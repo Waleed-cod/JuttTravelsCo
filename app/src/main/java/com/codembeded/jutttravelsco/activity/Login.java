@@ -1,4 +1,4 @@
-package com.codembeded.jutttravelsco;
+package com.codembeded.jutttravelsco.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.codembeded.jutttravelsco.R;
 
 public class Login extends AppCompatActivity {
     TextView Sign_up_btn;

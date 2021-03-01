@@ -9,14 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyBookings"></activity>
-        <activity android:name=".BookTour" />
-        <activity android:name=".Complain" />
-        <activity android:name=".BookMyRide" />
-        <activity android:name=".BookMyTicket" />
-        <activity android:name=".SignUp" />
-        <activity android:name=".Login" />
-        <activity android:name=".Splash">
+        <activity android:name=".activity.Splash"></activity>
+        <activity android:name=".activity.Login" />
+        <activity android:name=".activity.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
