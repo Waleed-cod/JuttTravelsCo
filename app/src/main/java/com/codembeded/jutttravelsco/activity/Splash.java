@@ -1,9 +1,11 @@
-package com.codembeded.jutttravelsco;
+package com.codembeded.jutttravelsco.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.codembeded.jutttravelsco.R;
 
 public class Splash extends AppCompatActivity {
 
@@ -12,7 +14,7 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Thread mythread =  new Thread(){
+        Thread myThread =  new Thread(){
 
             @Override
             public void run() {
@@ -28,6 +30,6 @@ public class Splash extends AppCompatActivity {
                 super.run();
             }
         };
-        mythread.start();
+        myThread.start();
     }
 }
