@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".BookMyRide">
+    tools:context=".activity.BookMyRide">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

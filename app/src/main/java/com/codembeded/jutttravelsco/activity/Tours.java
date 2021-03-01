@@ -1,14 +1,16 @@
-package com.codembeded.jutttravelsco;
+package com.codembeded.jutttravelsco.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class BookTour extends AppCompatActivity {
+import com.codembeded.jutttravelsco.R;
+
+public class Tours extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_tour);
+        setContentView(R.layout.activity_tours);
     }
 }

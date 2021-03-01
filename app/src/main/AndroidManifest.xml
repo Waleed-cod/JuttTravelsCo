@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.Splash"></activity>
+        <activity android:name=".activity.Tours"></activity>
+        <activity android:name=".activity.MyHistory" />
+        <activity android:name=".activity.BookMyTicket" />
+        <activity android:name=".activity.BookMyRide" />
+        <activity android:name=".activity.BookTour" />
+        <activity android:name=".activity.Complain" />
+        <activity android:name=".activity.MyBookings" />
+        <activity android:name=".activity.SignUp" />
+        <activity android:name=".activity.Splash" />
         <activity android:name=".activity.Login" />
         <activity android:name=".activity.Home">
             <intent-filter>

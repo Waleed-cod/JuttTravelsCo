@@ -11,6 +11,7 @@ import com.codembeded.jutttravelsco.R;
 
 public class Login extends AppCompatActivity {
     TextView Sign_up_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
