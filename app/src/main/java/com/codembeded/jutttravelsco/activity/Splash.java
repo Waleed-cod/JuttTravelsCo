@@ -1,11 +1,11 @@
 package com.codembeded.jutttravelsco.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.codembeded.jutttravelsco.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Splash extends AppCompatActivity {
 
