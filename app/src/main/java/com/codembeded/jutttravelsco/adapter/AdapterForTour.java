@@ -27,7 +27,7 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_history_box, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.booking_history_tour_box, parent, false);
         return new ViewHolder(view);
     }
 
@@ -53,10 +53,10 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.tour_departure = itemView.findViewById(R.id.my_history_departure);
-            this.tour_arrival = itemView.findViewById(R.id.my_history_arrival);
-            this.tour_date = itemView.findViewById(R.id.my_history_date);
-            this.tour_Time = itemView.findViewById(R.id.my_history_Time);
+            this.tour_departure = itemView.findViewById(R.id.booking_history_tour_departure);
+            this.tour_arrival = itemView.findViewById(R.id.booking_history_tour_arrival);
+            this.tour_date = itemView.findViewById(R.id.booking_history_tour_date);
+            this.tour_Time = itemView.findViewById(R.id.booking_history_tour_Time);
 
         }
     }

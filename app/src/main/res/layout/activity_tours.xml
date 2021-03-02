@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".activity.Tours">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tour_rv"
         android:layout_width="match_parent"
@@ -15,46 +16,51 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:divider="?android:dividerHorizontal"
             android:dividerPadding="10dp"
+            android:padding="10dp"
             android:orientation="horizontal"
             android:showDividers="middle">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Departure"
+                android:textAlignment="center"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Arrival"
+                android:textAlignment="center"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Date"
+                android:textAlignment="center"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Time"
+                android:textAlignment="center"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
 
