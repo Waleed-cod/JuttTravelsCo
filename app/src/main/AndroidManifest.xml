@@ -17,9 +17,9 @@
         <activity android:name=".activity.Complain" />
         <activity android:name=".activity.MyBookings" />
         <activity android:name=".activity.SignUp" />
-        <activity android:name=".activity.Splash" />
+        <activity android:name=".activity.Home" />
         <activity android:name=".activity.Login" />
-        <activity android:name=".activity.Home">
+        <activity android:name=".activity.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
