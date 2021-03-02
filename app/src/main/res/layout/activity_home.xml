@@ -50,6 +50,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/book_my_tickets_home"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
@@ -91,6 +92,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/book_my_ride_home"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
@@ -137,6 +139,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/my_tickets_home"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
@@ -173,6 +176,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/tour_home"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
@@ -219,6 +223,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/history_home"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
@@ -259,6 +264,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/complain_home"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"

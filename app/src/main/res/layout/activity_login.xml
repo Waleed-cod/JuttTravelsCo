@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Login">
+    android:background="@color/colorWhite"
+    tools:context=".activity.Login">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
@@ -50,75 +51,91 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/user_phone_login_et"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="10dp"
-                android:hint="Name/Phone"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_mobile_phone"
-                    android:inputType="phone"
-                    android:maxLength="10"
-                    android:maxLines="1"
-                    android:padding="10dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/user_password_login_et"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="10dp"
-                android:hint="Password"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp"
-                app:passwordToggleEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_password_mobile"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:padding="10dp" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/logIn_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="10dp"
                 android:background="@drawable/btn_background"
                 android:text="Login" />
 
-            <TextView
-                android:id="@+id/forgot_password_login_tv"
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Forgot your Password?"
-                android:layout_gravity="right"
-                android:textSize="16sp"
-                android:textColor="@android:color/holo_red_dark"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="10dp"
-                android:visibility="gone"
-                tools:visibility="visible" />
+                android:layout_margin="10dp"
+                app:cardCornerRadius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/user_phone_login_et"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginVertical="10dp"
+                        android:hint="Name/Phone"
+                        app:boxCornerRadiusBottomEnd="20dp"
+                        app:boxCornerRadiusBottomStart="20dp"
+                        app:boxCornerRadiusTopEnd="20dp"
+                        app:boxCornerRadiusTopStart="20dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_mobile_phone"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:padding="10dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/user_password_login_et"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginVertical="10dp"
+                        android:hint="Password"
+                        app:boxCornerRadiusBottomEnd="20dp"
+                        app:boxCornerRadiusBottomStart="20dp"
+                        app:boxCornerRadiusTopEnd="20dp"
+                        app:boxCornerRadiusTopStart="20dp"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_password_mobile"
+                            android:inputType="textPassword"
+                            android:maxLines="1"
+                            android:padding="10dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/forgot_password_login_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Forgot your Password?"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_width="match_parent"

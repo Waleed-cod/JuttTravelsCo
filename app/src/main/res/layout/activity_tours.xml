@@ -34,7 +34,8 @@
                     android:text="Departure"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -43,7 +44,8 @@
                     android:text="Arrival"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -52,7 +54,8 @@
                     android:text="Date"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -61,7 +64,8 @@
                     android:text="Time"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
