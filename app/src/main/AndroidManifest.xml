@@ -10,16 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.ForgetPassword"></activity>
-        <activity android:name=".activity.Tours" />
+        <activity android:name=".activity.OurTours" />
         <activity android:name=".activity.MyHistory" />
         <activity android:name=".activity.BookMyTicket" />
-        <activity android:name=".activity.BookMyRide" />
+        <activity android:name=".activity.SpecialBooking" />
         <activity android:name=".activity.BookTour" />
-        <activity android:name=".activity.Complain" />
+        <activity android:name=".activity.Complaints" />
         <activity android:name=".activity.MyBookings" />
         <activity android:name=".activity.SignUp" />
         <activity android:name=".activity.Home" />
-        <activity android:name=".activity.Login" />
+        <activity
+            android:name=".activity.Login"
+            android:label="Jutt Travels" />
         <activity android:name=".activity.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

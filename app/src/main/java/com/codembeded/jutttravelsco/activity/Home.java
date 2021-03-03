@@ -16,7 +16,6 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Home extends AppCompatActivity {
 
@@ -56,7 +55,7 @@ public class Home extends AppCompatActivity {
         bookMyRide_cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Home.this, BookMyRide.class);
+                Intent i = new Intent(Home.this, SpecialBooking.class);
                 startActivity(i);
             }
         });
@@ -77,14 +76,14 @@ public class Home extends AppCompatActivity {
         tour_cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Home.this, Tours.class);
+                Intent i = new Intent(Home.this, OurTours.class);
                 startActivity(i);
             }
         });
         complain_cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Home.this, Complain.class);
+                Intent i = new Intent(Home.this, Complaints.class);
                 startActivity(i);
             }
         });

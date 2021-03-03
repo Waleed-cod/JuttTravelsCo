@@ -1,54 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:padding="8dp"
-    android:weightSum="4"
-    android:orientation="horizontal">
+    android:layout_margin="10dp"
+    android:elevation="2dp"
+    app:cardCornerRadius="12dp">
 
-    <TextView
-        android:id="@+id/booking_history_tour_departure"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="Islamabad"
-        android:maxLines="2"
-        android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp" />
+        android:layout_margin="4dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/booking_history_tour_arrival"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="Gujranwala"
-        android:maxLines="2"
-        android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/booking_history_tour_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="11/11/1120"
-        android:maxLines="1"
-        android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp" />
+            <TextView
+                android:id="@+id/booking_history_tour_departure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:hint="Departure"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/booking_history_tour_Time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="11:58 pm"
-        android:maxLines="1"
-        android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp" />
+            <TextView
+                android:id="@+id/booking_history_tour_arrival"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:hint="Arrival"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+        </LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/booking_history_tour_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Date"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/booking_history_tour_Time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Time"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/booking_history_tour_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="Description"
+                android:maxLines="3"
+                android:padding="4dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
