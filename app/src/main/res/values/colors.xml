@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#11A0DA</color>
     <color name="colorPrimaryDark">#0E6CAC</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#11A0DA</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
 

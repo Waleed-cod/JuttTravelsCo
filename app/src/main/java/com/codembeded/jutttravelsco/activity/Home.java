@@ -1,27 +1,43 @@
 package com.codembeded.jutttravelsco.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
 import com.codembeded.jutttravelsco.adapter.AdapterForHomeSlider;
+import com.codembeded.jutttravelsco.helperclass.AppConfig;
+import com.codembeded.jutttravelsco.helperclass.AppController;
 import com.codembeded.jutttravelsco.models.HomeImageSliderModels;
 import com.google.android.material.card.MaterialCardView;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Home extends AppCompatActivity {
 
     private SliderView imageSlider;
     private final ArrayList<HomeImageSliderModels> items = new ArrayList<>();
     private AdapterForHomeSlider imageSliderAdapter;
+    private static final String TAG = Home.class.getSimpleName();
 
     MaterialCardView bookMyTickets_cv, bookMyRide_cv, myTicket_cv, tour_cv, history_cv, complain_cv;
 
@@ -40,8 +56,61 @@ public class Home extends AppCompatActivity {
 
         setImageSlider();
         OnClicks();
-
+        get_slider_images();
     }
+
+    private void get_slider_images() {
+
+        // Tag use to cancel the request
+        String tag_str_req = "req_get_images";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.GET_SLIDER_IMAGE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "!st Response:" + response);
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    Log.e(" second response:", response);
+                    boolean error = jObj.getBoolean("error");
+                    //check for error node in json
+                    if (!error) {
+                        JSONArray jArray = jObj.getJSONArray("images");
+                        for (int i = 0; i < jArray.length(); i++) {
+                            items.add(new HomeImageSliderModels(
+                                    jArray.getJSONObject(i).getString("images")
+
+                            ));
+
+                        }
+                        imageSliderAdapter = new AdapterForHomeSlider(items, Home.this);
+                        imageSlider.setSliderAdapter(imageSliderAdapter);
+
+
+                    } else {
+                        String error_msg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(), "Error is " + error_msg, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Volley Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_str_req);
+    }
+
 
     private void OnClicks() {
         bookMyTickets_cv.setOnClickListener(new View.OnClickListener() {
@@ -89,12 +158,13 @@ public class Home extends AppCompatActivity {
         });
     }
 
-    private void setImageSlider() {
 
-        items.add(new HomeImageSliderModels(R.drawable.world_tour));
-        items.add(new HomeImageSliderModels(R.drawable.world_tour_beauty));
-        imageSliderAdapter = new AdapterForHomeSlider(items, Home.this);
-        imageSlider.setSliderAdapter(imageSliderAdapter);
+    private void setImageSlider() {
+//
+//        items.add(new HomeImageSliderModels(R.drawable.world_tour));
+//        items.add(new HomeImageSliderModels(R.drawable.world_tour_beauty));
+//        imageSliderAdapter = new AdapterForHomeSlider(items, Home.this);
+//        imageSlider.setSliderAdapter(imageSliderAdapter);
         imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         imageSlider.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);

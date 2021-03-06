@@ -28,7 +28,7 @@
                     android:layout_height="150dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/tour_bus" />
+                    android:src="@drawable/logo" />
 
 
                 <TextView
@@ -65,30 +65,40 @@
                     app:cardCornerRadius="12dp"
                     app:cardElevation="8dp">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/forgot_password_login_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginHorizontal="16dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="Forgot your Password?"
-                            android:textColor="@android:color/holo_red_dark"
-                            android:textSize="16sp"
-                            android:visibility="gone"
-                            tools:visibility="visible" />
+                        android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/user_password_login_et"
+                            android:id="@+id/phone_layout"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginVertical="10dp"
+                            android:hint="+92xxxxxxxxxx"
+                            app:boxCornerRadiusBottomEnd="20dp"
+                            app:boxCornerRadiusBottomStart="20dp"
+                            app:boxCornerRadiusTopEnd="20dp"
+                            app:boxCornerRadiusTopStart="20dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/user_phone_login_et"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/ic_mobile_phone"
+                                android:inputType="phone"
+                                android:maxLength="13"
+                                android:maxLines="1"
+                                android:padding="10dp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/password_layout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/phone_layout"
                             android:layout_marginHorizontal="16dp"
                             android:layout_marginVertical="10dp"
                             android:hint="Password"
@@ -99,6 +109,7 @@
                             app:passwordToggleEnabled="true">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/user_password_login_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawableStart="@drawable/ic_password_mobile"
@@ -107,32 +118,22 @@
                                 android:padding="10dp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/user_phone_login_et"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        <TextView
+                            android:id="@+id/forgot_password_login_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
+                            android:layout_below="@id/password_layout"
                             android:layout_marginHorizontal="16dp"
-                            android:layout_marginVertical="10dp"
-                            android:hint="Name/Phone"
-                            app:boxCornerRadiusBottomEnd="20dp"
-                            app:boxCornerRadiusBottomStart="20dp"
-                            app:boxCornerRadiusTopEnd="20dp"
-                            app:boxCornerRadiusTopStart="20dp">
+                            android:layout_marginBottom="10dp"
+                            android:text="Forgot your Password?"
+                            android:textAlignment="textEnd"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp"
+                            android:visibility="gone"
+                            tools:visibility="visible" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:drawableLeft="@drawable/ic_mobile_phone"
-                                android:inputType="phone"
-                                android:maxLength="10"
-                                android:maxLines="1"
-                                android:padding="10dp"
-                                android:textColor="@color/colorWhite" />
-                        </com.google.android.material.textfield.TextInputLayout>
 
-                    </LinearLayout>
+                    </RelativeLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 

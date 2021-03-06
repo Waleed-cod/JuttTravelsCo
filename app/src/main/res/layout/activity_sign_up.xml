@@ -36,13 +36,11 @@
                 android:layout_height="50dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/user_name"
+                android:id="@+id/user_name_sign_up_et"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="20dp"
                 android:hint="Name"
                 app:boxCornerRadiusBottomEnd="20dp"
                 app:boxCornerRadiusBottomStart="20dp"
@@ -52,22 +50,22 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="5dp"
                     android:drawableStart="@drawable/ic_baseline_perm_identity_24"
+                    android:drawablePadding="5dp"
                     android:inputType="textPersonName"
+                    android:maxLength="25"
                     android:maxLines="1"
                     android:padding="10dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/user_phone_number"
+                android:id="@+id/user_phone_sign_up_et"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
-                android:hint="Phone Number"
+                android:hint="+92xxxxxxxxxx"
                 app:boxCornerRadiusBottomEnd="20dp"
                 app:boxCornerRadiusBottomStart="20dp"
                 app:boxCornerRadiusTopEnd="20dp"
@@ -77,19 +75,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_mobile_phone"
-                    android:inputType="number"
-                    android:maxLength="10"
                     android:drawablePadding="5dp"
+                    android:inputType="phone"
+                    android:maxLength="13"
                     android:maxLines="1"
                     android:padding="10dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/user_cnic"
+                android:id="@+id/user_cnic_sign_up_et"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
                 android:hint="CNIC"
@@ -102,19 +99,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_mobile_phone"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:maxLines="1"
                     android:drawablePadding="5dp"
+                    android:inputType="number"
+                    android:maxLength="13"
+                    android:maxLines="1"
                     android:padding="10dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/user_email"
+                android:id="@+id/user_email_sign_up_et"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
                 android:hint="Email"
@@ -126,14 +122,12 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="5dp"
                     android:drawableLeft="@drawable/ic_baseline_email_24"
+                    android:drawablePadding="5dp"
                     android:inputType="textEmailAddress"
-                    android:maxLength="10"
                     android:maxLines="1"
                     android:padding="10dp" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -141,7 +135,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
                 android:hint="Password"
@@ -155,8 +148,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_password_mobile"
-                    android:inputType="textPassword"
                     android:drawablePadding="5dp"
+                    android:inputType="textPassword"
+                    android:maxLength="25"
                     android:maxLines="1"
                     android:padding="10dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -181,18 +175,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_password_mobile"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
                     android:drawablePadding="5dp"
+                    android:inputType="textPassword"
+                    android:maxLength="25"
+                    android:maxLines="1"
                     android:padding="10dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
+                android:text="Select Gender:"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/male_radio_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/female_radio_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="Female" />
+
+            </RadioGroup>
+
             <Button
-                android:id="@+id/Signup_btn"
+                android:id="@+id/user_sign_up_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/btn_background"
                 android:text="Sign Up" />
 

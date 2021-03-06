@@ -11,16 +11,36 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ForgetPassword"></activity>
-        <activity android:name=".activity.OurTours" />
-        <activity android:name=".activity.MyHistory" />
-        <activity android:name=".activity.BookMyTicket" />
-        <activity android:name=".activity.SpecialBooking" />
-        <activity android:name=".activity.BookTour" />
-        <activity android:name=".activity.Complaints" />
-        <activity android:name=".activity.MyBookings" />
-        <activity android:name=".activity.SignUp" />
-        <activity android:name=".activity.Home" />
+        <activity
+            android:name=".activity.ForgetPassword"
+            android:label="Forget Password"></activity>
+        <activity
+            android:name=".activity.OurTours"
+            android:label="Our Tours" />
+        <activity
+            android:name=".activity.MyHistory"
+            android:label="My History" />
+        <activity
+            android:name=".activity.BookMyTicket"
+            android:label="Book My Ticket" />
+        <activity
+            android:name=".activity.SpecialBooking"
+            android:label="Special Booking" />
+        <activity
+            android:name=".activity.BookTour"
+            android:label="Book Tour" />
+        <activity
+            android:name=".activity.Complaints"
+            android:label="Complaints" />
+        <activity
+            android:name=".activity.MyBookings"
+            android:label="My Bookings" />
+        <activity
+            android:name=".activity.SignUp"
+            android:label="Sign Up" />
+        <activity
+            android:name=".activity.Home"
+            android:label="Home" />
         <activity
             android:name=".activity.Login"
             android:label="Jutt Travels" />

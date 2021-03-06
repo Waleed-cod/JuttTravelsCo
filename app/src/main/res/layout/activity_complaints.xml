@@ -7,30 +7,46 @@
     android:orientation="vertical"
     tools:context=".activity.Complaints">
 
-    <RadioButton
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bus" />
+        android:layout_gravity="center"
+        android:src="@drawable/logo" />
 
-    <RadioButton
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:id="@+id/complain_radio_group"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Driver" />
+        android:layout_marginHorizontal="16dp"
+        android:orientation="vertical">
 
-    <RadioButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Services" />
+        <RadioButton
+            android:id="@+id/bus_radio_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bus" />
+
+        <RadioButton
+            android:id="@+id/driver_radio_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Driver" />
+
+        <RadioButton
+            android:id="@+id/services_radio_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Services" />
+    </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/suggestion"
+        android:id="@+id/complain_suggestion"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="10dp"
-        android:hint="Any Suggestion"
+        android:hint="Enter your Message"
         app:boxCornerRadiusBottomEnd="20dp"
         app:boxCornerRadiusBottomStart="20dp"
         app:boxCornerRadiusTopEnd="20dp"
@@ -39,12 +55,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:gravity="top"
             android:inputType="text"
-            android:maxLines="1"
             android:padding="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <Button
-        android:id="@+id/btn_enter"
+        android:id="@+id/btn_complain_enter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
