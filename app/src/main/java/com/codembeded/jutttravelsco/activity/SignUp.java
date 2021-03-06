@@ -1,6 +1,8 @@
 package com.codembeded.jutttravelsco.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +33,8 @@ public class SignUp extends AppCompatActivity {
     Button btn_sign_up;
     String radio_btn_value_str;
     RadioGroup radioGroup;
+
+    SharedPreferences sharedPreferences;
     private static final String TAG = SignUp.class.getSimpleName();
 
     @Override
@@ -87,6 +91,11 @@ public class SignUp extends AppCompatActivity {
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
+                        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        editor.putString("id", jObj.getString("id"));
+                        editor.apply();
                         Intent intent = new Intent(SignUp.this, Home.class);
                         startActivity(intent);
                     } else {
