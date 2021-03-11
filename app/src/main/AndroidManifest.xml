@@ -11,9 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.NewParcel" />
         <activity
             android:name=".activity.ForgetPassword"
-            android:label="Forget Password"></activity>
+            android:label="Forget Password" />
         <activity
             android:name=".activity.OurTours"
             android:label="Our Tours" />
@@ -39,12 +40,12 @@
             android:name=".activity.SignUp"
             android:label="Sign Up" />
         <activity
-            android:name=".activity.Home"
+            android:name=".activity.Splash"
             android:label="Home" />
         <activity
             android:name=".activity.Login"
             android:label="Jutt Travels" />
-        <activity android:name=".activity.Splash">
+        <activity android:name=".activity.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

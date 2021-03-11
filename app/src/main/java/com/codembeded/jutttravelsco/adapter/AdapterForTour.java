@@ -27,7 +27,7 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.booking_history_tour_box, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tour_box, parent, false);
         return new ViewHolder(view);
     }
 
@@ -37,8 +37,11 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
 
         holder.tour_departure.setText(data.get(position).getDeparture());
         holder.tour_arrival.setText(data.get(position).getArrival());
-        holder.tour_date.setText(data.get(position).getDate());
-        holder.tour_Time.setText(data.get(position).getTime());
+        holder.tour_departure_date.setText(data.get(position).getDeparture_date());
+        holder.tour_arrival_date.setText(data.get(position).getArrival_date());
+        holder.tour_time.setText(data.get(position).getTime());
+        holder.tour_person_rate.setText(data.get(position).getRate_per_person());
+        holder.tour_desc.setText(data.get(position).getDesc());
     }
 
     @Override
@@ -48,15 +51,18 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tour_departure, tour_arrival, tour_date, tour_Time;
+        TextView tour_departure, tour_arrival, tour_departure_date, tour_arrival_date, tour_time, tour_person_rate, tour_desc;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.tour_departure = itemView.findViewById(R.id.booking_history_tour_departure);
-            this.tour_arrival = itemView.findViewById(R.id.booking_history_tour_arrival);
-            this.tour_date = itemView.findViewById(R.id.booking_history_tour_date);
-            this.tour_Time = itemView.findViewById(R.id.booking_history_tour_Time);
+            this.tour_departure = itemView.findViewById(R.id.departure_tour_box);
+            this.tour_arrival = itemView.findViewById(R.id.arrival_tour_box);
+            this.tour_departure_date = itemView.findViewById(R.id.departure_date_tour_box);
+            this.tour_arrival_date = itemView.findViewById(R.id.arrival_date_tour_box);
+            this.tour_time = itemView.findViewById(R.id.time_tour_box);
+            this.tour_person_rate = itemView.findViewById(R.id.person_rate_tour_box);
+            this.tour_desc = itemView.findViewById(R.id.desc_tour_box);
 
         }
     }

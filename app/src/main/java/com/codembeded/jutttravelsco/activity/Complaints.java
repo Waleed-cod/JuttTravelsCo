@@ -74,10 +74,10 @@ public class Complaints extends AppCompatActivity {
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.GET_COMPLAINS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "!st Response:" + response);
+                Log.d(TAG, "1st Response:" + response);
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e(" second response:", response);
+                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {

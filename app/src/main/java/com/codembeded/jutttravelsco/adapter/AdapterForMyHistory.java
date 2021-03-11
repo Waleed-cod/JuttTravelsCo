@@ -27,7 +27,7 @@ public class AdapterForMyHistory extends RecyclerView.Adapter<AdapterForMyHistor
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.booking_history_tour_box, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tour_box, parent, false);
         return new ViewHolder(view);
     }
 
@@ -52,11 +52,11 @@ public class AdapterForMyHistory extends RecyclerView.Adapter<AdapterForMyHistor
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            this.my_history_departure = itemView.findViewById(R.id.booking_history_tour_departure);
-            this.my_history_arrival = itemView.findViewById(R.id.booking_history_tour_arrival);
-            this.my_history_date = itemView.findViewById(R.id.booking_history_tour_date);
-            this.my_history_Time = itemView.findViewById(R.id.booking_history_tour_Time);
+//
+//            this.my_history_departure = itemView.findViewById(R.id.booking_history_tour_departure);
+//            this.my_history_arrival = itemView.findViewById(R.id.booking_history_tour_arrival);
+//            this.my_history_date = itemView.findViewById(R.id.booking_history_tour_date);
+//            this.my_history_Time = itemView.findViewById(R.id.booking_history_tour_Time);
 
         }
     }

@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:elevation="2dp"
-    app:cardCornerRadius="12dp">
+    android:elevation="4dp"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="14dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,36 +14,71 @@
         android:layout_margin="4dp"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="3">
+
 
             <TextView
-                android:id="@+id/booking_history_tour_departure"
+                android:id="@+id/departure_special_booking_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ellipsize="end"
+                android:layout_weight="1.4"
                 android:hint="Departure"
-                android:maxLines="1"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="16sp" />
+                android:textColor="@color/colorBlack" />
 
             <TextView
-                android:id="@+id/booking_history_tour_arrival"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:hint="To"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/arrival_special_booking_frag_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.4"
+                android:hint="Arrival"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <TextView
+                android:id="@+id/departure_date_special_booking_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ellipsize="end"
-                android:hint="Arrival"
-                android:maxLines="1"
+                android:hint="mm/dd/yyyy"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="16sp" />
+                android:textColor="@color/colorBlack" />
+
+
+            <TextView
+                android:id="@+id/time_special_booking_frag_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="hh:mm"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -50,46 +86,27 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+
             <TextView
-                android:id="@+id/booking_history_tour_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Date"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="16sp" />
+                android:layout_weight=".5"
+                android:hint="Vehicle:"
+                android:padding="4dp" />
 
             <TextView
-                android:id="@+id/booking_history_tour_Time"
+                android:id="@+id/vehicle_special_booking_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Time"
-                android:maxLines="1"
+                android:layout_weight="1.5"
+                android:hint="vehivles"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/booking_history_tour_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:hint="Description"
-                android:maxLines="3"
-                android:padding="4dp"
-                android:textColor="@color/colorBlack"
-                android:textSize="16sp" />
+                android:textColor="@color/colorBlack" />
 
         </LinearLayout>
+
     </LinearLayout>
+
+
 </androidx.cardview.widget.CardView>

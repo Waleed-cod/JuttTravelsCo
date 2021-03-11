@@ -1,13 +1,44 @@
 package com.codembeded.jutttravelsco.models;
 
 public class MyBookingsModels {
-    String departure, arrival, date, time;
+    int id;
+    String image, departure, arrival, departure_date, arrival_date, time, rate_parcel_vehicle, desc;
 
-    public MyBookingsModels(String departure, String arrival, String date, String time) {
+    public MyBookingsModels(int id, String image, String departure, String arrival, String departure_date, String arrival_date, String time, String rate_parcel_vehicle, String desc) {
+        this.id = id;
+        this.image = image;
         this.departure = departure;
         this.arrival = arrival;
-        this.date = date;
+        this.departure_date = departure_date;
+        this.arrival_date = arrival_date;
         this.time = time;
+        this.rate_parcel_vehicle = rate_parcel_vehicle;
+        this.desc = desc;
+    }
+
+    public MyBookingsModels(int id, String departure, String arrival, String departure_date, String time, String rate_parcel_vehicle) {
+        this.id = id;
+        this.departure = departure;
+        this.arrival = arrival;
+        this.departure_date = departure_date;
+        this.time = time;
+        this.rate_parcel_vehicle = rate_parcel_vehicle;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDeparture() {
@@ -26,12 +57,20 @@ public class MyBookingsModels {
         this.arrival = arrival;
     }
 
-    public String getDate() {
-        return date;
+    public String getDeparture_date() {
+        return departure_date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDeparture_date(String departure_date) {
+        this.departure_date = departure_date;
+    }
+
+    public String getArrival_date() {
+        return arrival_date;
+    }
+
+    public void setArrival_date(String arrival_date) {
+        this.arrival_date = arrival_date;
     }
 
     public String getTime() {
@@ -40,5 +79,21 @@ public class MyBookingsModels {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getRate_parcel_vehicle() {
+        return rate_parcel_vehicle;
+    }
+
+    public void setRate_parcel_vehicle(String rate_parcel_vehicle) {
+        this.rate_parcel_vehicle = rate_parcel_vehicle;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

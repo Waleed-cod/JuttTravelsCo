@@ -15,7 +15,7 @@
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/home_image_slider"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="450dp"
             android:layout_gravity="top"
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
@@ -51,7 +51,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/book_my_tickets_home"
                     android:layout_width="0dp"
-                    android:layout_height="170dp"
+                    android:layout_height="300dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
@@ -81,9 +81,9 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:elevation="8dp"
-                            android:text="Book My Ticket"
+                            android:text="BOOK MY TICKET"
                             android:textColor="#ffffff"
-                            android:textSize="18sp"
+                            android:textSize="30sp"
                             android:textStyle="bold" />
 
                     </RelativeLayout>
@@ -91,9 +91,9 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/book_my_ride_home"
+                    android:id="@+id/special_booking_home"
                     android:layout_width="0dp"
-                    android:layout_height="170dp"
+                    android:layout_height="300dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:clickable="true"
@@ -121,9 +121,9 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:elevation="8dp"
-                            android:text="Special Booking"
+                            android:text="SPECIAL BOOKING"
                             android:textColor="#ffffff"
-                            android:textSize="18sp"
+                            android:textSize="30sp"
                             android:textStyle="bold" />
 
                     </RelativeLayout>
@@ -138,9 +138,9 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/my_tickets_home"
+                    android:id="@+id/my_bookings_home"
                     android:layout_width="0dp"
-                    android:layout_height="170dp"
+                    android:layout_height="300dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:clickable="true"
@@ -164,9 +164,9 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:elevation="8dp"
-                            android:text="My Tickets"
+                            android:text="MY BOOKINGS"
                             android:textColor="@color/colorWhite"
-                            android:textSize="18sp"
+                            android:textSize="30sp"
                             android:textStyle="bold" />
 
                     </RelativeLayout>
@@ -176,7 +176,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/tour_home"
                     android:layout_width="0dp"
-                    android:layout_height="170dp"
+                    android:layout_height="300dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:clickable="true"
@@ -204,9 +204,9 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:elevation="8dp"
-                            android:text="Tour"
+                            android:text="TOUR"
                             android:textColor="#ffffff"
-                            android:textSize="18sp"
+                            android:textSize="30sp"
                             android:textStyle="bold" />
 
                     </RelativeLayout>
@@ -221,9 +221,97 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/new_parcel_home"
+                    android:layout_width="0dp"
+                    android:layout_height="300dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="#d3d3d3"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:foreground="@drawable/trending_gradient_shape"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_parcel" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:elevation="8dp"
+                            android:text="NEW PARCEL"
+                            android:textColor="#ffffff"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/my_parcel_home"
+                    android:layout_width="0dp"
+                    android:layout_height="300dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="#d3d3d3"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:foreground="@drawable/trending_gradient_shape"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/my_parcel" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:elevation="8dp"
+                            android:text="MY PARCEL"
+                            android:textColor="#ffffff"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/history_home"
                     android:layout_width="0dp"
-                    android:layout_height="170dp"
+                    android:layout_height="300dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:clickable="true"
@@ -251,9 +339,9 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:elevation="8dp"
-                            android:text="History!"
+                            android:text="HISTORY!"
                             android:textColor="#ffffff"
-                            android:textSize="18sp"
+                            android:textSize="30sp"
                             android:textStyle="bold" />
 
                     </RelativeLayout>
@@ -264,7 +352,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/complain_home"
                     android:layout_width="0dp"
-                    android:layout_height="170dp"
+                    android:layout_height="300dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:clickable="true"
@@ -292,9 +380,9 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:elevation="8dp"
-                            android:text="Complaints?"
+                            android:text="COMPLAINTS?"
                             android:textColor="#ffffff"
-                            android:textSize="18sp"
+                            android:textSize="30sp"
                             android:textStyle="bold" />
 
                     </RelativeLayout>

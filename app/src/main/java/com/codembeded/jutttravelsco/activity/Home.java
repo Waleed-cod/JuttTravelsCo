@@ -1,7 +1,6 @@
 package com.codembeded.jutttravelsco.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -39,7 +38,7 @@ public class Home extends AppCompatActivity {
     private AdapterForHomeSlider imageSliderAdapter;
     private static final String TAG = Home.class.getSimpleName();
 
-    MaterialCardView bookMyTickets_cv, bookMyRide_cv, myTicket_cv, tour_cv, history_cv, complain_cv;
+    MaterialCardView bookMyTickets_cv, specialBooking_cv, myBookings_cv, tour_cv, history_cv, complain_cv, new_parcel_cv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +47,12 @@ public class Home extends AppCompatActivity {
 
         imageSlider = findViewById(R.id.home_image_slider);
         bookMyTickets_cv = findViewById(R.id.book_my_tickets_home);
-        bookMyRide_cv = findViewById(R.id.book_my_ride_home);
-        myTicket_cv = findViewById(R.id.my_tickets_home);
+        specialBooking_cv = findViewById(R.id.special_booking_home);
+        myBookings_cv = findViewById(R.id.my_bookings_home);
         tour_cv = findViewById(R.id.tour_home);
         history_cv = findViewById(R.id.history_home);
         complain_cv = findViewById(R.id.complain_home);
-
+        new_parcel_cv = findViewById(R.id.new_parcel_home);
         setImageSlider();
         OnClicks();
         get_slider_images();
@@ -121,17 +120,17 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        bookMyRide_cv.setOnClickListener(new View.OnClickListener() {
+        specialBooking_cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Home.this, SpecialBooking.class);
                 startActivity(i);
             }
         });
-        myTicket_cv.setOnClickListener(new View.OnClickListener() {
+        myBookings_cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Home.this, BookMyTicket.class);
+                Intent i = new Intent(Home.this, MyBookings.class);
                 startActivity(i);
             }
         });
@@ -153,6 +152,14 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Home.this, Complaints.class);
+                startActivity(i);
+            }
+        });
+
+        new_parcel_cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Home.this, NewParcel.class);
                 startActivity(i);
             }
         });

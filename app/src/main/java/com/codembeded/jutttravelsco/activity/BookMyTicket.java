@@ -42,13 +42,14 @@ public class BookMyTicket extends AppCompatActivity {
     TextView date, time;
     int t1Hour, t1Minute;
     Spinner departure_sp, arrival_sp;
-    String date_str,routes_id_str;
+    private final ArrayList<RoutesModels> routes_lists = new ArrayList<>();
     Button book_ticket_btn;
-    private ArrayList<RoutesModels> routes_lists = new ArrayList<>();
-    private ArrayList<String> names = new ArrayList<>();
+    private final ArrayList<String> names = new ArrayList<>();
+    String date_str, routes_id_str;
     private Boolean isInitialSinner = false;
     private static final String TAG = BookMyTicket.class.getSimpleName();
-    RadioGroup radioGroup;
+    private RadioGroup radioGroup;
+    private String radio_btn_value_str;
     DatePickerDialog.OnDateSetListener dateSetListener;
 
 
@@ -56,12 +57,7 @@ public class BookMyTicket extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_my_ticket);
-        date = findViewById(R.id.date_of_ticket);
-        time = findViewById(R.id.time_of_ticket);
-        book_ticket_btn = findViewById(R.id.btn_book_ticket);
-        departure_sp = findViewById(R.id.Departure_spinner);
-        arrival_sp = findViewById(R.id.Arrival_spinner);
-
+        init();
         get_routes();
 
 
@@ -79,7 +75,7 @@ public class BookMyTicket extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 View v = departure_sp.getSelectedView();
-                ((TextView) v).setTextColor(Color.WHITE);
+                ((TextView) v).setTextColor(Color.BLACK);
 
                 if (isInitialSinner){
                     routes_id_str = String.valueOf(routes_lists.get(position).getId());
@@ -102,7 +98,7 @@ public class BookMyTicket extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 View v = departure_sp.getSelectedView();
-                ((TextView) v).setTextColor(Color.WHITE);
+                ((TextView) v).setTextColor(Color.BLACK);
 
                 if (isInitialSinner){
                     routes_id_str = String.valueOf(routes_lists.get(position).getId());
@@ -142,6 +138,31 @@ public class BookMyTicket extends AppCompatActivity {
             }
         };
 
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.book_my_ticket_ac_radio_btn:
+                        radio_btn_value_str = "ac";
+                        break;
+                    case R.id.book_my_ticket_non_ac_radio_btn:
+                        radio_btn_value_str = "non ac";
+                        break;
+
+                }
+            }
+        });
+
+    }
+
+    private void init() {
+
+        date = findViewById(R.id.date_of_ticket);
+        time = findViewById(R.id.time_of_ticket);
+        book_ticket_btn = findViewById(R.id.btn_book_ticket);
+        departure_sp = findViewById(R.id.Departure_spinner);
+        arrival_sp = findViewById(R.id.Arrival_spinner);
+        radioGroup = findViewById(R.id.book_my_ticket_radio_group);
     }
 
     private void get_routes() {
@@ -151,7 +172,7 @@ public class BookMyTicket extends AppCompatActivity {
         StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_ROUTES, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "!st Response:" + response);
+                Log.d(TAG, "1st Response:" + response);
                 try {
                     JSONObject jObj = new JSONObject(response);
                     Log.e(" second response:", response);

@@ -70,10 +70,6 @@ public class Login extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(Login.this, Home.class);
-//                startActivity(intent);
-//                getLogin(email_str, password);
-
 
                 if (phone_et.equals("")) {
                     Toast.makeText(Login.this, "Some Thing Missing", Toast.LENGTH_SHORT).show();
@@ -85,10 +81,7 @@ public class Login extends AppCompatActivity {
 
             }
         });
-
-
     }
-
 
     private void getLogin(final String phone_str,final String password_str) {
         String tag_str_req = "req_get_login";
@@ -97,10 +90,10 @@ public class Login extends AppCompatActivity {
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.GET_LOG_IN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "!st Response:" + response);
+                Log.d(TAG, "1st Response:" + response);
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e(" second response:", response);
+                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
