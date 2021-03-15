@@ -13,4 +13,5 @@ public class AppConfig {
     public static final String GET_CHANGE_PASSWORD = BASE_URL + "change_password.php";
     public static final String SPECIAL_BOOKING = BASE_URL + "special_booking.php";
     public static final String GET_SPECIAL_BOOKING = BASE_URL + "get_special_bookings.php";
+    public static final String GET_PARCEL = BASE_URL + "get_parcel.php";
 }

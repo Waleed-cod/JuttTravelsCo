@@ -23,28 +23,22 @@
 
 
             <TextView
-                android:id="@+id/departure_my_parcels_frag_box"
+                android:id="@+id/receiver_name_my_parcels_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.4"
-                android:hint="Departure"
+                android:layout_weight="1.5"
+                android:hint="Receiver Name"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:hint="to"
-                android:padding="4dp" />
 
             <TextView
-                android:id="@+id/arrival_my_parcels_frag_box"
+                android:id="@+id/receiver_contact_my_parcels_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.4"
-                android:hint="Arrival"
+                android:layout_weight="1.5"
+                android:hint="Receiver Contact"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
@@ -59,70 +53,38 @@
 
 
             <TextView
-                android:id="@+id/departure_date_my_parcels_frag_box"
+                android:id="@+id/weight_my_parcels_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="mm/dd/yyyy"
+                android:hint="weight"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
 
 
             <TextView
-                android:id="@+id/time_my_parcels_frag_box"
+                android:id="@+id/quantity_my_parcels_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="hh:mm"
+                android:hint="quantity"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/desc_my_parcel_frag_box"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="AC status"
-                android:padding="4dp" />
-
-            <TextView
-                android:id="@+id/ac_status_my_parcel_frag_box"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="on/off"
-                android:textAlignment="center"
+                android:hint="Desc"
+                android:maxLines="3"
+                android:justificationMode="inter_word"
+                android:ellipsize="end"
                 android:padding="4dp"
                 android:textColor="@color/colorBlack"/>
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Parcel Price"
-                android:padding="4dp" />
-
-            <TextView
-                android:id="@+id/my_parcels_frag_parcel_rate_box"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Amount"
-                android:padding="4dp"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack" />
-
-
-        </LinearLayout>
 
     </LinearLayout>
 

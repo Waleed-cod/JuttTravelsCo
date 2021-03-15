@@ -34,8 +34,7 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.tour_departure.setText(data.get(position).getDeparture());
-        holder.tour_arrival.setText(data.get(position).getArrival());
+        holder.tour_routes.setText(data.get(position).getDeparture());
         holder.tour_departure_date.setText(data.get(position).getDeparture_date());
         holder.tour_arrival_date.setText(data.get(position).getArrival_date());
         holder.tour_time.setText(data.get(position).getTime());
@@ -51,14 +50,13 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tour_departure, tour_arrival, tour_departure_date, tour_arrival_date, tour_time,
+        TextView tour_routes, tour_departure_date, tour_arrival_date, tour_time,
                 tour_person_rate, tour_desc, tour_ac_status;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.tour_departure = itemView.findViewById(R.id.departure_tour_box);
-            this.tour_arrival = itemView.findViewById(R.id.arrival_tour_box);
+            this.tour_routes = itemView.findViewById(R.id.routes_tour_box);
             this.tour_departure_date = itemView.findViewById(R.id.departure_date_tour_box);
             this.tour_arrival_date = itemView.findViewById(R.id.arrival_date_tour_box);
             this.tour_time = itemView.findViewById(R.id.time_tour_box);

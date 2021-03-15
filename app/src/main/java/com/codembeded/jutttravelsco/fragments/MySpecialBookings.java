@@ -87,15 +87,19 @@ public class MySpecialBookings extends Fragment {
                     //check for error node in json
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("special_bookings");
-                        for (int i = 0; i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            mMySpecialBookings_list.add(new MyBookingsModels(
-                                    jsonObject.getString("departure"),
-                                    jsonObject.getString("arrival"),
-                                    jsonObject.getString("booking_date"),
-                                    jsonObject.getString("booking_time"),
-                                    jsonObject.getString("vehicle_number"),
-                                    jsonObject.getString("vehicle_ac_status")));
+                        for (int i = 0; i<jsonArray.length();i++) {
+                            if (jsonArray.length() == 0) {
+                                empty_card_tv_mMySpecialBookings.setVisibility(View.VISIBLE);
+                            } else {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                mMySpecialBookings_list.add(new MyBookingsModels(
+                                        jsonObject.getString("departure"),
+                                        jsonObject.getString("arrival"),
+                                        jsonObject.getString("booking_date"),
+                                        jsonObject.getString("booking_time"),
+                                        jsonObject.getString("vehicle_number"),
+                                        jsonObject.getString("vehicle_ac_status")));
+                            }
                         }
                         Log.e("Data", mMySpecialBookings_list.get(0).toString());
                         mAdapterForMySpecialBookings = new AdapterForMyBookings(mMySpecialBookings_list,getActivity());
