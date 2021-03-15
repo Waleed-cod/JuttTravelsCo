@@ -96,31 +96,6 @@ public class BookMyTicket extends AppCompatActivity {
             }
         });
 
-        //date
-//        date.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Calendar cal = Calendar.getInstance();
-//                int year = cal.get(Calendar.YEAR);
-//                int month = cal.get(Calendar.MONTH);
-//                int day = cal.get(Calendar.DAY_OF_MONTH);
-//
-//                DatePickerDialog dialog = new DatePickerDialog(BookMyTicket.this,
-//                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-//                        dateSetListener,
-//                        year, month, day);
-//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                dialog.show();
-//            }
-//        });
-//        dateSetListener = new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                month = month + 1;
-//                date_str = year + "/" + month + "/" + dayOfMonth;
-//                date.setText(date_str);
-//            }
-//        };
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
