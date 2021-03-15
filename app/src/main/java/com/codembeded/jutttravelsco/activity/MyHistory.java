@@ -19,9 +19,9 @@ import java.util.ArrayList;
 public class MyHistory extends AppCompatActivity {
 
     Toolbar mToolbar;
-    ViewPagerAdapter viewPagerAdapter;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

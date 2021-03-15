@@ -77,8 +77,8 @@ public class SpecialBooking extends AppCompatActivity {
 
         init();
         getVehicles();
-        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        user_id = sharedPreferences.getString("id", "");
+        sharedPreferences = getSharedPreferences("MyPrefs",Context.MODE_PRIVATE);
+        user_id = sharedPreferences.getString("id","");
 
         //Vehicle names
         vehiclesSpecialBooking_sp.setSelected(false);
@@ -156,7 +156,7 @@ public class SpecialBooking extends AppCompatActivity {
 
                 setSpecialBooking(dept_et.getEditText().getText().toString(), arrival_et.getEditText().getText().toString(), vehicle_id_str, datePicker_tv.getText().toString(),
                         timePicker_tv.getText().toString(), mileage_et.getText().toString(), radio_btn_value_str,
-                        suggestions_et.getEditText().getText().toString(), user_id);
+                        suggestions_et.getEditText().getText().toString(),user_id);
             }
         });
 
@@ -290,14 +290,14 @@ public class SpecialBooking extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
 //                params.put("passenger_id", user_id);
                 params.put("departure", dept_et_str);
-                params.put("arrival", arrival_et_str);
+                params.put("arrival",arrival_et_str );
                 params.put("vehicle_id", vehicle_sp_str);
                 params.put("booking_date", date_value_str);
                 params.put("booking_time", time_value_str);
                 params.put("extra_mileage", mileage_str);
                 params.put("ac_status", ac_status_str);
                 params.put("description", suggestion_str);
-                params.put("passenger_id", passenger_id);
+                params.put("passenger_id",passenger_id);
                 return params;
             }
         };

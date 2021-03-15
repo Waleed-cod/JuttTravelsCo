@@ -7,12 +7,6 @@
     android:orientation="vertical"
     tools:context=".activity.MyBookings">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/app_bar_layout" />
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
@@ -31,6 +25,13 @@
 
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar_layout"/>
+
 
 
 </RelativeLayout>

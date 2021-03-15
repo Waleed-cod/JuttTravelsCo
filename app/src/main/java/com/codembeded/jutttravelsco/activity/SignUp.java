@@ -38,7 +38,6 @@ public class SignUp extends AppCompatActivity {
     RadioGroup radioGroup;
     SharedPreferences sharedPreferences;
     Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

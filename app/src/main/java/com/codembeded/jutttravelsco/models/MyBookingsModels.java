@@ -5,7 +5,7 @@ public class MyBookingsModels {
     String image, departure, arrival, departure_date, arrival_date, time, rate_parcel_vehicle, desc, ac_status;
 
     public MyBookingsModels(int id, String image, String departure, String arrival, String departure_date,
-                            String arrival_date, String time, String rate_parcel_vehicle, String desc, String ac_status) {
+                            String arrival_date, String time, String rate_parcel_vehicle, String desc , String ac_status) {
         this.id = id;
         this.image = image;
         this.departure = departure;

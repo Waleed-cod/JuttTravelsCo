@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.MyHistory">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_history"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/app_bar_layout_history" />
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout_history"
         android:layout_width="match_parent"
@@ -20,14 +14,20 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_history"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="?attr/actionBarSize"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs_history"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar_layout_history"/>
 
 
 </RelativeLayout>

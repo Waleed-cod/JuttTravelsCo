@@ -40,11 +40,11 @@ import java.util.Map;
 public class BookMyTicket extends AppCompatActivity {
     TextView date, time;
     int t1Hour, t1Minute;
-    private final ArrayList<MyTicketsRoutesTiming> route_timing_list = new ArrayList<>();
+    Spinner route_sp;
     private final ArrayList<RoutesModels> routes_lists = new ArrayList<>();
     Button book_ticket_btn;
     private final ArrayList<String> names = new ArrayList<>();
-    Spinner route_sp;
+    private final ArrayList<MyTicketsRoutesTiming> route_timing_list = new ArrayList<>();
     String date_str, routes_id_str;
     private Boolean isInitialSinner = false;
     private static final String TAG = BookMyTicket.class.getSimpleName();
@@ -74,7 +74,7 @@ public class BookMyTicket extends AppCompatActivity {
         });
         // Departure spinner
         route_sp.setSelected(false);
-        route_sp.setSelection(0, false);
+        route_sp.setSelection(0,false);
 
         route_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -82,9 +82,9 @@ public class BookMyTicket extends AppCompatActivity {
                 View v = route_sp.getSelectedView();
                 ((TextView) v).setTextColor(Color.BLACK);
 
-                if (isInitialSinner) {
+                if (isInitialSinner){
                     routes_id_str = String.valueOf(routes_lists.get(position).getId());
-                } else {
+                }else {
                     isInitialSinner = true;
                 }
 
@@ -164,10 +164,10 @@ public class BookMyTicket extends AppCompatActivity {
                     if (!error) {
                         JSONArray array = jObj.getJSONArray("routes");
                         routes_lists.clear();
-                        for (int i=0; i<array.length();i++) {
+                        for (int i=0; i<array.length();i++){
                             JSONObject jsonObject = array.getJSONObject(i);
                             JSONArray timing_array = jsonObject.getJSONArray("route_timings");
-                            for (int k = 0; k < timing_array.length(); k++) {
+                            for (int k = 0; k<timing_array.length(); k++){
                                 JSONObject route_timing_obj = timing_array.getJSONObject(k);
                                 route_timing_list.add(new MyTicketsRoutesTiming(route_timing_obj.getString("departure_time"),
                                         route_timing_obj.getString("arrival_time"),

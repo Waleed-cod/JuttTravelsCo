@@ -7,25 +7,37 @@
     android:orientation="vertical"
     tools:context=".activity.BookMyTicket">
 
+    <include
+        android:id="@+id/toolbar_my_tickets"
+        layout="@layout/custom_toolbar"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_bus_ticket" />
+        android:src="@drawable/ic_bus_ticket"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:text="Book Your Bus Tickets"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_gravity="center" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Select your Route" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -42,18 +54,6 @@
             android:layout_marginHorizontal="5dp"
             android:spinnerMode="dialog" />
     </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:text="Select your Route" />
-
-    <include
-        android:id="@+id/toolbar_my_tickets"
-        layout="@layout/custom_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -7,6 +7,11 @@
     android:orientation="vertical"
     tools:context=".activity.OurTours">
 
+    <include
+        android:id="@+id/our_tour_toolbar"
+        layout="@layout/custom_toolbar" />
+
+
     <TextView
         android:id="@+id/empty_card_tv_tour"
         android:layout_width="match_parent"
@@ -19,15 +24,10 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tour_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/our_tour_toolbar"
         android:layout_marginHorizontal="10dp" />
-
-    <include
-        android:id="@+id/our_tour_toolbar"
-        layout="@layout/custom_toolbar" />
 </RelativeLayout>
