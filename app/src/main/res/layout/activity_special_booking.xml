@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,217 +7,229 @@
     android:orientation="vertical"
     tools:context=".activity.SpecialBooking">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/special_booking_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp"
-            android:background="@drawable/btn_background"
-            android:text="Book my Booking" />
-
-        <EditText
-            android:id="@+id/extra_mileage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp"
-            android:hint="Enter Extra Mileage"
-            android:inputType="numberDecimal"
-            android:maxLength="2"
-            android:maxLines="1"
-            android:padding="8dp" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/special_booking_btn"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
-                android:layout_weight="1"
-                android:elevation="3dp"
-                app:cardCornerRadius="10dp">
+                android:background="@drawable/btn_background"
+                android:text="Book my Booking" />
 
-                <TextView
-                    android:id="@+id/date_special_booking_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_marginVertical="10dp"
-                    android:text="mm/dd/yyyy"
-                    android:textAlignment="center" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
+            <EditText
+                android:id="@+id/extra_mileage"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
-                android:layout_weight="1"
-                android:elevation="3dp"
-                app:cardCornerRadius="10dp">
+                android:hint="Enter Extra Mileage"
+                android:inputType="numberDecimal"
+                android:maxLength="2"
+                android:maxLines="1"
+                android:padding="8dp" />
 
-                <TextView
-                    android:id="@+id/time_special_booking_tv"
-                    android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_marginVertical="10dp"
-                    android:text="hh:mm"
-                    android:textAlignment="center" />
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    android:layout_weight="1"
+                    android:elevation="3dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="10dp">
 
-            </androidx.cardview.widget.CardView>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/date_special_booking_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="mm/dd/yyyy"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="8dp"
+                        android:textAlignment="center" />
+                </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    android:layout_weight="1"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="10dp">
 
-        <RadioGroup
-            android:id="@+id/radio_group_special_booking"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/time_special_booking_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:text="hh:mm"
+                        android:focusable="true"
+                        android:padding="8dp"
+                        android:textAlignment="center" />
 
-            <RadioButton
-                android:id="@+id/ac_special_booking_btn"
-                android:layout_width="0dp"
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_weight="1"
-                android:text="A.C" />
+                android:layout_marginStart="16dp"
+                android:text="Select Vehicle" />
 
-            <RadioButton
-                android:id="@+id/non_ac_special_booking_btn"
-                android:layout_width="0dp"
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_weight="1"
-                android:text="Non A.C" />
-
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:text="Book Your Trip Here"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
 
-        </RadioGroup>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
-            android:text="Book Your Trip Here"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Select Departure" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Select Arrival" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Select Vehicle" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp"
-            android:elevation="3dp"
-            android:padding="8dp"
-            app:cardCornerRadius="10dp">
-
-            <Spinner
-                android:id="@+id/Departure_spinner"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:spinnerMode="dropdown" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:elevation="3dp"
+                app:cardCornerRadius="10dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp"
-            android:elevation="3dp"
-            app:cardCornerRadius="10dp">
+                <Spinner
+                    android:id="@+id/select_vehicles_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:spinnerMode="dropdown" />
+            </androidx.cardview.widget.CardView>
 
-            <Spinner
-                android:id="@+id/Arrival_spinner"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/arrival_special_booking_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:spinnerMode="dropdown" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginHorizontal="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginVertical="8dp"
+                android:elevation="3dp"
+                android:hint="Enter Arrival"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp"
-            android:elevation="3dp"
-            app:cardCornerRadius="10dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textAutoComplete"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/select_vehicles_spinner"
+            <RadioGroup
+                android:id="@+id/radio_group_special_booking"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:spinnerMode="dropdown" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginHorizontal="16dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/suggestion_special_booking_et"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp"
-            android:hint="Any Suggestion"
-            app:boxCornerRadiusBottomEnd="20dp"
-            app:boxCornerRadiusBottomStart="20dp"
-            app:boxCornerRadiusTopEnd="20dp"
-            app:boxCornerRadiusTopStart="20dp">
+                <RadioButton
+                    android:id="@+id/ac_special_booking_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:text="A.C" />
 
-            <com.google.android.material.textfield.TextInputEditText
+                <RadioButton
+                    android:id="@+id/non_ac_special_booking_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:text="Non A.C" />
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+            </RadioGroup>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/suggestion_special_booking_et"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="top"
-                android:inputType="text"
-                android:padding="10dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="190dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:hint="Any Suggestion"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp">
 
-    </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:inputType="text"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-</ScrollView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dept_special_booking_et"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:elevation="3dp"
+                android:hint="Enter Departure"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textAutoComplete"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/special_booking_toolbar"
+        layout="@layout/custom_toolbar" />
+</LinearLayout>

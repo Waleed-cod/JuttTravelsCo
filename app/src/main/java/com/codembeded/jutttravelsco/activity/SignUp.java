@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -29,27 +30,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
+
+    private static final String TAG = SignUp.class.getSimpleName();
     TextInputLayout name_et, phone_et, email_et, cnic_et, password_et, confirm_password_et;
     Button btn_sign_up;
     String radio_btn_value_str;
     RadioGroup radioGroup;
-
     SharedPreferences sharedPreferences;
-    private static final String TAG = SignUp.class.getSimpleName();
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        name_et = findViewById(R.id.user_name_sign_up_et);
-        phone_et = findViewById(R.id.user_phone_sign_up_et);
-        email_et = findViewById(R.id.user_email_sign_up_et);
-        cnic_et = findViewById(R.id.user_cnic_sign_up_et);
-        password_et = findViewById(R.id.user_password_sign_up_et);
-        confirm_password_et = findViewById(R.id.user_password_sign_up_confirm_et);
-        btn_sign_up = findViewById(R.id.user_sign_up_btn);
-        radioGroup = findViewById(R.id.radio_group);
+        toolbar = findViewById(R.id.sign_up_toolbar);
+        setSupportActionBar(toolbar);
 
+        init();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -76,9 +73,20 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    private void init() {
+        name_et = findViewById(R.id.user_name_sign_up_et);
+        phone_et = findViewById(R.id.user_phone_sign_up_et);
+        email_et = findViewById(R.id.user_email_sign_up_et);
+        cnic_et = findViewById(R.id.user_cnic_sign_up_et);
+        password_et = findViewById(R.id.user_password_sign_up_et);
+        confirm_password_et = findViewById(R.id.user_password_sign_up_confirm_et);
+        btn_sign_up = findViewById(R.id.user_sign_up_btn);
+        radioGroup = findViewById(R.id.radio_group);
+    }
+
     private void get_sign_up(final String name_tv_str, final String phone_tv_str, final String email_tv_str, final String cnic_tv_str,
                              final String password_tv_str, final String radio_value_str) {
-        String tag_str_req = "req_get_signup";
+        String tag_str_req = "req_get_sign_up";
 
 
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.GET_SIGN_UP, new Response.Listener<String>() {
@@ -95,7 +103,7 @@ public class SignUp extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
 
                         editor.putString("id", jObj.getString("id"));
-                        editor.apply();
+                        editor.commit();
                         Intent intent = new Intent(SignUp.this, Home.class);
                         startActivity(intent);
                     } else {

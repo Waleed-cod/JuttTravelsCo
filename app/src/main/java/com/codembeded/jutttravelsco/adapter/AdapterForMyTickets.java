@@ -39,6 +39,7 @@ public class AdapterForMyTickets extends RecyclerView.Adapter<AdapterForMyTicket
         holder.date.setText(details.get(position).getDeparture_date());
         holder.time.setText(details.get(position).getTime());
         holder.numTickets.setText(details.get(position).getRate_parcel_vehicle());
+        holder.ac_status_Tickets.setText(details.get(position).getAc_status());
     }
 
     @Override
@@ -48,7 +49,7 @@ public class AdapterForMyTickets extends RecyclerView.Adapter<AdapterForMyTicket
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView arrival, departure, date, time, numTickets;
+        TextView arrival, departure, date, time, numTickets, ac_status_Tickets;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +59,7 @@ public class AdapterForMyTickets extends RecyclerView.Adapter<AdapterForMyTicket
             date = itemView.findViewById(R.id.departure_date_my_tickets_frag_box);
             time = itemView.findViewById(R.id.time_my_tickets_frag_box);
             numTickets = itemView.findViewById(R.id.ticket_rate_my_tickets_frag_box);
+            ac_status_Tickets = itemView.findViewById(R.id.ac_status_my_tickets_frag_box);
 
         }
     }

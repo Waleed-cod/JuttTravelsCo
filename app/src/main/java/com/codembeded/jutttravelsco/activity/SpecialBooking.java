@@ -1,12 +1,17 @@
 package com.codembeded.jutttravelsco.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +37,7 @@ import com.codembeded.jutttravelsco.models.RoutesModels;
 import com.codembeded.jutttravelsco.models.VehiclesModels;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textview.MaterialTextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,85 +46,39 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.IllegalFormatCodePointException;
 import java.util.Map;
 
 public class SpecialBooking extends AppCompatActivity {
 
     private static final String TAG = SpecialBooking.class.getSimpleName();
-    private final ArrayList<RoutesModels> routes_lists = new ArrayList<>();
-    private final ArrayList<String> names = new ArrayList<>();
     private final ArrayList<VehiclesModels> vehicles_lists = new ArrayList<>();
     private final ArrayList<String> vehicles_names = new ArrayList<>();
     Button booking_btn;
-    TextView datePicker_tv, timePicker_tv;
-    TextInputLayout suggestions_et;
+    MaterialTextView datePicker_tv, timePicker_tv;
+    TextInputLayout dept_et, arrival_et, suggestions_et;
     RadioGroup radioGroup;
     EditText mileage_et;
-    Spinner departureSpecialBooking_sp, arrivalSpecialBooking_sp, vehiclesSpecialBooking_sp;
+    Spinner vehiclesSpecialBooking_sp;
     Boolean isInitialSinner;
     DatePickerDialog.OnDateSetListener dateSetListener;
-    String date_str, routes_id_str, vehicle_id_str, radio_btn_value_str;
+    String date_str, vehicle_id_str, radio_btn_value_str;
     private int t1Hour, t1Minute;
+    Toolbar toolbar;
+    SharedPreferences sharedPreferences;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_special_booking);
 
+        toolbar = findViewById(R.id.special_booking_toolbar);
+        setSupportActionBar(toolbar);
+
         init();
         getVehicles();
-        getRoutes();
-
-
-        //Spinner
-        departureSpecialBooking_sp.setSelected(false);
-        departureSpecialBooking_sp.setSelection(0, false);
-
-        departureSpecialBooking_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                View v = departureSpecialBooking_sp.getSelectedView();
-
-                ((TextView) v).setTextColor(Color.BLACK);
-
-//                if (isInitialSinner){
-                routes_id_str = String.valueOf(routes_lists.get(position).getId());
-//                }else {
-//                    isInitialSinner = true;
-//                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        //Spinner
-        arrivalSpecialBooking_sp.setSelected(false);
-        arrivalSpecialBooking_sp.setSelection(0, false);
-
-        arrivalSpecialBooking_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                View v = arrivalSpecialBooking_sp.getSelectedView();
-
-                ((TextView) v).setTextColor(Color.BLACK);
-
-//                if (isInitialSinner){
-                routes_id_str = String.valueOf(routes_lists.get(position).getId());
-//                }else {
-//                    isInitialSinner = true;
-//                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        user_id = sharedPreferences.getString("id", "");
 
         //Vehicle names
         vehiclesSpecialBooking_sp.setSelected(false);
@@ -181,10 +141,10 @@ public class SpecialBooking extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.ac_special_booking_btn:
-                        radio_btn_value_str = "ac";
+                        radio_btn_value_str = "1";
                         break;
                     case R.id.non_ac_special_booking_btn:
-                        radio_btn_value_str = "non ac";
+                        radio_btn_value_str = "0";
                         break;
                 }
             }
@@ -193,7 +153,10 @@ public class SpecialBooking extends AppCompatActivity {
         booking_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setSpecialBooking();
+
+                setSpecialBooking(dept_et.getEditText().getText().toString(), arrival_et.getEditText().getText().toString(), vehicle_id_str, datePicker_tv.getText().toString(),
+                        timePicker_tv.getText().toString(), mileage_et.getText().toString(), radio_btn_value_str,
+                        suggestions_et.getEditText().getText().toString(), user_id);
             }
         });
 
@@ -205,10 +168,11 @@ public class SpecialBooking extends AppCompatActivity {
         timePicker_tv = findViewById(R.id.time_special_booking_tv);
         suggestions_et = findViewById(R.id.suggestion_special_booking_et);
         radioGroup = findViewById(R.id.radio_group_special_booking);
-        departureSpecialBooking_sp = findViewById(R.id.Departure_spinner);
-        arrivalSpecialBooking_sp = findViewById(R.id.Arrival_spinner);
+        dept_et = findViewById(R.id.dept_special_booking_et);
+        arrival_et = findViewById(R.id.arrival_special_booking_et);
         mileage_et = findViewById(R.id.extra_mileage);
         vehiclesSpecialBooking_sp = findViewById(R.id.select_vehicles_spinner);
+
     }
 
     //time
@@ -235,66 +199,6 @@ public class SpecialBooking extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    private void getRoutes() {
-
-        String tag_str_req = "req_get_routes";
-
-
-        StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_ROUTES, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "1st Response:" + response);
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    Log.e(" second response:", response);
-                    boolean error = jObj.getBoolean("error");
-                    //check for error node in json
-                    if (!error) {
-                        JSONArray array = jObj.getJSONArray("routes");
-                        routes_lists.clear();
-                        for (int i = 0; i < array.length(); i++) {
-                            JSONObject jsonObject = array.getJSONObject(i);
-                            routes_lists.add(new RoutesModels(jsonObject.getInt("id"),
-                                    jsonObject.getString("name")));
-                        }
-                        names.clear();
-                        for (int j = 0; j < routes_lists.size(); j++) {
-                            names.add(routes_lists.get(j).getLocation_name());
-                        }
-
-                        ArrayAdapter<String> spinnerArrayAdapter_dept = new ArrayAdapter<String>(SpecialBooking.this, R.layout.support_simple_spinner_dropdown_item, names);
-                        spinnerArrayAdapter_dept.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        departureSpecialBooking_sp.setAdapter(spinnerArrayAdapter_dept);
-
-                        ArrayAdapter<String> spinnerArrayAdapter_Arrival = new ArrayAdapter<String>(SpecialBooking.this, R.layout.support_simple_spinner_dropdown_item, names);
-                        spinnerArrayAdapter_Arrival.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        arrivalSpecialBooking_sp.setAdapter(spinnerArrayAdapter_Arrival);
-
-                        Toast.makeText(SpecialBooking.this, "Your Routes is now under consideration", Toast.LENGTH_SHORT).show();
-                    } else {
-                        String error_msg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(), "Error is " + error_msg, Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Volley Error: " + error.getMessage());
-                        Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(strReq, tag_str_req);
-    }
 
     private void getVehicles() {
         String tag_str_req = "req_get_vehicles";
@@ -304,7 +208,7 @@ public class SpecialBooking extends AppCompatActivity {
                 Log.d(TAG, "1st Response:" + response);
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e(" second response:", response);
+                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
@@ -336,7 +240,7 @@ public class SpecialBooking extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Volley Error: " + error.getMessage());
+                        Log.e(TAG, "Volley Error:" + error.getMessage());
                         Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
@@ -349,28 +253,26 @@ public class SpecialBooking extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_str_req);
     }
 
-    private void setSpecialBooking() {
-        String tag_str_req = "req_get_vehicles";
+    private void setSpecialBooking(final String dept_et_str, final String arrival_et_str, final String vehicle_sp_str,
+                                   final String date_value_str, final String time_value_str, final String mileage_str,
+                                   final String ac_status_str, final String suggestion_str, final String passenger_id) {
+        String tag_str_req = "req_special_booking";
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.SPECIAL_BOOKING, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "1st Response:" + response);
+                Log.e(TAG, "1st Response:" + response);
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e(" second response:", response);
+                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
-                        JSONArray array = jObj.getJSONArray("vehicles");
-                        for (int i = 0; i < array.length(); i++) {
-                            JSONObject jsonObject = array.getJSONObject(i);
-                            vehicles_lists.add(new VehiclesModels(jsonObject.getInt("id"),
-                                    jsonObject.getString("name")));
-                        }
 
+                        Intent intent = new Intent(SpecialBooking.this, Home.class);
+                        startActivity(intent);
                     } else {
                         String error_msg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(), "Error is " + error_msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), error_msg, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -380,13 +282,22 @@ public class SpecialBooking extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Volley Error: " + error.getMessage());
+                        Log.e(TAG, "error of volley:" + error.getMessage());
                         Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
+//                params.put("passenger_id", user_id);
+                params.put("departure", dept_et_str);
+                params.put("arrival", arrival_et_str);
+                params.put("vehicle_id", vehicle_sp_str);
+                params.put("booking_date", date_value_str);
+                params.put("booking_time", time_value_str);
+                params.put("extra_mileage", mileage_str);
+                params.put("ac_status", ac_status_str);
+                params.put("description", suggestion_str);
+                params.put("passenger_id", passenger_id);
                 return params;
             }
         };

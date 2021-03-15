@@ -1,6 +1,7 @@
 package com.codembeded.jutttravelsco.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -37,13 +38,24 @@ public class Home extends AppCompatActivity {
     private final ArrayList<HomeImageSliderModels> items = new ArrayList<>();
     private AdapterForHomeSlider imageSliderAdapter;
     private static final String TAG = Home.class.getSimpleName();
-
     MaterialCardView bookMyTickets_cv, specialBooking_cv, myBookings_cv, tour_cv, history_cv, complain_cv, new_parcel_cv;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        toolbar = findViewById(R.id.home_toolbar);
+        setSupportActionBar(toolbar);
+
+        init();
+        setImageSlider();
+        OnClicks();
+        get_slider_images();
+    }
+
+    private void init() {
 
         imageSlider = findViewById(R.id.home_image_slider);
         bookMyTickets_cv = findViewById(R.id.book_my_tickets_home);
@@ -53,9 +65,6 @@ public class Home extends AppCompatActivity {
         history_cv = findViewById(R.id.history_home);
         complain_cv = findViewById(R.id.complain_home);
         new_parcel_cv = findViewById(R.id.new_parcel_home);
-        setImageSlider();
-        OnClicks();
-        get_slider_images();
     }
 
     private void get_slider_images() {

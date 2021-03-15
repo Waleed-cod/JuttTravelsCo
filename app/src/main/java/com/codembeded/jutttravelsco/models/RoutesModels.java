@@ -3,12 +3,12 @@ package com.codembeded.jutttravelsco.models;
 public class RoutesModels {
 
     int id;
-    String location_name, ac_rate, non_ac_rate, date;
+    String location_name, time, non_ac_rate, date;
 
-    public RoutesModels(int id, String location_name, String ac_rate, String non_ac_rate, String date) {
+    public RoutesModels(String location_name, String date) {
         this.id = id;
         this.location_name = location_name;
-        this.ac_rate = ac_rate;
+        this.time = time;
         this.non_ac_rate = non_ac_rate;
         this.date = date;
     }
@@ -35,12 +35,12 @@ public class RoutesModels {
         this.location_name = location_name;
     }
 
-    public String getAc_rate() {
-        return ac_rate;
+    public String getTime() {
+        return time;
     }
 
-    public void setAc_rate(String ac_rate) {
-        this.ac_rate = ac_rate;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getNon_ac_rate() {

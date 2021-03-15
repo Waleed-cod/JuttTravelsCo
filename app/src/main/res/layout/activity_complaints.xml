@@ -7,21 +7,57 @@
     android:orientation="vertical"
     tools:context=".activity.Complaints">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/logo" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <RadioGroup
-        android:id="@+id/complain_radio_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/bus_radio_btn"
+            <Button
+                android:id="@+id/btn_complain_enter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/btn_background"
+                android:text="Submit" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_review" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:text="Choose whom you concern" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:text="Share your concerns here" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <RadioGroup
+                android:id="@+id/complain_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/bus_radio_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bus" />
@@ -32,41 +68,43 @@
             android:layout_height="wrap_content"
             android:text="Driver" />
 
-        <RadioButton
-            android:id="@+id/services_radio_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Services" />
-    </RadioGroup>
+                <RadioButton
+                    android:id="@+id/services_radio_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Services" />
+            </RadioGroup>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/complain_suggestion"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="10dp"
-        android:hint="Enter your Message"
-        app:boxCornerRadiusBottomEnd="20dp"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/complain_suggestion"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="10dp"
+                android:hint="Share your Comments"
+                app:boxCornerRadiusBottomEnd="20dp"
         app:boxCornerRadiusBottomStart="20dp"
-        app:boxCornerRadiusTopEnd="20dp"
-        app:boxCornerRadiusTopStart="20dp">
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="top"
-            android:inputType="text"
-            android:padding="10dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="top"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_complain_enter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="10dp"
-        android:background="@drawable/btn_background"
-        android:text="Enter" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/toolbar_complaints"
+        layout="@layout/custom_toolbar" />
 
 </LinearLayout>

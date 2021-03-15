@@ -1,6 +1,7 @@
 package com.codembeded.jutttravelsco.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class Complaints extends AppCompatActivity {
     String radio_btn_value_str;
     private static final String TAG = Complaints.class.getSimpleName();
     Button btn_enter;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class Complaints extends AppCompatActivity {
         suggestion_et = findViewById(R.id.complain_suggestion);
         radioGroup = findViewById(R.id.complain_radio_group);
         btn_enter = findViewById(R.id.btn_complain_enter);
+        toolbar = findViewById(R.id.toolbar_complaints);
+        setSupportActionBar(toolbar);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

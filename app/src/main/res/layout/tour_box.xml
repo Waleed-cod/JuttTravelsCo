@@ -48,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:hint="To"
+                android:hint="to"
                 android:padding="4dp" />
 
             <TextView
@@ -108,11 +108,28 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="AC status"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/ac_status_tour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="on/off"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack" />
+
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
+                android:layout_weight="1"
                 android:hint="Per Person"
                 android:padding="4dp" />
 
@@ -120,11 +137,12 @@
                 android:id="@+id/person_rate_tour_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:hint="rate"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
+
 
         </LinearLayout>
 

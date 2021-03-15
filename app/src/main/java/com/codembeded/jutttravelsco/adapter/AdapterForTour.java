@@ -34,7 +34,6 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
         holder.tour_departure.setText(data.get(position).getDeparture());
         holder.tour_arrival.setText(data.get(position).getArrival());
         holder.tour_departure_date.setText(data.get(position).getDeparture_date());
@@ -42,6 +41,7 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
         holder.tour_time.setText(data.get(position).getTime());
         holder.tour_person_rate.setText(data.get(position).getRate_per_person());
         holder.tour_desc.setText(data.get(position).getDesc());
+        holder.tour_ac_status.setText(data.get(position).getAc_status());
     }
 
     @Override
@@ -51,7 +51,8 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tour_departure, tour_arrival, tour_departure_date, tour_arrival_date, tour_time, tour_person_rate, tour_desc;
+        TextView tour_departure, tour_arrival, tour_departure_date, tour_arrival_date, tour_time,
+                tour_person_rate, tour_desc, tour_ac_status;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -63,6 +64,7 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
             this.tour_time = itemView.findViewById(R.id.time_tour_box);
             this.tour_person_rate = itemView.findViewById(R.id.person_rate_tour_box);
             this.tour_desc = itemView.findViewById(R.id.desc_tour_box);
+            this.tour_ac_status = itemView.findViewById(R.id.ac_status_tour);
 
         }
     }

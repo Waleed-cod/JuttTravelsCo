@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         phone_et = findViewById(R.id.user_phone_login_et);
         password_et = findViewById(R.id.user_password_login_et);
         sign_up_tv = findViewById(R.id.signUp_login_tv);
@@ -100,7 +100,7 @@ public class Login extends AppCompatActivity {
                         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("id", jObj.getString("id"));
-                        editor.apply();
+                        editor.commit();
                         Intent intent = new Intent(Login.this, Home.class);
                         startActivity(intent);
                     } else {

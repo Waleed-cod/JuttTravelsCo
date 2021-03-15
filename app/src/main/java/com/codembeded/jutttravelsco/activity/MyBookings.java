@@ -30,7 +30,7 @@ public class MyBookings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_bookings);
 
-        mToolbar = findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar_my_bookings);
         setSupportActionBar(mToolbar);
         setViewPager();
 

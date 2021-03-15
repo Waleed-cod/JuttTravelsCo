@@ -1,6 +1,7 @@
 package com.codembeded.jutttravelsco.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,11 +32,15 @@ public class ForgetPassword extends AppCompatActivity {
     final static String TAG = ForgetPassword.class.getSimpleName();
     TextInputLayout new_password_forgot_et, confirm_new_password_forgot_et;
     Button reset_password_btn;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
+        toolbar = findViewById(R.id.forget_password_toolbar);
+        setSupportActionBar(toolbar);
+
         init();
         resetPassword(new_password_forgot_et.getEditText().getText().toString());
     }

@@ -2,9 +2,10 @@ package com.codembeded.jutttravelsco.models;
 
 public class MyBookingsModels {
     int id;
-    String image, departure, arrival, departure_date, arrival_date, time, rate_parcel_vehicle, desc;
+    String image, departure, arrival, departure_date, arrival_date, time, rate_parcel_vehicle, desc, ac_status;
 
-    public MyBookingsModels(int id, String image, String departure, String arrival, String departure_date, String arrival_date, String time, String rate_parcel_vehicle, String desc) {
+    public MyBookingsModels(int id, String image, String departure, String arrival, String departure_date,
+                            String arrival_date, String time, String rate_parcel_vehicle, String desc, String ac_status) {
         this.id = id;
         this.image = image;
         this.departure = departure;
@@ -14,15 +15,18 @@ public class MyBookingsModels {
         this.time = time;
         this.rate_parcel_vehicle = rate_parcel_vehicle;
         this.desc = desc;
+        this.ac_status = ac_status;
     }
 
-    public MyBookingsModels(int id, String departure, String arrival, String departure_date, String time, String rate_parcel_vehicle) {
+    public MyBookingsModels(String departure, String arrival, String departure_date,
+                            String time, String rate_parcel_vehicle, String ac_status) {
         this.id = id;
         this.departure = departure;
         this.arrival = arrival;
         this.departure_date = departure_date;
         this.time = time;
         this.rate_parcel_vehicle = rate_parcel_vehicle;
+        this.ac_status = ac_status;
     }
 
     public int getId() {
@@ -95,5 +99,13 @@ public class MyBookingsModels {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getAc_status() {
+        return ac_status;
+    }
+
+    public void setAc_status(String ac_status) {
+        this.ac_status = ac_status;
     }
 }

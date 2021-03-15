@@ -1,81 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".activity.MyHistory">
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar_layout_history" />
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_history"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_height="?attr/actionBarSize" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="?android:dividerHorizontal"
-                android:dividerPadding="10dp"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:showDividers="middle"
-                android:weightSum="4">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Departure"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Arrival"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Date"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Time"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_history_rv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp" />
+    </com.google.android.material.appbar.AppBarLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

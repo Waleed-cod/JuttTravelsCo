@@ -7,26 +7,27 @@
     android:orientation="vertical"
     tools:context=".activity.OurTours">
 
-
     <TextView
         android:id="@+id/empty_card_tv_tour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="Sorry, We're Organizing Tour soon \n Stay Tune"
+        android:text="Sorry, We will Organize Tour soon \n Stay Tune"
         android:textColor="@color/colorBlack"
         android:textSize="20sp"
         android:visibility="gone"
         tools:visibility="visible" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tour_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/our_tour_toolbar"
         android:layout_marginHorizontal="10dp" />
+
+    <include
+        android:id="@+id/our_tour_toolbar"
+        layout="@layout/custom_toolbar" />
 </RelativeLayout>

@@ -38,6 +38,7 @@ public class AdapterForMyBookings extends RecyclerView.Adapter<AdapterForMyBooki
         holder.my_bookings_date.setText(data.get(position).getDeparture_date());
         holder.my_bookings_Time.setText(data.get(position).getTime());
         holder.vehicles.setText(data.get(position).getRate_parcel_vehicle());
+        holder.ac_status_myBookings.setText(data.get(position).getAc_status());
     }
 
     @Override
@@ -47,7 +48,7 @@ public class AdapterForMyBookings extends RecyclerView.Adapter<AdapterForMyBooki
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView my_bookings_departure, my_bookings_arrival, my_bookings_date, my_bookings_Time, vehicles;
+        TextView my_bookings_departure, my_bookings_arrival, my_bookings_date, my_bookings_Time, vehicles, ac_status_myBookings;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -58,6 +59,7 @@ public class AdapterForMyBookings extends RecyclerView.Adapter<AdapterForMyBooki
             this.my_bookings_date = itemView.findViewById(R.id.departure_date_special_booking_frag_box);
             this.my_bookings_Time = itemView.findViewById(R.id.time_special_booking_frag_box);
             this.vehicles = itemView.findViewById(R.id.vehicle_special_booking_frag_box);
+            this.ac_status_myBookings = itemView.findViewById(R.id.ac_status_special_booking_frag_box);
 
         }
     }

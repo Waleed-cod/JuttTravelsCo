@@ -2,9 +2,10 @@ package com.codembeded.jutttravelsco.models;
 
 public class TourModels {
     int id;
-    String image, departure, arrival, departure_date, arrival_date, time, rate_per_person, desc;
+    String image, departure, arrival, departure_date, arrival_date, time, rate_per_person, desc, ac_status;
 
-    public TourModels(int id, String image, String departure, String arrival, String departure_date, String arrival_date, String time, String rate_per_person, String desc) {
+    public TourModels(int id, String image, String departure, String arrival, String departure_date,
+                      String arrival_date, String time, String rate_per_person, String desc, String ac_status) {
         this.id = id;
         this.image = image;
         this.departure = departure;
@@ -14,14 +15,7 @@ public class TourModels {
         this.time = time;
         this.rate_per_person = rate_per_person;
         this.desc = desc;
-    }
-
-    public int getid() {
-        return id;
-    }
-
-    public void setId() {
-        this.id = id;
+        this.ac_status = ac_status;
     }
 
     public String getImage() {
@@ -86,5 +80,21 @@ public class TourModels {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAc_status() {
+        return ac_status;
+    }
+
+    public void setAc_status(String ac_status) {
+        this.ac_status = ac_status;
     }
 }

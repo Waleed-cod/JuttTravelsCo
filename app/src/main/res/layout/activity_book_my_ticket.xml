@@ -4,21 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".activity.BookMyTicket">
-<!--    <ImageView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:src="@drawable/logo"/>-->
 
-    <com.google.android.material.textview.MaterialTextView
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_bus_ticket" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Select Departure" />
+        android:layout_gravity="center"
+        android:text="Book Your Bus Tickets"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -29,7 +36,7 @@
         app:cardCornerRadius="10dp">
 
         <Spinner
-            android:id="@+id/Departure_spinner"
+            android:id="@+id/route_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
@@ -41,25 +48,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Select Arrival" />
+        android:layout_marginTop="10dp"
+        android:text="Select your Route" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
-        android:elevation="3dp"
-        app:cardCornerRadius="10dp">
-
-        <Spinner
-            android:id="@+id/Arrival_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:spinnerMode="dialog" />
-    </androidx.cardview.widget.CardView>
-
+    <include
+        android:id="@+id/toolbar_my_tickets"
+        layout="@layout/custom_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"

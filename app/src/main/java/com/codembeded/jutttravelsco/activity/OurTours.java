@@ -1,6 +1,7 @@
 package com.codembeded.jutttravelsco.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +38,7 @@ public class OurTours extends AppCompatActivity {
     final static String TAG = OurTours.class.getSimpleName();
     ArrayList<TourModels> tours_lists = new ArrayList<>();
     TextView empty_card_tv_tour;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class OurTours extends AppCompatActivity {
 
         tour_rv = findViewById(R.id.tour_rv);
         empty_card_tv_tour = findViewById(R.id.empty_card_tv_tour);
+        toolbar = findViewById(R.id.our_tour_toolbar);
+        setSupportActionBar(toolbar);
 
         getToursDetails();
 
@@ -69,15 +73,15 @@ public class OurTours extends AppCompatActivity {
                             for (int i = 0; i < array.length(); i++) {
 
                                 JSONObject jsonObject = array.getJSONObject(i);
-                                tours_lists.add(new TourModels(jsonObject.getInt("id"),
-                                        jsonObject.getString(""),
-                                        jsonObject.getString(""),
-                                        jsonObject.getString(""),
-                                        jsonObject.getString(""),
-                                        jsonObject.getString(""),
-                                        jsonObject.getString(""),
-                                        jsonObject.getString(""),
-                                        jsonObject.getString("")));
+//                                tours_lists.add(new TourModels(jsonObject.getInt("id"),
+//                                        jsonObject.getString(""),
+//                                        jsonObject.getString(""),
+//                                        jsonObject.getString(""),
+//                                        jsonObject.getString(""),
+//                                        jsonObject.getString(""),
+//                                        jsonObject.getString(""),
+//                                        jsonObject.getString(""),
+//                                        jsonObject.getString("")));
                             }
 
                         adapterForTour = new AdapterForTour(tours_lists, OurTours.this);

@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:hint="To"
+                android:hint="to"
                 android:padding="4dp" />
 
             <TextView
@@ -90,7 +90,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
+                android:layout_weight="1"
                 android:hint="Vehicle:"
                 android:padding="4dp" />
 
@@ -98,8 +98,25 @@
                 android:id="@+id/vehicle_special_booking_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:hint="vehivles"
+                android:layout_weight="1"
+                android:hint="price"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="AC status"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/ac_status_special_booking_frag_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="on/off"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />

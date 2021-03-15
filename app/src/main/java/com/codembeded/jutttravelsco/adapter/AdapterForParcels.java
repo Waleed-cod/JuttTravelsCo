@@ -33,6 +33,7 @@ public class AdapterForParcels extends RecyclerView.Adapter<AdapterForParcels.Vi
         holder.date.setText(details.get(position).getDeparture_date());
         holder.time.setText(details.get(position).getTime());
         holder.parcel.setText(details.get(position).getRate_parcel_vehicle());
+        holder.ac_status.setText(details.get(position).getAc_status());
     }
 
     @Override
@@ -42,7 +43,7 @@ public class AdapterForParcels extends RecyclerView.Adapter<AdapterForParcels.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView arrival, departure, date, time, parcel;
+        TextView arrival, departure, date, time, parcel, ac_status;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +53,7 @@ public class AdapterForParcels extends RecyclerView.Adapter<AdapterForParcels.Vi
             date = itemView.findViewById(R.id.departure_date_my_parcels_frag_box);
             time = itemView.findViewById(R.id.time_my_parcels_frag_box);
             parcel = itemView.findViewById(R.id.my_parcels_frag_parcel_rate_box);
+            ac_status = itemView.findViewById(R.id.ac_status_my_parcel_frag_box);
         }
     }
 }

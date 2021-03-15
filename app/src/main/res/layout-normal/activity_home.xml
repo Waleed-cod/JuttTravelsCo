@@ -8,31 +8,6 @@
     android:orientation="vertical"
     tools:context=".activity.Home">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.smarteist.autoimageslider.SliderView
-            android:id="@+id/home_image_slider"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_gravity="top"
-            app:sliderAnimationDuration="600"
-            app:sliderAutoCycleDirection="back_and_forth"
-            app:sliderAutoCycleEnabled="true"
-            app:sliderIndicatorAnimationDuration="600"
-            app:sliderIndicatorGravity="center_horizontal|bottom"
-            app:sliderIndicatorMargin="15dp"
-            app:sliderIndicatorOrientation="horizontal"
-            app:sliderIndicatorPadding="3dp"
-            app:sliderIndicatorSelectedColor="#5A5A5A"
-            app:sliderIndicatorUnselectedColor="#FFF"
-            app:sliderScrollTimeInSec="1"
-            app:sliderStartAutoCycle="true" />
-
-
-    </LinearLayout>
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -261,7 +236,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/my_parcel_home"
+                    android:id="@+id/complain_home"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
@@ -274,7 +249,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent">
+                        android:background="@android:color/transparent"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -283,14 +259,14 @@
                             android:background="@android:color/transparent"
                             android:foreground="@drawable/trending_gradient_shape"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/my_parcel" />
+                            android:src="@drawable/complain" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:elevation="8dp"
-                            android:text="MY PARCEL"
+                            android:text="COMPLAINTS?"
                             android:textColor="#ffffff"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -349,52 +325,41 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/complain_home"
-                    android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardBackgroundColor="#d3d3d3"
-                    app:cardCornerRadius="10dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:foreground="@drawable/trending_gradient_shape"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/complain" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:elevation="8dp"
-                            android:text="COMPLAINTS?"
-                            android:textColor="#ffffff"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
 
             </LinearLayout>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/home_image_slider"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_gravity="top"
+            app:sliderAnimationDuration="600"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderAutoCycleEnabled="true"
+            app:sliderIndicatorAnimationDuration="600"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorSelectedColor="#5A5A5A"
+            app:sliderIndicatorUnselectedColor="#FFF"
+            app:sliderScrollTimeInSec="1"
+            app:sliderStartAutoCycle="true" />
+
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/home_toolbar"
+        layout="@layout/custom_toolbar" />
 
 
 </LinearLayout>

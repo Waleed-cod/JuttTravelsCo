@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:hint="To"
+                android:hint="to"
                 android:padding="4dp" />
 
             <TextView
@@ -86,11 +86,28 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="AC status"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/ac_status_my_parcel_frag_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="on/off"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack" />
+
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
+                android:layout_weight="1"
                 android:hint="Parcel Price"
                 android:padding="4dp" />
 
@@ -98,11 +115,12 @@
                 android:id="@+id/my_parcels_frag_parcel_rate_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:hint="Amount"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
+
 
         </LinearLayout>
 
