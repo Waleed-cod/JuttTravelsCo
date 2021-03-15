@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.codembeded.jutttravelsco.R;
 import com.codembeded.jutttravelsco.models.MyBookingsModels;
+import com.codembeded.jutttravelsco.models.ParcelModels;
 
 import java.util.ArrayList;
 
@@ -16,8 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AdapterForParcels extends RecyclerView.Adapter<AdapterForParcels.ViewHolder> {
 
-    ArrayList<MyBookingsModels> details;
+    ArrayList<ParcelModels> details;
     Context ctx;
+
+    public AdapterForParcels(ArrayList<ParcelModels> details, Context ctx) {
+        this.details = details;
+        this.ctx = ctx;
+    }
 
     @NonNull
     @Override
@@ -28,12 +34,11 @@ public class AdapterForParcels extends RecyclerView.Adapter<AdapterForParcels.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AdapterForParcels.ViewHolder holder, int position) {
-        holder.departure.setText(details.get(position).getDeparture());
-        holder.arrival.setText(details.get(position).getArrival());
-        holder.date.setText(details.get(position).getDeparture_date());
-        holder.time.setText(details.get(position).getTime());
-        holder.parcel.setText(details.get(position).getRate_parcel_vehicle());
-        holder.ac_status.setText(details.get(position).getAc_status());
+        holder.receiver_name.setText(details.get(position).getReceiver_name());
+        holder.receiver_contact.setText(details.get(position).getReceiver_contact());
+        holder.parcel_weight.setText(details.get(position).getParcel_weight());
+        holder.parcel_quantity.setText(details.get(position).getParcel_quantity());
+        holder.parcel_description.setText(details.get(position).getDescription());
     }
 
     @Override
@@ -43,17 +48,16 @@ public class AdapterForParcels extends RecyclerView.Adapter<AdapterForParcels.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView arrival, departure, date, time, parcel, ac_status;
+        TextView receiver_name, receiver_contact, parcel_weight, parcel_quantity, parcel_description;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            departure = itemView.findViewById(R.id.departure_date_my_parcels_frag_box);
-            arrival = itemView.findViewById(R.id.arrival_my_parcels_frag_box);
-            date = itemView.findViewById(R.id.departure_date_my_parcels_frag_box);
-            time = itemView.findViewById(R.id.time_my_parcels_frag_box);
-            parcel = itemView.findViewById(R.id.my_parcels_frag_parcel_rate_box);
-            ac_status = itemView.findViewById(R.id.ac_status_my_parcel_frag_box);
+            receiver_name = itemView.findViewById(R.id.receiver_name_my_parcels_frag_box);
+            receiver_contact = itemView.findViewById(R.id.receiver_contact_my_parcels_frag_box);
+            parcel_weight = itemView.findViewById(R.id.weight_my_parcels_frag_box);
+            parcel_quantity = itemView.findViewById(R.id.quantity_my_parcels_frag_box);
+            parcel_description = itemView.findViewById(R.id.desc_my_parcel_frag_box);
         }
     }
 }

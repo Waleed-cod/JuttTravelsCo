@@ -27,6 +27,8 @@ import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
 import com.codembeded.jutttravelsco.models.MyTicketsRoutesTiming;
 import com.codembeded.jutttravelsco.models.RoutesModels;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,19 +40,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BookMyTicket extends AppCompatActivity {
-    TextView date, time;
-    int t1Hour, t1Minute;
-    Spinner route_sp;
+    TextView date;
+    Spinner route_sp,time_tickets_sp;
+    TextInputLayout total_tickets, women_seats;
     private final ArrayList<RoutesModels> routes_lists = new ArrayList<>();
     Button book_ticket_btn;
     private final ArrayList<String> names = new ArrayList<>();
+    private final ArrayList<String> time = new ArrayList<>();
     private final ArrayList<MyTicketsRoutesTiming> route_timing_list = new ArrayList<>();
-    String date_str, routes_id_str;
+    String routes_id_str, routes_time_id_str;
     private Boolean isInitialSinner = false;
     private static final String TAG = BookMyTicket.class.getSimpleName();
     private RadioGroup radioGroup;
-    private String radio_btn_value_str;
-    DatePickerDialog.OnDateSetListener dateSetListener;
+    String radio_btn_value_str;
     Toolbar toolbar;
 
 
@@ -96,6 +98,29 @@ public class BookMyTicket extends AppCompatActivity {
             }
         });
 
+        time_tickets_sp.setSelected(false);
+        time_tickets_sp.setSelection(0,false);
+
+        time_tickets_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                View v = route_sp.getSelectedView();
+                ((TextView) v).setTextColor(Color.BLACK);
+
+                if (isInitialSinner){
+                    routes_time_id_str = String.valueOf(route_timing_list.get(position).getId());
+                }else {
+                    isInitialSinner = true;
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -117,10 +142,12 @@ public class BookMyTicket extends AppCompatActivity {
     private void init() {
 
         date = findViewById(R.id.date_of_ticket);
-        time = findViewById(R.id.time_of_ticket);
+        time_tickets_sp = findViewById(R.id.time_spinner_tickets);
         book_ticket_btn = findViewById(R.id.btn_book_ticket);
         route_sp = findViewById(R.id.route_spinner);
         radioGroup = findViewById(R.id.book_my_ticket_radio_group);
+        women_seats = findViewById(R.id.women_seats_tickets);
+        total_tickets = findViewById(R.id.total_ticket_et);
     }
 
     private void get_routes() {
@@ -133,7 +160,7 @@ public class BookMyTicket extends AppCompatActivity {
                 Log.d(TAG, "1st Response:" + response);
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e(" second response:", response);
+                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
@@ -144,11 +171,15 @@ public class BookMyTicket extends AppCompatActivity {
                             JSONArray timing_array = jsonObject.getJSONArray("route_timings");
                             for (int k = 0; k<timing_array.length(); k++){
                                 JSONObject route_timing_obj = timing_array.getJSONObject(k);
-                                route_timing_list.add(new MyTicketsRoutesTiming(route_timing_obj.getString("departure_time"),
+                                route_timing_list.add(new MyTicketsRoutesTiming(route_timing_obj.getInt("id")
+                                        ,route_timing_obj.getString("departure_time"),
                                         route_timing_obj.getString("arrival_time"),
-                                        route_timing_obj.getString("entry_date")));
-                                time.setText(route_timing_list.get(i).getDeparture_time());
-
+                                        route_timing_obj.getString("entry_date"),
+                                        route_timing_obj.getString("status")));
+                            }
+                            time.clear();
+                            for (int l= 0; l<route_timing_list.size(); l++){
+                                time.add(route_timing_list.get(l).getDeparture_time());
                             }
 
                             routes_lists.add(new RoutesModels(jsonObject.getString("name"),
@@ -160,6 +191,10 @@ public class BookMyTicket extends AppCompatActivity {
                         for (int j = 0; j<routes_lists.size(); j++){
                             names.add(routes_lists.get(j).getLocation_name());
                         }
+
+                        ArrayAdapter<String> spinnerArrayAdapter_time = new ArrayAdapter<String>(BookMyTicket.this, R.layout.support_simple_spinner_dropdown_item, time);
+                        spinnerArrayAdapter_time.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        time_tickets_sp.setAdapter(spinnerArrayAdapter_time);
 
                         ArrayAdapter<String> spinnerArrayAdapter_dept = new ArrayAdapter<String>(BookMyTicket.this, R.layout.support_simple_spinner_dropdown_item, names);
                         spinnerArrayAdapter_dept.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -192,28 +227,5 @@ public class BookMyTicket extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_str_req);
 
     }
-//    //time
-//    private void showTimePickerDialog() {
-//        TimePickerDialog timePickerDialog = new TimePickerDialog(
-//                BookMyTicket.this,
-//                new TimePickerDialog.OnTimeSetListener() {
-//                    @Override
-//                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//                        t1Hour = hourOfDay;
-//                        t1Minute = minute;
-//
-//                        Calendar calendar = Calendar.getInstance();
-//
-//                        calendar.set(0, 0, 0, t1Hour, t1Minute);
-//
-//                        time.setText(DateFormat.format("hh:mm aa", calendar));
-//                    }
-//                }, 12, 0, false
-//        );
-//        ///Display previous time
-//        timePickerDialog.updateTime(t1Hour, t1Minute);
-//        //show time
-//        timePickerDialog.show();
-//    }
 
 }
