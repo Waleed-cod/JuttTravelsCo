@@ -69,7 +69,6 @@ public class MyParcels extends Fragment {
 
         getMyParcels(user_id);
 
-        Log.e("USER_ID",user_id);
         return v;
     }
 

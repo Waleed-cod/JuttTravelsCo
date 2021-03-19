@@ -2,16 +2,16 @@ package com.codembeded.jutttravelsco.models;
 
 public class HomeImageSliderModels {
 
-    String ImgUrl;
+    int ImgUrl;
 
-    public HomeImageSliderModels(String imgUrl) {
+    public HomeImageSliderModels(int imgUrl) {
         ImgUrl = imgUrl;
     }
-    public String getImgUrl() {
+    public int getImgUrl() {
         return ImgUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
+    public void setImgUrl(int imgUrl) {
         ImgUrl = imgUrl;
     }
 

@@ -57,7 +57,6 @@ public class SignUp extends AppCompatActivity {
                     case R.id.female_radio_btn:
                         radio_btn_value_str = "female";
                         break;
-
                 }
             }
         });
@@ -65,7 +64,8 @@ public class SignUp extends AppCompatActivity {
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                get_sign_up(name_et.getEditText().getText().toString(), phone_et.getEditText().getText().toString(), email_et.getEditText().getText().toString(), cnic_et.getEditText().getText().toString(),
+                get_sign_up(name_et.getEditText().getText().toString(), "+92"+phone_et.getEditText().getText().toString(),
+                        email_et.getEditText().getText().toString(), cnic_et.getEditText().getText().toString(),
                         password_et.getEditText().getText().toString(), radio_btn_value_str);
             }
         });

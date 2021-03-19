@@ -15,5 +15,8 @@ public class AppConfig {
     public static final String GET_SPECIAL_BOOKING = BASE_URL + "get_special_bookings.php";
     public static final String ADD_PARCEL = BASE_URL + "add_parcel.php";
     public static final String GET_PARCEL = BASE_URL + "get_parcel.php";
-    public static final String GET_TICKET = BASE_URL + "add_booking.php";
+    public static final String ADD_BOOKING = BASE_URL + "add_booking.php";
+    public static final String GET_BOOKING = BASE_URL + "get_booking.php";
+    public static final String ADD_TOUR = BASE_URL + "add_tour_booking.php";
+    public static final String GET_TOUR_BOOKING = BASE_URL + "get_tour_booking.php";
 }

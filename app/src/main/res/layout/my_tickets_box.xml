@@ -6,7 +6,7 @@
     android:layout_margin="10dp"
     android:elevation="4dp"
     app:cardBackgroundColor="@color/colorWhite"
-    app:cardCornerRadius="14dp">
+    app:cardCornerRadius="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,31 +19,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="2">
 
 
             <TextView
-                android:id="@+id/departure_my_tickets_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.4"
-                android:hint="Departure"
+                android:layout_weight="0.5"
+                android:hint="My Route:"
                 android:padding="4dp"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack" />
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                />
 
             <TextView
+                android:id="@+id/route_my_tickets_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:hint="to"
-                android:padding="4dp" />
-
-            <TextView
-                android:id="@+id/arrival_my_tickets_frag_box"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.4"
+                android:layout_weight="1.5"
                 android:hint="Arrival"
                 android:padding="4dp"
                 android:textAlignment="center"
@@ -59,7 +52,7 @@
 
 
             <TextView
-                android:id="@+id/departure_date_my_tickets_frag_box"
+                android:id="@+id/booking_date_my_tickets_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -70,7 +63,7 @@
 
 
             <TextView
-                android:id="@+id/time_my_tickets_frag_box"
+                android:id="@+id/booking_time_my_tickets_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -90,8 +83,55 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="AC status"
+                android:hint="Total seats:"
+                android:textSize="12sp"
                 android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/total_seats_my_tickets_frag_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Total Seats"
+                android:textAlignment="center"
+                android:padding="4dp"
+                android:textColor="@color/colorBlack"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Women seats"
+                android:textSize="12sp"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/women_seats_my_tickets_frag_box"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="seats"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="AC status"
+                android:padding="4dp"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/ac_status_my_tickets_frag_box"
@@ -108,15 +148,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Ticket Price"
-                android:padding="4dp" />
+                android:hint="Total Amount"
+                android:padding="4dp"
+                android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/ticket_rate_my_tickets_frag_box"
+                android:id="@+id/total_amount_my_tickets_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Amount"
+                android:hint="T Amount"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />

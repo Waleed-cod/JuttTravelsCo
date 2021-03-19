@@ -76,7 +76,7 @@ public class Login extends AppCompatActivity {
                 } else if (password_et.equals("")) {
                     Toast.makeText(Login.this, "Some Thing Missing", Toast.LENGTH_SHORT).show();
                 } else {
-                    getLogin(phone_et.getText().toString(),password_et.getText().toString());
+                    getLogin("+92"+phone_et.getText().toString(),password_et.getText().toString());
                 }
 
             }

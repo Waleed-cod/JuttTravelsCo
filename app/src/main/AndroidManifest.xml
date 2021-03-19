@@ -30,9 +30,6 @@
             android:name=".activity.SpecialBooking"
             android:label="Special Booking" />
         <activity
-            android:name=".activity.BookTour"
-            android:label="Book Tour" />
-        <activity
             android:name=".activity.Complaints"
             android:label="Complaints" />
         <activity

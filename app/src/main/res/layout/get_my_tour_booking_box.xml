@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
     android:elevation="4dp"
     app:cardBackgroundColor="@color/colorWhite"
@@ -21,7 +21,7 @@
 
 
             <ImageView
-                android:id="@+id/image_tour_box"
+                android:id="@+id/image_get_tour_booking_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -43,7 +43,7 @@
                 android:padding="4dp" />
 
             <TextView
-                android:id="@+id/routes_tour_box"
+                android:id="@+id/routes_get_tour_booking_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
@@ -69,7 +69,7 @@
 
 
             <TextView
-                android:id="@+id/departure_date_tour_box"
+                android:id="@+id/departure_date_get_tour_booking_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -81,7 +81,7 @@
 
 
             <TextView
-                android:id="@+id/arrival_date_tour_box"
+                android:id="@+id/arrival_date_get_tour_booking_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -91,7 +91,7 @@
                 android:textColor="@color/colorBlack" />
 
             <TextView
-                android:id="@+id/time_tour_box"
+                android:id="@+id/time_get_tour_booking_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -112,17 +112,35 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:showDividers="middle"
-            android:divider="@color/colorBlack">
+            android:divider="@color/colorBlack"
+            android:weightSum="4">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:hint="Per Seat"
+                android:layout_weight="0.6"
+                android:hint="Seats"
                 android:padding="4dp" />
 
             <TextView
-                android:id="@+id/person_rate_tour_box"
+                android:id="@+id/total_seats_get_tour_booking_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:hint="seats"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.1"
+                android:hint=" Total Amount"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/total_amount_get_tour_booking_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
@@ -130,7 +148,6 @@
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
-
 
         </LinearLayout>
 
@@ -145,7 +162,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/desc_tour_box"
+                android:id="@+id/desc_get_tour_booking_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
@@ -161,4 +178,6 @@
 
 
     </LinearLayout>
+
+
 </androidx.cardview.widget.CardView>
