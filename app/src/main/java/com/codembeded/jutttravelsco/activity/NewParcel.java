@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,14 +49,19 @@ public class NewParcel extends AppCompatActivity {
         confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                get_parcel(user_id,receive_name_et.getEditText().getText().toString(), receive_contact_et.getEditText().getText().toString(), parcel_weight_et.getEditText().getText().toString(),
-                        parcel_quantity_et.getEditText().getText().toString(), info_et.getEditText().getText().toString());
+                if (!validateName() | !validatePhone() | !validateWeight() | !validateQuantity() | !validateInfo()) {
+                    return;
+                }else
+                get_parcel(user_id,receive_name_et.getEditText().getText().toString(), receive_contact_et.getEditText().getText().toString(),
+                        parcel_weight_et.getEditText().getText().toString(), parcel_quantity_et.getEditText().getText().toString(),
+                        info_et.getEditText().getText().toString());
             }
 
         });
     }
 
-    private void get_parcel(final String passenger_id, final String name_str, final String contact_str, final String weight_str, final String quantity_str, final String info_str) {
+    private void get_parcel(final String passenger_id, final String name_str,
+                            final String contact_str, final String weight_str, final String quantity_str, final String info_str) {
         String tag_str_req = "req_get_parcels";
 
 
@@ -69,7 +75,14 @@ public class NewParcel extends AppCompatActivity {
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
+                        receive_name_et.getEditText().setText("");
+                        receive_contact_et.getEditText().setText("");
+                        parcel_weight_et.getEditText().setText("");
+                        parcel_quantity_et.getEditText().setText("");
+                        info_et.getEditText().setText("");
                         Toast.makeText(NewParcel.this, "Your Parcel has been Booked", Toast.LENGTH_SHORT).show();
+                        startActivity( new Intent( NewParcel.this,Home.class));
+
                     } else {
                         String error_msg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(), "" + error_msg, Toast.LENGTH_SHORT).show();
@@ -110,5 +123,64 @@ public class NewParcel extends AppCompatActivity {
         info_et = findViewById(R.id.desc_parcel_et);
         confirm_btn = findViewById(R.id.btn_book_parcel);
     }
+    private boolean validateName(){
+        String name_et = receive_name_et.getEditText().getText().toString();
+        if (name_et.isEmpty()) {
+            receive_name_et.setError("Field cannot be empty");
+            return false;
+        }else {
+            receive_name_et.setError(null);
+            return true;
+        }
+
+    }
+    private boolean validatePhone(){
+        String phone = receive_contact_et.getEditText().getText().toString();
+        if (phone.isEmpty()) {
+            receive_contact_et.setError("Field cannot be empty");
+            return false;
+        }else if (phone.length() < 13){
+            receive_contact_et.setError("Enter 13 digits +92xxxxxxxxx");
+            return false;
+        }else {
+            receive_contact_et.setError(null);
+            return true;
+        }
+
+    }
+    private boolean validateWeight(){
+        String name_et = parcel_weight_et.getEditText().getText().toString();
+        if (name_et.isEmpty()) {
+            parcel_weight_et.setError("Field cannot be empty");
+            return false;
+        }else {
+            parcel_weight_et.setError(null);
+            return true;
+        }
+
+    }
+    private boolean validateQuantity(){
+        String name_et = parcel_quantity_et.getEditText().getText().toString();
+        if (name_et.isEmpty()) {
+            parcel_quantity_et.setError("Field cannot be empty");
+            return false;
+        }else {
+            parcel_quantity_et.setError(null);
+            return true;
+        }
+
+    }
+    private boolean validateInfo(){
+        String name_et = info_et.getEditText().getText().toString();
+        if (name_et.isEmpty()) {
+            info_et.setError("Field cannot be empty");
+            return false;
+        }else {
+            info_et.setError(null);
+            return true;
+        }
+
+    }
+
 
 }

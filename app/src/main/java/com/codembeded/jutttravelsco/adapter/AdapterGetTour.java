@@ -53,11 +53,9 @@ public class AdapterGetTour extends RecyclerView.Adapter<AdapterGetTour.ViewHold
 
         TextView  routes, tour_departure_date, tour_arrival_date, tour_time,
                 total_amount, tour_desc, total_seats;
-        ImageView tour_image;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            this.tour_image = itemView.findViewById(R.id.image_get_tour_booking_box);
             this.routes = itemView.findViewById(R.id.routes_get_tour_booking_box);
             this.tour_departure_date = itemView.findViewById(R.id.departure_date_get_tour_booking_box);
             this.tour_arrival_date = itemView.findViewById(R.id.arrival_date_get_tour_booking_box);

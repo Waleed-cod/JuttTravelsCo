@@ -20,13 +20,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
-import com.codembeded.jutttravelsco.activity.BookMyTicket;
-import com.codembeded.jutttravelsco.activity.MyBookings;
 import com.codembeded.jutttravelsco.adapter.AdapterForMyTickets;
 import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
 import com.codembeded.jutttravelsco.models.GetTicketsModels;
-import com.codembeded.jutttravelsco.models.MyBookingsModels;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,33 +33,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyTickets extends Fragment {
 
-    public static final String TITLE = "My Tickets";
-    RecyclerView mMyTicket_rv;
-    AdapterForMyTickets mAdapterForMyTickets;
-    ArrayList<GetTicketsModels> bookings_list = new ArrayList<>();
+public class MyTicketsHistory extends Fragment {
+
+    public static final String TITLE = "My Tour";
+
+    RecyclerView recyclerView;
+    AdapterForMyTickets adapterForMyTickets;
+    ArrayList<GetTicketsModels> lists = new ArrayList<>();
     TextView mEmpty_card_tv_myTickets;
     SharedPreferences preferences;
     String user_id_str;
 
-
-    public static MyTickets newInstance() {
-
-        return new MyTickets();
+    public static Fragment newInstance() {
+        return new MyTicketsHistory();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_my_tickets, container, false);
-        mMyTicket_rv = v.findViewById(R.id.my_tickets_frag_rv);
-        mEmpty_card_tv_myTickets = v.findViewById(R.id.empty_tv_my_tickets_frag);
+        View v = inflater.inflate(R.layout.fragment_my_tickets_history, container, false);
+
+
+        recyclerView = v.findViewById(R.id.my_tickets_history_frag_rv);
+        mEmpty_card_tv_myTickets = v.findViewById(R.id.empty_tv_my_tickets_history_frag);
 
         preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         user_id_str = preferences.getString("id", "");
+
+        getBookingTickets(user_id_str);
 
         getBookingTickets(user_id_str);
 
@@ -84,16 +84,14 @@ public class MyTickets extends Fragment {
                     //check for error node in json
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("bookings");
-//                        JSONObject jObject = jsonArray.getJSONObject(Integer.parseInt("status"));
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        if (jsonArray.length() == 0) {
+                        if (jsonArray.length()==0){
 
                             mEmpty_card_tv_myTickets.setVisibility(View.VISIBLE);
 
-                        } else if (jsonObject.getInt("status") == 0) {
-
-                                bookings_list.add(new GetTicketsModels(jsonObject.getInt("booking_id"),
+                        }else {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                lists.add(new GetTicketsModels(jsonObject.getInt("booking_id"),
                                         jsonObject.getInt("ladies_seats"),
                                         jsonObject.getInt("status"),
                                         jsonObject.getInt("total_seats"),
@@ -105,9 +103,9 @@ public class MyTickets extends Fragment {
                                         jsonObject.getString("booking_time")));
                             }
                         }
-                        mAdapterForMyTickets = new AdapterForMyTickets(bookings_list, getActivity());
-                        mMyTicket_rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                        mMyTicket_rv.setAdapter(mAdapterForMyTickets);
+                        adapterForMyTickets = new AdapterForMyTickets(lists, getActivity());
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+                        recyclerView.setAdapter(adapterForMyTickets);
 
                     } else {
                         String error_msg = jObj.getString("error_msg");
@@ -133,4 +131,5 @@ public class MyTickets extends Fragment {
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_str_req);
     }
+
 }

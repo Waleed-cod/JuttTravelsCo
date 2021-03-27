@@ -125,6 +125,8 @@
 
             </RadioGroup>
 
+
+
             <TextView
                 android:id="@+id/create_acc_tv"
                 android:layout_width="wrap_content"
@@ -145,6 +147,22 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/please_select_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Please Select Gender "
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="gone"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@id/gender_tv"
+                android:layout_below="@id/user_password_sign_up_confirm_et"
+                tools:visibility="visible"/>
+
 
             <View
                 android:id="@+id/view"

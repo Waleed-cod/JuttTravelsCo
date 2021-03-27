@@ -1,7 +1,6 @@
 package com.codembeded.jutttravelsco.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -19,16 +18,11 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
-import com.codembeded.jutttravelsco.activity.Home;
-import com.codembeded.jutttravelsco.activity.SignUp;
-import com.codembeded.jutttravelsco.adapter.AdapterForMyBookings;
 import com.codembeded.jutttravelsco.adapter.AdapterForParcels;
 import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
-import com.codembeded.jutttravelsco.models.MyBookingsModels;
 import com.codembeded.jutttravelsco.models.ParcelModels;
 
 import org.json.JSONArray;
@@ -41,31 +35,32 @@ import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
-public class MyParcels extends Fragment {
+public class MyParcelHistory extends Fragment {
 
-    public static final String TITLE = "My Parcels";
-    RecyclerView myParcels_rv;
-    AdapterForParcels mAdapterForParcels;
-    ArrayList<ParcelModels> mMyParcels_list = new ArrayList<>();
-    TextView empty_card_tv_mMyParcels;
+    public static final String TITLE = "My Parcel";
+    private RecyclerView myParcels_rv;
+    private AdapterForParcels mAdapterForParcels;
+    private final ArrayList<ParcelModels> mMyParcels_list = new ArrayList<>();
+    private TextView empty_card_tv_mMyParcels;
     SharedPreferences preferences;
-    String user_id;
+    private String user_id;
 
-    public static MyParcels newInstance() {
-        return new MyParcels();
+    public static Fragment newInstance() {
+        return new MyParcelHistory();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_my_parcels, container, false);
-        myParcels_rv = v.findViewById(R.id.my_parcels_frag_rv);
+        View v = inflater.inflate(R.layout.fragment_my_parcel_history, container, false);
+
+        myParcels_rv = v.findViewById(R.id.my_parcel_history_frag_rv);
 
         preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         user_id = preferences.getString("id", "");
 
-        empty_card_tv_mMyParcels = v.findViewById(R.id.empty_tv_my_parcels_frag);
+        empty_card_tv_mMyParcels = v.findViewById(R.id.empty_tv_my_parcel_history_frag);
 
         getMyParcels(user_id);
 
@@ -76,7 +71,7 @@ public class MyParcels extends Fragment {
         String tag_str_req = "req_get_my_parcel";
 
 
-        StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_PARCEL + "?passenger_id=" + passenger_id, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.GET_PARCEL + "?passenger_id=" + passenger_id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "1st Response:" + response);
@@ -87,13 +82,11 @@ public class MyParcels extends Fragment {
                     //check for error node in json
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("parcels");
-//                        JSONObject jObject = jsonArray.getJSONObject(Integer.parseInt(("status")));
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-
                             if (jsonArray.length() == 0) {
                                 empty_card_tv_mMyParcels.setVisibility(View.VISIBLE);
-                            } else if (jsonObject.getInt("status") == 0){
+                            } else {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 mMyParcels_list.add(new ParcelModels(jsonObject.getInt("parcel_id"),
                                         jsonObject.getString("weight"),
                                         jsonObject.getString("quantity"),
@@ -103,8 +96,6 @@ public class MyParcels extends Fragment {
                                         jsonObject.getString("status"),
                                         jsonObject.getString("description"),
                                         jsonObject.getString("Amount")));
-                            }else {
-                                empty_card_tv_mMyParcels.setVisibility(View.VISIBLE);
                             }
                         }
 

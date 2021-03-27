@@ -35,10 +35,10 @@ public class AdapterForMyBookings extends RecyclerView.Adapter<AdapterForMyBooki
     public void onBindViewHolder(@NonNull AdapterForMyBookings.ViewHolder holder, int position) {
         holder.my_bookings_departure.setText(data.get(position).getDeparture());
         holder.my_bookings_arrival.setText(data.get(position).getArrival());
-        holder.my_bookings_date.setText(data.get(position).getDeparture_date());
-        holder.my_bookings_Time.setText(data.get(position).getTime());
-        holder.vehicles.setText(data.get(position).getRate_parcel_vehicle());
-        holder.ac_status_myBookings.setText(data.get(position).getAc_status());
+        holder.my_bookings_date.setText(data.get(position).getBooking_date());
+        holder.my_bookings_Time.setText(data.get(position).getBooking_time());
+        holder.vehicles.setText(String.valueOf(data.get(position).getAmount()));
+        holder.ac_status_myBookings.setText(String.valueOf(data.get(position).getVehicle_ac_status()));
     }
 
     @Override

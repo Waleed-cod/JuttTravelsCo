@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    android:orientation="vertical"
     tools:context=".activity.NewParcel">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -144,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_quantity"
                     android:drawablePadding="4dp"
-                    android:inputType="textAutoComplete"
+                    android:inputType="number"
                     android:maxLength="2"
                     android:maxLines="1"
                     android:padding="10dp" />
@@ -174,18 +179,22 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btn_book_parcel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/desc_parcel_et"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/btn_background"
-                android:text="Book" />
 
         </RelativeLayout>
 
     </ScrollView>
 
-</LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_book_parcel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="10dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_background"
+        android:text="Book" />
+
+
+</RelativeLayout>

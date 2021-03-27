@@ -20,13 +20,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
-import com.codembeded.jutttravelsco.activity.OurTours;
-import com.codembeded.jutttravelsco.adapter.AdapterForMyTickets;
-import com.codembeded.jutttravelsco.adapter.AdapterForTour;
 import com.codembeded.jutttravelsco.adapter.AdapterGetTour;
 import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
-import com.codembeded.jutttravelsco.models.GetTicketsModels;
 import com.codembeded.jutttravelsco.models.TourModels;
 
 import org.json.JSONArray;
@@ -37,33 +33,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyTours extends Fragment {
-    public static final String TITLE = "My Tours";
+public class MyToursHistory extends Fragment {
+
+
+    public static final String TITLE = "My Tour";
     private final ArrayList<TourModels> mGetTours_lists = new ArrayList<>();
-    RecyclerView mTour_rv;
+    private RecyclerView mTour_rv;
     private AdapterGetTour mAdapterGetTour;
     private TextView mEmpty_card_tv_tour;
-    String user_id;
+    private String user_id;
     SharedPreferences preferences;
 
 
-    public static MyTours newInstance() {
-        return new MyTours();
+    public static Fragment newInstance() {
+        return new MyToursHistory();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_my_tours, container, false);
-        mTour_rv = v.findViewById(R.id.get_my_tours_frag_rv);
-        mEmpty_card_tv_tour = v.findViewById(R.id.empty_tv_my_tours_frag);
+        View v = inflater.inflate(R.layout.fragment_my_tours_history, container, false);
+        mTour_rv = v.findViewById(R.id.my_tours_history_frag_rv);
+        mEmpty_card_tv_tour = v.findViewById(R.id.empty_tv_my_tours_history_frag);
 
-        preferences = getActivity().getSharedPreferences("MyPrefs",Context.MODE_PRIVATE);
+        preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         user_id = preferences.getString("id","");
 
         getTourBooking(user_id);
+
         return v;
     }
 
@@ -84,15 +82,13 @@ public class MyTours extends Fragment {
                     //check for error node in json
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("tours");
-//                        JSONObject jObject = jsonArray.getJSONObject(Integer.parseInt("tour_status"));
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
                         if (jsonArray.length() == 0) {
 
                             mEmpty_card_tv_tour.setVisibility(View.VISIBLE);
 
-                        } else if (jsonObject.getInt("tour_status") == 0){
-
+                        } else {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 mGetTours_lists.add(new TourModels(jsonObject.getString("image"),
                                         jsonObject.getString("name"),
                                         jsonObject.getString("start_date"),
@@ -105,11 +101,8 @@ public class MyTours extends Fragment {
                                         jsonObject.getInt("amount"),
                                         jsonObject.getInt("discounted_amount"),
                                         jsonObject.getInt("total_seats")));
-
-                        }else{
-                            mEmpty_card_tv_tour.setVisibility(View.VISIBLE);
+                            }
                         }
-                    }
                         mAdapterGetTour = new AdapterGetTour(mGetTours_lists, getActivity());
                         mTour_rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                         mTour_rv.setAdapter(mAdapterGetTour);
@@ -138,4 +131,5 @@ public class MyTours extends Fragment {
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_str_req);
     }
+
 }

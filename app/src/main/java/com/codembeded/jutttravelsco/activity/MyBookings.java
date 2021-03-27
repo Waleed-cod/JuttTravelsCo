@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class MyBookings extends AppCompatActivity {
 
         mToolbar = findViewById(R.id.toolbar_my_bookings);
         setSupportActionBar(mToolbar);
+        mToolbar.setTitleTextColor(Color.WHITE);
         setViewPager();
 
     }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.BookMyTicket">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar_my_tickets"
@@ -138,7 +142,7 @@
             android:layout_marginHorizontal="16dp"
             android:gravity="center"
             android:layout_weight="1"
-            android:hint="Women Seats"
+            android:hint="Ladies Seats"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
@@ -172,7 +176,6 @@
             android:id="@+id/book_my_ticket_ac_radio_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:layout_marginHorizontal="10dp"
             android:text="A.C" />
 
@@ -181,18 +184,37 @@
             android:id="@+id/book_my_ticket_non_ac_radio_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
             android:layout_marginHorizontal="10dp"
             android:text="Non A.C" />
 
+        <TextView
+            android:id="@+id/select_ac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_one"
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
     </RadioGroup>
 
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_above="@+id/btn_book_ticket"/>
     <Button
         android:id="@+id/btn_book_ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="10dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/btn_background"
         android:text="Book My Ticket" />
-</LinearLayout>
+</RelativeLayout>

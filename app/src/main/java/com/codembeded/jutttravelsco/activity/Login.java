@@ -44,7 +44,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        getSupportActionBar().hide();
         phone_et = findViewById(R.id.user_phone_login_et);
         password_et = findViewById(R.id.user_password_login_et);
         sign_up_tv = findViewById(R.id.signUp_login_tv);
@@ -71,16 +70,40 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (phone_et.equals("")) {
-                    Toast.makeText(Login.this, "Some Thing Missing", Toast.LENGTH_SHORT).show();
-                } else if (password_et.equals("")) {
-                    Toast.makeText(Login.this, "Some Thing Missing", Toast.LENGTH_SHORT).show();
-                } else {
+                if (!validateName() | !validatePassword()) {
+                    return;
+                }else {
                     getLogin("+92"+phone_et.getText().toString(),password_et.getText().toString());
                 }
 
             }
         });
+    }
+
+    private boolean validateName(){
+        String name_et = phone_et.getText().toString().trim();
+        if (name_et.isEmpty()) {
+            phone_et.setError("Field cannot be empty");
+            return false;
+        }else if (name_et.length() < 13){
+            phone_et.setError("Enter 13 digits +92xxxxxxxxx");
+            return false;
+        }else {
+            phone_et.setError(null);
+            return true;
+        }
+
+    }
+
+    private boolean validatePassword(){
+        String pass = password_et.getText().toString();
+        if (pass.isEmpty()){
+            password_et.setError("Password field cannot be empty");
+            return false;
+        }else{
+            password_et.setError(null);
+            return true;
+        }
     }
 
     private void getLogin(final String phone_str,final String password_str) {
@@ -101,8 +124,11 @@ public class Login extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("id", jObj.getString("id"));
                         editor.commit();
+                        phone_et.setText("");
+                        password_et.setText("");
                         Intent intent = new Intent(Login.this, Home.class);
                         startActivity(intent);
+
                     } else {
                         String error_msg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(), "Error is " + error_msg, Toast.LENGTH_SHORT).show();

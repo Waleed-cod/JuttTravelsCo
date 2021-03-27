@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -42,8 +43,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BookMyTicket extends AppCompatActivity {
-    TextView date;
-    Spinner route_sp,time_tickets_sp;
+    TextView date, select_ac;
+    Spinner route_sp, time_tickets_sp;
     TextInputLayout total_tickets, women_seats;
     private final ArrayList<RoutesModels> routes_lists = new ArrayList<>();
     Button book_ticket_btn;
@@ -54,11 +55,11 @@ public class BookMyTicket extends AppCompatActivity {
     private Boolean isInitialSinner = false;
     private static final String TAG = BookMyTicket.class.getSimpleName();
     private RadioGroup radioGroup;
-    String  user_id;
-    int ac_rate,non_ac_rate, total_amount;
+    String user_id;
+    int ac_rate, non_ac_rate, total_amount;
     Toolbar toolbar;
     SharedPreferences preferences;
-    Boolean radio_btn_value_str = false;
+    Boolean radio_btn_value = false;
 
 
     @Override
@@ -66,7 +67,7 @@ public class BookMyTicket extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_my_ticket);
         preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        user_id = preferences.getString("id","");
+        user_id = preferences.getString("id", "");
         toolbar = findViewById(R.id.toolbar_my_tickets);
         setSupportActionBar(toolbar);
 
@@ -77,7 +78,7 @@ public class BookMyTicket extends AppCompatActivity {
 
         // Departure spinner
         route_sp.setSelected(false);
-        route_sp.setSelection(0,false);
+        route_sp.setSelection(0, false);
 
         route_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -85,24 +86,12 @@ public class BookMyTicket extends AppCompatActivity {
                 View v = route_sp.getSelectedView();
                 ((TextView) v).setTextColor(Color.BLACK);
 
-                if (isInitialSinner){
+                if (isInitialSinner) {
                     routes_id_str = String.valueOf(routes_lists.get(position).getId());
-
-//                    if (radio_btn_value_str == "ac"){
-//
                     ac_rate = routes_lists.get(position).getAc_rate();
+                    non_ac_rate = routes_lists.get(position).getNon_ac_rate();
 
-                    Log.e("first_ac_rate",String.valueOf(ac_rate));
-//                        Log.e("ac_rate",ac_rate);
-//
-//                        total_amount_str = ac_rate;
-//
-//                        Log.e("total_ac_rate",total_amount_str);
-//                    } else if (radio_btn_value_str == "non ac"){
-                        non_ac_rate = routes_lists.get(position).getNon_ac_rate();
-//                        total_amount_str = non_ac_rate;
-//                    }
-                }else {
+                } else {
                     isInitialSinner = true;
                 }
 
@@ -115,8 +104,8 @@ public class BookMyTicket extends AppCompatActivity {
         });
 
 
-        time_tickets_sp.setSelected(false);
-        time_tickets_sp.setSelection(0,false);
+//        time_tickets_sp.setSelected(false);
+//        time_tickets_sp.setSelection(0, false);
 
         time_tickets_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -124,12 +113,12 @@ public class BookMyTicket extends AppCompatActivity {
                 View v = route_sp.getSelectedView();
                 ((TextView) v).setTextColor(Color.BLACK);
 
-                if (isInitialSinner){
-                    routes_time_id_str = String.valueOf(route_timing_list.get(position).getId());
+//                if (isInitialSinner) {
+                routes_time_id_str = String.valueOf(route_timing_list.get(position).getId());
 
-                }else {
-                    isInitialSinner = true;
-                }
+//                } else {
+//                    isInitialSinner = true;
+//                }
 
             }
 
@@ -145,10 +134,10 @@ public class BookMyTicket extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.book_my_ticket_ac_radio_btn:
-                        radio_btn_value_str = true;
+                        radio_btn_value = true;
                         break;
                     case R.id.book_my_ticket_non_ac_radio_btn:
-                        radio_btn_value_str = false;
+                        radio_btn_value = false;
                         break;
                 }
             }
@@ -158,20 +147,31 @@ public class BookMyTicket extends AppCompatActivity {
         book_ticket_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (radio_btn_value_str == true){
-
-                    total_amount = ac_rate;
-
-                    Log.e("total_ac_rate", String.valueOf(total_amount));
-                } else if (radio_btn_value_str == false){
-                    total_amount = non_ac_rate;
+                if (!validateTickets()) {
+                    return;
+                } else if (!validateWSeats()) {
+                    return;
+                } else if (!validateRadioGroup()) {
+                    return;
                 }
-                addBooking(user_id,routes_id_str,date.getText().toString(),routes_time_id_str, total_tickets.getEditText().getText().toString(),
-                        women_seats.getEditText().getText().toString(),radio_btn_value_str.toString(),String.valueOf(total_amount));
+                getAmountOfAc();
+                addBooking(user_id, routes_id_str, date.getText().toString(), routes_time_id_str, total_tickets.getEditText().getText().toString(),
+                        women_seats.getEditText().getText().toString(), radio_btn_value.toString(), String.valueOf(total_amount));
+
             }
         });
 
+    }
+
+    private void getAmountOfAc() {
+        if (radio_btn_value == true) {
+
+            total_amount = ac_rate;
+
+            Log.e("total_ac_rate", String.valueOf(total_amount));
+        } else if (radio_btn_value == false) {
+            total_amount = non_ac_rate;
+        }
     }
 
     private void init() {
@@ -183,7 +183,61 @@ public class BookMyTicket extends AppCompatActivity {
         radioGroup = findViewById(R.id.book_my_ticket_radio_group);
         women_seats = findViewById(R.id.women_seats_tickets);
         total_tickets = findViewById(R.id.total_ticket_et);
+        select_ac = findViewById(R.id.select_ac);
     }
+
+
+    private boolean validateTickets() {
+        String tickets = total_tickets.getEditText().getText().toString().trim();
+        if (tickets.isEmpty()) {
+            total_tickets.setError("Field cannot be empty");
+            return false;
+        } else if (tickets.matches(String.valueOf(Integer.parseInt("0")))) {
+            total_tickets.setError("Enter the valid Number");
+            return false;
+        } else if (Integer.parseInt(tickets) > 18) {
+            total_tickets.setError("Should be less then or equal to 18");
+            return false;
+        } else {
+            total_tickets.setError(null);
+            return true;
+        }
+
+    }
+
+    private boolean validateWSeats() {
+
+        String seats = women_seats.getEditText().getText().toString().trim();
+        String tickets = total_tickets.getEditText().getText().toString().trim();
+        if (seats.isEmpty()) {
+            women_seats.setError("Field cannot be empty");
+            return false;
+        } else if (Integer.parseInt(seats) > Integer.parseInt(tickets)) {
+            women_seats.setError("Ladies seats should be less then or equal to total Tickets");
+            return false;
+        } else if (Integer.parseInt(seats) > 18) {
+            women_seats.setError("Should be less then or equal to 18");
+            return false;
+        } else {
+            women_seats.setError(null);
+            return true;
+        }
+
+    }
+
+    private boolean validateRadioGroup() {
+        if (radioGroup.getCheckedRadioButtonId() == -1) {
+            select_ac.setVisibility(View.VISIBLE);
+            return false;
+        } else if (radioGroup.getCheckedRadioButtonId() != -1) {
+            select_ac.setVisibility(View.GONE);
+            return true;
+        } else {
+            select_ac.setVisibility(View.GONE);
+            return true;
+        }
+    }
+
 
     private void get_routes() {
         String tag_str_req = "req_get_routes";
@@ -201,10 +255,10 @@ public class BookMyTicket extends AppCompatActivity {
                     if (!error) {
                         JSONArray array = jObj.getJSONArray("routes");
                         routes_lists.clear();
-                        for (int i=0; i<array.length();i++){
+                        for (int i = 0; i < array.length(); i++) {
                             JSONObject jsonObject = array.getJSONObject(i);
                             JSONArray timing_array = jsonObject.getJSONArray("route_timings");
-                            for (int k = 0; k<timing_array.length(); k++){
+                            for (int k = 0; k < timing_array.length(); k++) {
                                 JSONObject route_timing_obj = timing_array.getJSONObject(k);
                                 route_timing_list.add(new MyTicketsRoutesTiming(route_timing_obj.getInt("id"),
                                         route_timing_obj.getString("departure_time"),
@@ -213,7 +267,7 @@ public class BookMyTicket extends AppCompatActivity {
                                         route_timing_obj.getString("status")));
                             }
                             time.clear();
-                            for (int l= 0; l<route_timing_list.size(); l++){
+                            for (int l = 0; l < route_timing_list.size(); l++) {
                                 time.add(route_timing_list.get(l).getDeparture_time());
                             }
 
@@ -226,7 +280,7 @@ public class BookMyTicket extends AppCompatActivity {
 
                         }
                         names.clear();
-                        for (int j = 0; j<routes_lists.size(); j++){
+                        for (int j = 0; j < routes_lists.size(); j++) {
                             names.add(routes_lists.get(j).getLocation_name());
                         }
 
@@ -239,7 +293,7 @@ public class BookMyTicket extends AppCompatActivity {
                         route_sp.setAdapter(spinnerArrayAdapter_dept);
 
 
-                         Toast.makeText(BookMyTicket.this, "Your Routes is now under consideration", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BookMyTicket.this, "Your Routes is now under consideration", Toast.LENGTH_SHORT).show();
                     } else {
                         String error_msg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(), "Error is " + error_msg, Toast.LENGTH_SHORT).show();
@@ -265,33 +319,37 @@ public class BookMyTicket extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_str_req);
 
     }
+
     private void addBooking(final String passenger_id, final String routes_id_str, final String date_str, final String routes_time_id_str,
-                              final String total_tickets_str, final String women_seats_str, final String ac_status_str,
+                            final String total_tickets_str, final String women_seats_str, final String ac_status_str,
                             final String total_amount_str) {
         String tag_str_req = "req_add_bookings";
 
 
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.ADD_BOOKING,
                 new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "1st Response:" + response);
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
-                    boolean error = jObj.getBoolean("error");
-                    //check for error node in json
-                    if (!error) {
-                        Toast.makeText(BookMyTicket.this, "Your Ticket has been Booked", Toast.LENGTH_SHORT).show();
-                    } else {
-                        String error_msg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(), "" + error_msg, Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "1st Response:" + response);
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            Log.e("second response:", response);
+                            boolean error = jObj.getBoolean("error");
+                            //check for error node in json
+                            if (!error) {
+                                total_tickets.getEditText().setText("");
+                                women_seats.getEditText().setText("");
+                                Toast.makeText(BookMyTicket.this, "Your Ticket has been Booked", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(BookMyTicket.this, Home.class));
+                            } else {
+                                String error_msg = jObj.getString("error_msg");
+                                Toast.makeText(getApplicationContext(), "" + error_msg, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        },
+                },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -307,9 +365,9 @@ public class BookMyTicket extends AppCompatActivity {
                 params.put("ladies_seats", women_seats_str);
                 params.put("booking_date", date_str);
                 params.put("ac_status", ac_status_str);
-                params.put("route_id",routes_id_str );
-                params.put("booking_time",routes_time_id_str);
-                params.put("total_amount",total_amount_str);
+                params.put("route_id", routes_id_str);
+                params.put("booking_time", routes_time_id_str);
+                params.put("total_amount", total_amount_str);
 
                 return params;
             }

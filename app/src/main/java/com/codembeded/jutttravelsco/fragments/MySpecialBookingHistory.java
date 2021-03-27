@@ -1,12 +1,9 @@
 package com.codembeded.jutttravelsco.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,13 +18,10 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
-import com.codembeded.jutttravelsco.activity.Home;
-import com.codembeded.jutttravelsco.activity.Login;
-import com.codembeded.jutttravelsco.activity.MyBookings;
 import com.codembeded.jutttravelsco.adapter.AdapterForMyBookings;
+import com.codembeded.jutttravelsco.adapter.ViewPagerHistoryAdapter;
 import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
 import com.codembeded.jutttravelsco.models.MyBookingsModels;
@@ -40,35 +34,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MySpecialBookings extends Fragment {
 
-//    private static final String TAG = MyBookings.class.getSimpleName();
-    public static final String TITLE = "Special Bookings";
-    RecyclerView mMySpecialBookings_rv;
-    AdapterForMyBookings mAdapterForMySpecialBookings;
-    ArrayList<MyBookingsModels> mMySpecialBookings_list = new ArrayList<>();
-    TextView empty_card_tv_mMySpecialBookings;
+public class MySpecialBookingHistory extends Fragment {
+
+
+    public static final String TITLE = "Special Booking";
+
+    private RecyclerView mMySpecialBookings_rv;
+    private AdapterForMyBookings mAdapterForMySpecialBookings;
+    private final ArrayList<MyBookingsModels> mMySpecialBookings_list = new ArrayList<>();
+    private TextView empty_card_tv_mMySpecialBookings;
     SharedPreferences preferences;
-    String user_id;
+    private String user_id;
 
-//    int id = preferences.getInt("id",0);
-
-    public static MySpecialBookings newInstance() {
-        return new MySpecialBookings();
+    public static Fragment newInstance() {
+        return new MySpecialBookingHistory();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_my_special_bookings, container, false);
+        View v = inflater.inflate(R.layout.fragment_my_special_booking_history, container, false);
 
-        preferences = getActivity().getSharedPreferences("MyPrefs",Context.MODE_PRIVATE);
+
+        preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         user_id = preferences.getString("id","");
 
-        mMySpecialBookings_rv = v.findViewById(R.id.my_special_bookings_frag_rv);
-        empty_card_tv_mMySpecialBookings = v.findViewById(R.id.empty_tv_my_special_bookings_frag);
+        mMySpecialBookings_rv = v.findViewById(R.id.my_special_booking_history_frag_rv);
+        empty_card_tv_mMySpecialBookings = v.findViewById(R.id.empty_tv_my_special_booking_history_frag);
         getSpecialBooking(user_id);
 
         return v;
@@ -87,13 +81,11 @@ public class MySpecialBookings extends Fragment {
                     //check for error node in json
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("special_bookings");
-//                        JSONObject jObject = jsonArray.getJSONObject(Integer.parseInt("special_booking_status"));
                         for (int i = 0; i<jsonArray.length();i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
                             if (jsonArray.length() == 0) {
                                 empty_card_tv_mMySpecialBookings.setVisibility(View.VISIBLE);
-                            } else if (jsonObject.getInt("special_booking_status") == 0){
-
+                            } else {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 mMySpecialBookings_list.add(new MyBookingsModels(
                                         jsonObject.getInt("special_booking_id"),
                                         jsonObject.getInt("vehicle_id"),
@@ -110,11 +102,9 @@ public class MySpecialBookings extends Fragment {
                                         jsonObject.getString("arrival"),
                                         jsonObject.getString("vehicle_name"),
                                         jsonObject.getString("vehicle_number")));
-
-                            }else {
-                                empty_card_tv_mMySpecialBookings.setVisibility(View.VISIBLE);
                             }
-                    }
+                        }
+                        Log.e("Data", mMySpecialBookings_list.get(0).toString());
                         mAdapterForMySpecialBookings = new AdapterForMyBookings(mMySpecialBookings_list,getActivity());
                         mMySpecialBookings_rv.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
                         mMySpecialBookings_rv.setAdapter(mAdapterForMySpecialBookings);

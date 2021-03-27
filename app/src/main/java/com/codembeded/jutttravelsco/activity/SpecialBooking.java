@@ -54,18 +54,16 @@ public class SpecialBooking extends AppCompatActivity {
     private final ArrayList<VehiclesModels> vehicles_lists = new ArrayList<>();
     private final ArrayList<String> vehicles_names = new ArrayList<>();
     Button booking_btn;
-    MaterialTextView datePicker_tv, timePicker_tv;
-    TextInputLayout dept_et, arrival_et, suggestions_et;
+    TextView datePicker_tv, timePicker_tv,select_type;
+    TextInputLayout dept_et, arrival_et, suggestions_et, mileage_et;
     RadioGroup radioGroup;
-    EditText mileage_et;
     Spinner vehiclesSpecialBooking_sp;
     Boolean isInitialSinner;
     DatePickerDialog.OnDateSetListener dateSetListener;
-    String date_str, vehicle_id_str, radio_btn_value_str;
+    String date_str, vehicle_id_str, radio_btn_value_str, user_id;
     private int t1Hour, t1Minute;
     Toolbar toolbar;
     SharedPreferences sharedPreferences;
-    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,9 +152,13 @@ public class SpecialBooking extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if (!validateDeparture() | !validateArrival() | !validateRadioGroup()){
+                    return;
+                }else {
                 setSpecialBooking(dept_et.getEditText().getText().toString(), arrival_et.getEditText().getText().toString(), vehicle_id_str, datePicker_tv.getText().toString(),
-                        timePicker_tv.getText().toString(), mileage_et.getText().toString(), radio_btn_value_str,
+                        timePicker_tv.getText().toString(), mileage_et.getEditText().getText().toString(), radio_btn_value_str,
                         suggestions_et.getEditText().getText().toString(),user_id);
+            }
             }
         });
 
@@ -172,6 +174,10 @@ public class SpecialBooking extends AppCompatActivity {
         arrival_et = findViewById(R.id.arrival_special_booking_et);
         mileage_et = findViewById(R.id.extra_mileage);
         vehiclesSpecialBooking_sp = findViewById(R.id.select_vehicles_spinner);
+        select_type = findViewById(R.id.select_ac);
+        mileage_et.getEditText().setText(" ");
+        suggestions_et.getEditText().setText(" ");
+
 
     }
 
@@ -199,7 +205,67 @@ public class SpecialBooking extends AppCompatActivity {
         timePickerDialog.show();
     }
 
+    private boolean validateDeparture(){
+        String name_et = dept_et.getEditText().getText().toString();
+        if (name_et.isEmpty()) {
+            dept_et.setError("Field cannot be empty");
+            return false;
+        }else {
+            dept_et.setError(null);
+            return true;
+        }
 
+    }
+    private boolean validateArrival(){
+        String name_et = arrival_et.getEditText().getText().toString();
+        if (name_et.isEmpty()) {
+            arrival_et.setError("Field cannot be empty");
+            return false;
+        }else {
+            arrival_et.setError(null);
+            return true;
+        }
+
+    }
+    private boolean validateRadioGroup(){
+        if (radioGroup.getCheckedRadioButtonId() == -1){
+            select_type.setVisibility(View.VISIBLE);
+            return false;
+        }else if(radioGroup.getCheckedRadioButtonId() != -1){
+            select_type.setVisibility(View.GONE);
+            return true;
+        }else{
+            select_type.setVisibility(View.GONE);
+            return true;
+        }
+    }
+
+//    }
+
+    //    private boolean validateDate(){
+//        String name_et = datePicker_tv.getText().toString();
+//        if (name_et.isEmpty()) {
+//            datePicker_tv.setError("Set the Date");
+//            Toast.makeText(this, "Set Date", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }else {
+//            datePicker_tv.setError(null);
+//            return true;
+//        }
+//
+//    }
+//    private boolean validateTime(){
+//        String name_et = timePicker_tv.getText().toString();
+//        if (name_et.isEmpty()) {
+//            datePicker_tv.requestFocus();
+//            datePicker_tv.setError("Set the Date");
+//            Toast.makeText(this, "Set Date", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }else {
+//            timePicker_tv.setError(null);
+//            return true;
+//        }
+//
     private void getVehicles() {
         String tag_str_req = "req_get_vehicles";
         StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_VEHICLES, new Response.Listener<String>() {
@@ -268,6 +334,7 @@ public class SpecialBooking extends AppCompatActivity {
                     //check for error node in json
                     if (!error) {
 
+                        Toast.makeText(SpecialBooking.this, "Booked ", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(SpecialBooking.this, Home.class);
                         startActivity(intent);
                     } else {
@@ -283,7 +350,7 @@ public class SpecialBooking extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e(TAG, "error of volley:" + error.getMessage());
-                        Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             protected Map<String, String> getParams() {

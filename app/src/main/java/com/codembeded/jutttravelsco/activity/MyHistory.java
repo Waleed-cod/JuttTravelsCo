@@ -5,12 +5,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.codembeded.jutttravelsco.R;
 import com.codembeded.jutttravelsco.adapter.AdapterForHomeSlider;
 import com.codembeded.jutttravelsco.adapter.AdapterForMyHistory;
 import com.codembeded.jutttravelsco.adapter.ViewPagerAdapter;
+import com.codembeded.jutttravelsco.adapter.ViewPagerHistoryAdapter;
 import com.codembeded.jutttravelsco.models.MyHistoryModels;
 import com.google.android.material.tabs.TabLayout;
 
@@ -21,7 +23,7 @@ public class MyHistory extends AppCompatActivity {
     Toolbar mToolbar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-    ViewPagerAdapter viewPagerAdapter;
+    ViewPagerHistoryAdapter viewPagerHistoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class MyHistory extends AppCompatActivity {
         setContentView(R.layout.activity_my_history);
 
         mToolbar = findViewById(R.id.toolbar_history);
-
+        mToolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(mToolbar);
         setViewPager();
 
@@ -40,8 +42,8 @@ public class MyHistory extends AppCompatActivity {
         mViewPager = findViewById(R.id.view_pager_history);
         mTabLayout = findViewById(R.id.tabs_history);
 
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(viewPagerAdapter);
+        viewPagerHistoryAdapter = new ViewPagerHistoryAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(viewPagerHistoryAdapter);
 
         mTabLayout.setupWithViewPager(mViewPager);
 
