@@ -1,15 +1,12 @@
 package com.codembeded.jutttravelsco.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +26,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 public class Complaints extends AppCompatActivity {
     TextInputLayout suggestion_et;
     RadioGroup radioGroup;
@@ -38,6 +38,7 @@ public class Complaints extends AppCompatActivity {
     Toolbar toolbar;
     TextView select_one;
     SharedPreferences preferences;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,7 @@ public class Complaints extends AppCompatActivity {
         init();
         setSupportActionBar(toolbar);
         preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        user_id = preferences.getString("id","");
-
+        user_id = preferences.getString("id", "");
 
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -72,10 +72,10 @@ public class Complaints extends AppCompatActivity {
         btn_enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!validateName() | !validateRadioGroup()){
+                if (!validateName() | !validateRadioGroup()) {
                     return;
                 }
-                get_complains(user_id,suggestion_et.getEditText().toString(), radio_btn_value_str);
+                get_complains(user_id, suggestion_et.getEditText().getText().toString(), radio_btn_value_str);
             }
         });
 
@@ -87,14 +87,15 @@ public class Complaints extends AppCompatActivity {
         btn_enter = findViewById(R.id.btn_complain_enter);
         toolbar = findViewById(R.id.toolbar_complaints);
         select_one = findViewById(R.id.select_one);
+        progressBar = findViewById(R.id.progress_complaints);
     }
 
-    private boolean validateName(){
+    private boolean validateName() {
         String name_et = suggestion_et.getEditText().getText().toString();
         if (name_et.isEmpty()) {
             suggestion_et.setError("Field cannot be empty");
             return false;
-        }else {
+        } else {
             suggestion_et.setError(null);
             return true;
         }
@@ -117,21 +118,22 @@ public class Complaints extends AppCompatActivity {
 
     private void get_complains(final String passenger_id, final String suggestion_str, final String radio_value_str) {
         String tag_str_req = "req_get_complains";
+        progressBar.setVisibility(View.VISIBLE);
 
 
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.GET_COMPLAINS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "1st Response:" + response);
+                progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
                         suggestion_et.getEditText().setText("");
                         Toast.makeText(Complaints.this, "Your complaint is now under consideration", Toast.LENGTH_SHORT).show();
-                        startActivity( new Intent( Complaints.this,Home.class));
+                        startActivity(new Intent(Complaints.this, Home.class));
                     } else {
                         String error_msg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(), "Error is " + error_msg, Toast.LENGTH_SHORT).show();
@@ -144,7 +146,6 @@ public class Complaints extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Volley Error: " + error.getMessage());
                         Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {

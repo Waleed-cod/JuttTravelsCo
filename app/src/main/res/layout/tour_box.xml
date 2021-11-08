@@ -28,8 +28,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:hint="Destination"
-                android:padding="4dp" />
+                android:hint="Route:"
+                android:padding="6dp" />
 
             <TextView
                 android:id="@+id/routes_tour_box"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:hint="Route"
-                android:padding="4dp"
+                android:padding="6dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
 
@@ -97,7 +97,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:hint="Per Seat"
+                android:hint="Per Seat:"
                 android:padding="4dp" />
 
             <TextView
@@ -116,13 +116,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            android:divider="@color/colorBlack">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:hint="Info:"
+                android:padding="4dp" />
+
 
             <TextView
                 android:id="@+id/desc_tour_box"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1.7"
                 android:ellipsize="end"
                 android:hint="Description"
                 android:justificationMode="inter_word"

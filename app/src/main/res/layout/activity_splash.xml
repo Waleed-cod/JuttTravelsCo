@@ -18,25 +18,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:scaleType="fitXY"
         android:src="@drawable/splash3" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="   Jutt Travels Services"
-        android:gravity="center"
-        android:textSize="24sp"
+        android:text="Jutt"
+        android:gravity="start"
+        android:textSize="40sp"
         android:textStyle="bold"
-        android:padding="10dp"
+        android:layout_marginStart="50dp"
         android:textColor="@color/colorPrimary" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Travel"
+            android:gravity="start"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_marginStart="50dp"
+            android:textColor="@color/colorPrimary" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Service"
+            android:gravity="start"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_marginStart="50dp"
+            android:textColor="@color/colorPrimary" />
 
+    </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Developed By"
+            android:hint="Developed By"
             android:layout_above="@+id/text_codembed"
             android:gravity="center_horizontal"/>
 
@@ -48,6 +67,14 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
+        android:layout_above="@+id/txt_num"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/txt_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+923144783478"
         android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"/>

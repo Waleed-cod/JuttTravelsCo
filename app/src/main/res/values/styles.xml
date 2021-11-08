@@ -5,18 +5,19 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorBlack</item>
 
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/colorPrimary</item>
         <item name="boxStrokeWidth">2dp</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
-    </style>
-
-    <style name="roundedCornersImageView" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">10dp</item>
     </style>
 
 </resources>

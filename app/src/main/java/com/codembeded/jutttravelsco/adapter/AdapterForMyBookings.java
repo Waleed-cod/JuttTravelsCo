@@ -37,7 +37,7 @@ public class AdapterForMyBookings extends RecyclerView.Adapter<AdapterForMyBooki
         holder.my_bookings_arrival.setText(data.get(position).getArrival());
         holder.my_bookings_date.setText(data.get(position).getBooking_date());
         holder.my_bookings_Time.setText(data.get(position).getBooking_time());
-        holder.vehicles.setText(String.valueOf(data.get(position).getAmount()));
+        holder.vehicles.setText(data.get(position).getVehicle_name());
         holder.ac_status_myBookings.setText(String.valueOf(data.get(position).getVehicle_ac_status()));
     }
 

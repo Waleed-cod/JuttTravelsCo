@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class  ViewPagerAdapter extends FragmentStatePagerAdapter {
 
 
     private static final int TAB_COUNT = 4;

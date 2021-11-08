@@ -3,15 +3,11 @@ package com.codembeded.jutttravelsco.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +29,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import static android.content.ContentValues.TAG;
 
 public class MyParcelHistory extends Fragment {
@@ -44,6 +44,7 @@ public class MyParcelHistory extends Fragment {
     private TextView empty_card_tv_mMyParcels;
     SharedPreferences preferences;
     private String user_id;
+    ProgressBar progressBar;
 
     public static Fragment newInstance() {
         return new MyParcelHistory();
@@ -56,6 +57,7 @@ public class MyParcelHistory extends Fragment {
         View v = inflater.inflate(R.layout.fragment_my_parcel_history, container, false);
 
         myParcels_rv = v.findViewById(R.id.my_parcel_history_frag_rv);
+        progressBar = v.findViewById(R.id.progress_my_parcel_history);
 
         preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         user_id = preferences.getString("id", "");
@@ -70,32 +72,38 @@ public class MyParcelHistory extends Fragment {
     private void getMyParcels(final String passenger_id) {
         String tag_str_req = "req_get_my_parcel";
 
+        progressBar.setVisibility(View.VISIBLE);
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.GET_PARCEL + "?passenger_id=" + passenger_id, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_PARCEL_HISTORY + "?passenger_id=" + passenger_id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "1st Response:" + response);
+                progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("parcels");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            if (jsonArray.length() == 0) {
-                                empty_card_tv_mMyParcels.setVisibility(View.VISIBLE);
-                            } else {
+
+                        if (jsonArray.length() == 0) {
+                            empty_card_tv_mMyParcels.setVisibility(View.VISIBLE);
+                            myParcels_rv.setVisibility(View.GONE);
+                        } else {
+                            empty_card_tv_mMyParcels.setVisibility(View.GONE);
+                            myParcels_rv.setVisibility(View.VISIBLE);
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 mMyParcels_list.add(new ParcelModels(jsonObject.getInt("parcel_id"),
-                                        jsonObject.getString("weight"),
-                                        jsonObject.getString("quantity"),
+                                        jsonObject.getInt("weight"),
+                                        jsonObject.getInt("quantity"),
+                                        jsonObject.getInt("status"),
+                                        jsonObject.getInt("Amount"),
                                         jsonObject.getString("receiver_name"),
                                         jsonObject.getString("receiver_contact"),
                                         jsonObject.getString("parcel_date"),
-                                        jsonObject.getString("status"),
                                         jsonObject.getString("description"),
-                                        jsonObject.getString("Amount")));
+                                        jsonObject.getString("route_name")));
                             }
                         }
 
@@ -105,7 +113,7 @@ public class MyParcelHistory extends Fragment {
 
                     } else {
                         String error_msg = jObj.getString("error_msg");
-                        Toast.makeText(getContext(), "Error is:" + error_msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),error_msg, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -115,8 +123,7 @@ public class MyParcelHistory extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Volley Error:" + error.getMessage());
-                Toast.makeText(getContext(), "error of volley:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }) {
             protected Map<String, String> getParams() {

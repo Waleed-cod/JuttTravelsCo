@@ -26,7 +26,8 @@ public class AdapterForHomeSlider extends SliderViewAdapter<AdapterForHomeSlider
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_image_slider_box,null);
-        return new ViewHolder(view);    }
+        return new ViewHolder(view);
+    }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
@@ -41,13 +42,13 @@ public class AdapterForHomeSlider extends SliderViewAdapter<AdapterForHomeSlider
 
     public class ViewHolder extends SliderViewAdapter.ViewHolder {
 
-        ImageView slider_image;
+            ImageView slider_image;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
+            public ViewHolder(View itemView) {
+                super(itemView);
 
-            this.slider_image = itemView.findViewById(R.id.iv_auto_image_slider);
-        }
+                this.slider_image = itemView.findViewById(R.id.iv_auto_image_slider);
+            }
     }
 
 

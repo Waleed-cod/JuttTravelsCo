@@ -28,8 +28,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:hint="Destination"
-                android:padding="4dp" />
+                android:hint="Route:"
+                android:padding="6dp" />
 
             <TextView
                 android:id="@+id/routes_get_tour_booking_box"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:hint="Route"
-                android:padding="4dp"
+                android:padding="6dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
 
@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="mm/dd/yyyy"
+                android:drawableStart="@drawable/ic_dept_calendar_today_24"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
@@ -72,6 +73,7 @@
                 android:hint="mm/dd/yyyy"
                 android:padding="4dp"
                 android:textAlignment="center"
+                android:drawableStart="@drawable/ic_arrival_date_range_24"
                 android:textColor="@color/colorBlack" />
 
             <TextView
@@ -82,7 +84,8 @@
                 android:hint="hh:mm"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorBlack" />
+                android:textColor="@color/colorBlack"
+                app:drawableStartCompat="@drawable/ic_dept_time_24" />
 
         </LinearLayout>
 
@@ -98,7 +101,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
-                android:hint="Seats"
+                android:hint="Seats:"
                 android:padding="4dp" />
 
             <TextView
@@ -115,7 +118,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.1"
-                android:hint=" Total Amount"
+                android:hint="Total Amount:"
                 android:padding="4dp" />
 
             <TextView
@@ -133,13 +136,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            android:divider="@color/colorBlack">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:hint="Info:"
+                android:padding="4dp"/>
 
             <TextView
                 android:id="@+id/desc_get_tour_booking_box"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1.8"
                 android:ellipsize="end"
                 android:hint="Description"
                 android:justificationMode="inter_word"

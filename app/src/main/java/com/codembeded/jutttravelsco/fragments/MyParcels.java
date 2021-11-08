@@ -1,34 +1,24 @@
 package com.codembeded.jutttravelsco.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
-import com.codembeded.jutttravelsco.activity.Home;
-import com.codembeded.jutttravelsco.activity.SignUp;
-import com.codembeded.jutttravelsco.adapter.AdapterForMyBookings;
 import com.codembeded.jutttravelsco.adapter.AdapterForParcels;
 import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
-import com.codembeded.jutttravelsco.models.MyBookingsModels;
 import com.codembeded.jutttravelsco.models.ParcelModels;
 
 import org.json.JSONArray;
@@ -38,6 +28,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.ContentValues.TAG;
 
@@ -50,6 +44,7 @@ public class MyParcels extends Fragment {
     TextView empty_card_tv_mMyParcels;
     SharedPreferences preferences;
     String user_id;
+    ProgressBar progressBar;
 
     public static MyParcels newInstance() {
         return new MyParcels();
@@ -61,6 +56,7 @@ public class MyParcels extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_my_parcels, container, false);
         myParcels_rv = v.findViewById(R.id.my_parcels_frag_rv);
+        progressBar = v.findViewById(R.id.progress_my_parcel);
 
         preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         user_id = preferences.getString("id", "");
@@ -75,36 +71,39 @@ public class MyParcels extends Fragment {
     private void getMyParcels(final String passenger_id) {
         String tag_str_req = "req_get_my_parcel";
 
-
+        progressBar.setVisibility(View.VISIBLE);
         StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_PARCEL + "?passenger_id=" + passenger_id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "1st Response:" + response);
+                progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("parcels");
-//                        JSONObject jObject = jsonArray.getJSONObject(Integer.parseInt(("status")));
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                            if (jsonArray.length() == 0) {
-                                empty_card_tv_mMyParcels.setVisibility(View.VISIBLE);
-                            } else if (jsonObject.getInt("status") == 0){
+                        if (jsonArray.length() == 0) {
+                            empty_card_tv_mMyParcels.setVisibility(View.VISIBLE);
+                            myParcels_rv.setVisibility(View.GONE);
+
+                        } else {
+                            empty_card_tv_mMyParcels.setVisibility(View.GONE);
+                            myParcels_rv.setVisibility(View.VISIBLE);
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 mMyParcels_list.add(new ParcelModels(jsonObject.getInt("parcel_id"),
-                                        jsonObject.getString("weight"),
-                                        jsonObject.getString("quantity"),
+                                        jsonObject.getInt("weight"),
+                                        jsonObject.getInt("quantity"),
+                                        jsonObject.getInt("status"),
+                                        jsonObject.getInt("Amount"),
                                         jsonObject.getString("receiver_name"),
                                         jsonObject.getString("receiver_contact"),
                                         jsonObject.getString("parcel_date"),
-                                        jsonObject.getString("status"),
                                         jsonObject.getString("description"),
-                                        jsonObject.getString("Amount")));
-                            }else {
-                                empty_card_tv_mMyParcels.setVisibility(View.VISIBLE);
+                                        jsonObject.getString("route_name")));
                             }
                         }
 
@@ -114,7 +113,7 @@ public class MyParcels extends Fragment {
 
                     } else {
                         String error_msg = jObj.getString("error_msg");
-                        Toast.makeText(getContext(), "Error is:" + error_msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),error_msg, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -124,9 +123,11 @@ public class MyParcels extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Volley Error:" + error.getMessage());
-                Toast.makeText(getContext(), "error of volley:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getContext(),"something went wrong", Toast.LENGTH_SHORT).show();
+
             }
+
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

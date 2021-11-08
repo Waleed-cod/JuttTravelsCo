@@ -3,15 +3,10 @@ package com.codembeded.jutttravelsco.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +28,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class MyToursHistory extends Fragment {
 
 
@@ -43,7 +42,7 @@ public class MyToursHistory extends Fragment {
     private TextView mEmpty_card_tv_tour;
     private String user_id;
     SharedPreferences preferences;
-
+    ProgressBar progressBar;
 
     public static Fragment newInstance() {
         return new MyToursHistory();
@@ -55,10 +54,11 @@ public class MyToursHistory extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_my_tours_history, container, false);
         mTour_rv = v.findViewById(R.id.my_tours_history_frag_rv);
+        progressBar = v.findViewById(R.id.progress_my_tours_history_frag);
         mEmpty_card_tv_tour = v.findViewById(R.id.empty_tv_my_tours_history_frag);
 
         preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        user_id = preferences.getString("id","");
+        user_id = preferences.getString("id", "");
 
         getTourBooking(user_id);
 
@@ -69,24 +69,29 @@ public class MyToursHistory extends Fragment {
 
         String tag_str_req = "req_get_tour_bookings";
 
+        progressBar.setVisibility(View.VISIBLE);
 
         StringRequest strReq = new StringRequest(Request.Method.GET,
-                AppConfig.GET_TOUR_BOOKING +"?passenger_id="+ passenger_id, new Response.Listener<String>() {
+                AppConfig.GET_TOUR_BOOKING_HISTORY + "?passenger_id=" + passenger_id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e("1st Response:", response);
+                progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("tours");
+
                         if (jsonArray.length() == 0) {
 
                             mEmpty_card_tv_tour.setVisibility(View.VISIBLE);
+                            mTour_rv.setVisibility(View.GONE);
 
                         } else {
+                            mEmpty_card_tv_tour.setVisibility(View.GONE);
+                            mTour_rv.setVisibility(View.VISIBLE);
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 mGetTours_lists.add(new TourModels(jsonObject.getString("image"),
@@ -100,7 +105,9 @@ public class MyToursHistory extends Fragment {
                                         jsonObject.getInt("tour_booking_id"),
                                         jsonObject.getInt("amount"),
                                         jsonObject.getInt("discounted_amount"),
-                                        jsonObject.getInt("total_seats")));
+                                        jsonObject.getInt("total_seats"),
+                                        jsonObject.getInt("rate_per_seat"),
+                                        jsonObject.getString("tour_entry_date")));
                             }
                         }
                         mAdapterGetTour = new AdapterGetTour(mGetTours_lists, getActivity());
@@ -109,7 +116,7 @@ public class MyToursHistory extends Fragment {
 
                     } else {
                         String error_msg = jObj.getString("error_msg");
-                        Toast.makeText(getActivity(), "" + error_msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), error_msg, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -119,8 +126,7 @@ public class MyToursHistory extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Volley Error:", error.getMessage());
-                        Toast.makeText(getContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             protected Map<String, String> getParams() {

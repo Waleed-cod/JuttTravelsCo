@@ -22,11 +22,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
 import com.codembeded.jutttravelsco.activity.Home;
-import com.codembeded.jutttravelsco.activity.OurTours;
 import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
 import com.codembeded.jutttravelsco.models.TourModels;
-import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,10 +68,10 @@ public class AdapterForTour extends RecyclerView.Adapter<AdapterForTour.ViewHold
         holder.tour_departure_date.setText(data.get(position).getDeparture_date());
         holder.tour_arrival_date.setText(data.get(position).getArrival_date());
         holder.tour_time.setText(data.get(position).getTime());
-        holder.tour_person_rate.setText("Rs:  " + data.get(position).getRate_per_person());
+        holder.tour_person_rate.setText("Rs:  " + data.get(position).getRate_per_seat());
         holder.tour_desc.setText(data.get(position).getDesc());
         tour_id = data.get(position).getId();
-        price_per_seat = data.get(position).getRate_per_person();
+        price_per_seat = data.get(position).getRate_per_seat();
     }
 
     @Override

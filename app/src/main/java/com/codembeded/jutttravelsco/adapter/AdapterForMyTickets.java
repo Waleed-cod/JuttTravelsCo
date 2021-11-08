@@ -35,9 +35,10 @@ public class AdapterForMyTickets extends RecyclerView.Adapter<AdapterForMyTicket
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.my_routes.setText(String.valueOf(details.get(position).getRoute_id()));
+        holder.my_routes.setText(details.get(position).getRoute_name());
         holder.booking_date.setText(details.get(position).getBooking_date());
-        holder.booking_time.setText(details.get(position).getBooking_time());
+        holder.departure_time.setText(details.get(position).getDeparture_time());
+        holder.arrival_time.setText(details.get(position).getArrival_time());
         holder.total_seats.setText(String.valueOf(details.get(position).getTotal_seats()));
         holder.women_seats.setText(String.valueOf(details.get(position).getLadies_seats()));
         holder.ac_status_Tickets.setText(String.valueOf(details.get(position).getAc_status()));
@@ -51,14 +52,15 @@ public class AdapterForMyTickets extends RecyclerView.Adapter<AdapterForMyTicket
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView my_routes, booking_date, booking_time, total_seats, women_seats, ac_status_Tickets, total_amount;
+        TextView my_routes, booking_date, departure_time,arrival_time, total_seats, women_seats, ac_status_Tickets, total_amount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             my_routes = itemView.findViewById(R.id.route_my_tickets_frag_box);
             booking_date = itemView.findViewById(R.id.booking_date_my_tickets_frag_box);
-            booking_time = itemView.findViewById(R.id.booking_time_my_tickets_frag_box);
+            departure_time = itemView.findViewById(R.id.departure_time_my_tickets_frag_box);
+            arrival_time = itemView.findViewById(R.id.arrival_time_my_tickets_frag_box);
             total_seats = itemView.findViewById(R.id.total_seats_my_tickets_frag_box);
             women_seats = itemView.findViewById(R.id.women_seats_my_tickets_frag_box);
             ac_status_Tickets = itemView.findViewById(R.id.ac_status_my_tickets_frag_box);

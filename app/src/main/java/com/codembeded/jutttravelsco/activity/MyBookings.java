@@ -1,22 +1,15 @@
 package com.codembeded.jutttravelsco.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
 import com.codembeded.jutttravelsco.R;
-import com.codembeded.jutttravelsco.adapter.AdapterForMyBookings;
 import com.codembeded.jutttravelsco.adapter.ViewPagerAdapter;
-import com.codembeded.jutttravelsco.models.MyBookingsModels;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 public class MyBookings extends AppCompatActivity {
 

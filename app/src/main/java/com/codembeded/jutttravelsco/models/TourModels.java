@@ -1,26 +1,28 @@
 package com.codembeded.jutttravelsco.models;
 
 public class TourModels {
-    int id,rate_per_person, tour_id, tour_status, tour_booking_id, total_amount, discount,
+    int id, rate_per_seat, tour_id, tour_status, tour_booking_id, total_amount, discount,
             total_seats;
-    String image, routes,departure_date, arrival_date, time, desc;
+    String image, routes, date, departure_date, arrival_date, time, desc;
 
     public TourModels(int id, String image, String routes, String departure_date,
-                      String arrival_date, String time, int rate_per_person, String desc) {
+                      String arrival_date, String time, int rate_per_seat, String desc, int tour_status, String date) {
         this.id = id;
         this.image = image;
         this.routes = routes;
         this.departure_date = departure_date;
         this.arrival_date = arrival_date;
         this.time = time;
-        this.rate_per_person = rate_per_person;
+        this.rate_per_seat = rate_per_seat;
         this.desc = desc;
+        this.tour_status = tour_status;
+        this.date = date;
     }
 
     // get Tour Booking constructor
     public TourModels(String image, String routes, String departure_date, String arrival_date,
-                      String time, String desc, int tour_id,
-                      int tour_status, int tour_booking_id, int total_amount, int discount, int total_seats) {
+                      String time, String desc, int tour_id, int tour_status, int tour_booking_id,
+                      int total_amount, int discount, int total_seats,int rate_per_seat, String date) {
 
         this.image = image;
         this.routes = routes;
@@ -34,6 +36,17 @@ public class TourModels {
         this.total_amount = total_amount;
         this.discount = discount;
         this.total_seats = total_seats;
+        this.rate_per_seat = rate_per_seat;
+        this.date = date;
+
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getId() {
@@ -44,12 +57,12 @@ public class TourModels {
         this.id = id;
     }
 
-    public int getRate_per_person() {
-        return rate_per_person;
+    public int getRate_per_seat() {
+        return rate_per_seat;
     }
 
-    public void setRate_per_person(int rate_per_person) {
-        this.rate_per_person = rate_per_person;
+    public void setRate_per_seat(int rate_per_seat) {
+        this.rate_per_seat = rate_per_seat;
     }
 
     public int getTour_id() {

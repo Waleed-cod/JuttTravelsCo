@@ -1,8 +1,5 @@
 package com.codembeded.jutttravelsco.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -11,15 +8,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,11 +28,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
 import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
-import com.codembeded.jutttravelsco.models.RoutesModels;
 import com.codembeded.jutttravelsco.models.VehiclesModels;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.android.material.textview.MaterialTextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,13 +40,16 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 public class SpecialBooking extends AppCompatActivity {
 
     private static final String TAG = SpecialBooking.class.getSimpleName();
     private final ArrayList<VehiclesModels> vehicles_lists = new ArrayList<>();
     private final ArrayList<String> vehicles_names = new ArrayList<>();
     Button booking_btn;
-    TextView datePicker_tv, timePicker_tv,select_type;
+    TextView datePicker_tv, timePicker_tv, select_type;
     TextInputLayout dept_et, arrival_et, suggestions_et, mileage_et;
     RadioGroup radioGroup;
     Spinner vehiclesSpecialBooking_sp;
@@ -64,6 +59,7 @@ public class SpecialBooking extends AppCompatActivity {
     private int t1Hour, t1Minute;
     Toolbar toolbar;
     SharedPreferences sharedPreferences;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +71,8 @@ public class SpecialBooking extends AppCompatActivity {
 
         init();
         getVehicles();
-        sharedPreferences = getSharedPreferences("MyPrefs",Context.MODE_PRIVATE);
-        user_id = sharedPreferences.getString("id","");
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        user_id = sharedPreferences.getString("id", "");
 
         //Vehicle names
         vehiclesSpecialBooking_sp.setSelected(false);
@@ -90,6 +86,7 @@ public class SpecialBooking extends AppCompatActivity {
 
 //                if (isInitialSinner){
                 vehicle_id_str = String.valueOf(vehicles_lists.get(position).getId());
+//                vehicle_id_str = vehicles_lists.get(position).getVehicle_name();
 //                }else{
 //                    isInitialSinner = true;
 //                }
@@ -110,10 +107,12 @@ public class SpecialBooking extends AppCompatActivity {
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
+
                 DatePickerDialog dialog = new DatePickerDialog(SpecialBooking.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         dateSetListener,
                         year, month, day);
+
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -121,8 +120,10 @@ public class SpecialBooking extends AppCompatActivity {
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
                 month = month + 1;
                 date_str = year + "/" + month + "/" + dayOfMonth;
+
                 datePicker_tv.setText(date_str);
             }
         };
@@ -152,13 +153,13 @@ public class SpecialBooking extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!validateDeparture() | !validateArrival() | !validateRadioGroup()){
+                if (!validateDeparture() | !validateArrival() | !validateRadioGroup()) {
                     return;
-                }else {
-                setSpecialBooking(dept_et.getEditText().getText().toString(), arrival_et.getEditText().getText().toString(), vehicle_id_str, datePicker_tv.getText().toString(),
-                        timePicker_tv.getText().toString(), mileage_et.getEditText().getText().toString(), radio_btn_value_str,
-                        suggestions_et.getEditText().getText().toString(),user_id);
-            }
+                } else {
+                    setSpecialBooking(dept_et.getEditText().getText().toString(), arrival_et.getEditText().getText().toString(), vehicle_id_str, datePicker_tv.getText().toString(),
+                            timePicker_tv.getText().toString(), mileage_et.getEditText().getText().toString(), radio_btn_value_str,
+                            suggestions_et.getEditText().getText().toString(), user_id);
+                }
             }
         });
 
@@ -175,6 +176,7 @@ public class SpecialBooking extends AppCompatActivity {
         mileage_et = findViewById(R.id.extra_mileage);
         vehiclesSpecialBooking_sp = findViewById(R.id.select_vehicles_spinner);
         select_type = findViewById(R.id.select_ac);
+        progressBar = findViewById(R.id.progress_special_booking);
         mileage_et.getEditText().setText(" ");
         suggestions_et.getEditText().setText(" ");
 
@@ -195,7 +197,7 @@ public class SpecialBooking extends AppCompatActivity {
 
                         calendar.set(0, 0, 0, t1Hour, t1Minute);
 
-                        timePicker_tv.setText(DateFormat.format("hh:mm aa", calendar));
+                                timePicker_tv.setText(DateFormat.format("hh:mm aa", calendar));
                     }
                 }, 12, 0, false
         );
@@ -205,76 +207,54 @@ public class SpecialBooking extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    private boolean validateDeparture(){
+    private boolean validateDeparture() {
         String name_et = dept_et.getEditText().getText().toString();
         if (name_et.isEmpty()) {
             dept_et.setError("Field cannot be empty");
             return false;
-        }else {
+        } else {
             dept_et.setError(null);
             return true;
         }
 
     }
-    private boolean validateArrival(){
+
+    private boolean validateArrival() {
         String name_et = arrival_et.getEditText().getText().toString();
         if (name_et.isEmpty()) {
             arrival_et.setError("Field cannot be empty");
             return false;
-        }else {
+        } else {
             arrival_et.setError(null);
             return true;
         }
 
     }
-    private boolean validateRadioGroup(){
-        if (radioGroup.getCheckedRadioButtonId() == -1){
+
+    private boolean validateRadioGroup() {
+        if (radioGroup.getCheckedRadioButtonId() == -1) {
             select_type.setVisibility(View.VISIBLE);
             return false;
-        }else if(radioGroup.getCheckedRadioButtonId() != -1){
+        } else if (radioGroup.getCheckedRadioButtonId() != -1) {
             select_type.setVisibility(View.GONE);
             return true;
-        }else{
+        } else {
             select_type.setVisibility(View.GONE);
             return true;
         }
     }
 
-//    }
-
-    //    private boolean validateDate(){
-//        String name_et = datePicker_tv.getText().toString();
-//        if (name_et.isEmpty()) {
-//            datePicker_tv.setError("Set the Date");
-//            Toast.makeText(this, "Set Date", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }else {
-//            datePicker_tv.setError(null);
-//            return true;
-//        }
-//
-//    }
-//    private boolean validateTime(){
-//        String name_et = timePicker_tv.getText().toString();
-//        if (name_et.isEmpty()) {
-//            datePicker_tv.requestFocus();
-//            datePicker_tv.setError("Set the Date");
-//            Toast.makeText(this, "Set Date", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }else {
-//            timePicker_tv.setError(null);
-//            return true;
-//        }
-//
     private void getVehicles() {
         String tag_str_req = "req_get_vehicles";
+        progressBar.setVisibility(View.VISIBLE);
+
         StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_VEHICLES, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "1st Response:" + response);
+                progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
@@ -296,7 +276,7 @@ public class SpecialBooking extends AppCompatActivity {
 
                     } else {
                         String error_msg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(), "Error is " + error_msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Error is:" + error_msg, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -306,7 +286,6 @@ public class SpecialBooking extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Volley Error:" + error.getMessage());
                         Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
@@ -323,13 +302,14 @@ public class SpecialBooking extends AppCompatActivity {
                                    final String date_value_str, final String time_value_str, final String mileage_str,
                                    final String ac_status_str, final String suggestion_str, final String passenger_id) {
         String tag_str_req = "req_special_booking";
+        progressBar.setVisibility(View.VISIBLE);
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.SPECIAL_BOOKING, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e(TAG, "1st Response:" + response);
+                progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
@@ -349,22 +329,21 @@ public class SpecialBooking extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "error of volley:" + error.getMessage());
-//                        Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 }) {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-//                params.put("passenger_id", user_id);
+
                 params.put("departure", dept_et_str);
-                params.put("arrival",arrival_et_str );
+                params.put("arrival", arrival_et_str);
                 params.put("vehicle_id", vehicle_sp_str);
                 params.put("booking_date", date_value_str);
                 params.put("booking_time", time_value_str);
                 params.put("extra_mileage", mileage_str);
                 params.put("ac_status", ac_status_str);
                 params.put("description", suggestion_str);
-                params.put("passenger_id",passenger_id);
+                params.put("passenger_id", passenger_id);
                 return params;
             }
         };

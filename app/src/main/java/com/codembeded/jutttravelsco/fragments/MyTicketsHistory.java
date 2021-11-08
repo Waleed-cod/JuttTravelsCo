@@ -3,15 +3,10 @@ package com.codembeded.jutttravelsco.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,10 +28,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 public class MyTicketsHistory extends Fragment {
 
-    public static final String TITLE = "My Tour";
+    public static final String TITLE = "My Tickets";
 
     RecyclerView recyclerView;
     AdapterForMyTickets adapterForMyTickets;
@@ -44,6 +43,7 @@ public class MyTicketsHistory extends Fragment {
     TextView mEmpty_card_tv_myTickets;
     SharedPreferences preferences;
     String user_id_str;
+    ProgressBar progressBar;
 
     public static Fragment newInstance() {
         return new MyTicketsHistory();
@@ -54,7 +54,7 @@ public class MyTicketsHistory extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_my_tickets_history, container, false);
-
+        progressBar = v.findViewById(R.id.progress_my_tickets_history_frag);
 
         recyclerView = v.findViewById(R.id.my_tickets_history_frag_rv);
         mEmpty_card_tv_myTickets = v.findViewById(R.id.empty_tv_my_tickets_history_frag);
@@ -64,31 +64,35 @@ public class MyTicketsHistory extends Fragment {
 
         getBookingTickets(user_id_str);
 
-        getBookingTickets(user_id_str);
 
         return v;
     }
 
     private void getBookingTickets(final String passenger_id) {
         String tag_str_req = "req_get_bookings";
+        progressBar.setVisibility(View.VISIBLE);
 
-
-        StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_BOOKING + "?passenger_id=" + passenger_id, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_BOOKING_HISTORY + "?passenger_id=" + passenger_id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e("1st Response:", response);
+                progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("bookings");
-                        if (jsonArray.length()==0){
+
+                        if (jsonArray.length() == 0) {
 
                             mEmpty_card_tv_myTickets.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
 
-                        }else {
+                        } else {
+
+                            mEmpty_card_tv_myTickets.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 lists.add(new GetTicketsModels(jsonObject.getInt("booking_id"),
@@ -100,16 +104,18 @@ public class MyTicketsHistory extends Fragment {
                                         jsonObject.getInt("ac_status"),
                                         jsonObject.getString("date"),
                                         jsonObject.getString("booking_date"),
-                                        jsonObject.getString("booking_time")));
+                                        jsonObject.getString("arrival_time"),
+                                        jsonObject.getString("route_name"),
+                                        jsonObject.getString("departure_time")));
                             }
                         }
                         adapterForMyTickets = new AdapterForMyTickets(lists, getActivity());
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                         recyclerView.setAdapter(adapterForMyTickets);
 
                     } else {
                         String error_msg = jObj.getString("error_msg");
-                        Toast.makeText(getActivity(), "" + error_msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), error_msg, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -119,8 +125,7 @@ public class MyTicketsHistory extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Volley Error:", error.getMessage());
-                        Toast.makeText(getContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 }) {
             protected Map<String, String> getParams() {

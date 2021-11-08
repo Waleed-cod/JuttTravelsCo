@@ -2,10 +2,10 @@ package com.codembeded.jutttravelsco.models;
 
 public class MyTicketsRoutesTiming {
 
-    int id;
-    String departure_time, arrival_time, entry_date, status;
+    int id, status;
+    String departure_time, arrival_time, entry_date;
 
-    public MyTicketsRoutesTiming(int id, String departure_time, String arrival_time, String entry_date, String status) {
+    public MyTicketsRoutesTiming(int id, String departure_time, String arrival_time, String entry_date, int status) {
         this.id = id;
         this.departure_time = departure_time;
         this.arrival_time = arrival_time;
@@ -51,11 +51,11 @@ public class MyTicketsRoutesTiming {
         this.entry_date = entry_date;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }

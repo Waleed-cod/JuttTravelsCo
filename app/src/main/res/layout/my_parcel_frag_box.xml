@@ -8,6 +8,7 @@
     app:cardBackgroundColor="@color/colorWhite"
     app:cardCornerRadius="12dp">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +35,8 @@
                 android:hint="Receiver Name"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorBlack" />
+                android:textColor="@color/colorBlack"
+                app:drawableStartCompat="@drawable/ic_outline_person_24" />
 
 
             <TextView
@@ -43,6 +45,82 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:hint="Receiver Contact"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                app:drawableStartCompat="@drawable/ic_mobile" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:showDividers="middle"
+            android:divider="@color/colorBlack">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="Route:"
+                android:padding="4dp"
+                android:textAlignment="center"/>
+
+
+            <TextView
+                android:id="@+id/route_my_parcel_frag_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="route"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:showDividers="middle"
+            android:divider="@color/colorBlack">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:hint="weight:"
+                android:padding="4dp"/>
+
+            <TextView
+                android:id="@+id/weight_my_parcels_frag_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.7"
+                android:hint="weight"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:hint="Quantity:"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/quantity_my_parcels_frag_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="quantity"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
@@ -59,40 +137,27 @@
 
 
             <TextView
-                android:id="@+id/weight_my_parcels_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="weight"
-                android:padding="4dp"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack" />
+                android:layout_weight="0.2"
+                android:hint="Info:"
+                android:padding="4dp"/>
 
-
-            <TextView
-                android:id="@+id/quantity_my_parcels_frag_box"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="quantity"
-                android:padding="4dp"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack" />
-
-        </LinearLayout>
 
             <TextView
                 android:id="@+id/desc_my_parcel_frag_box"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Desc"
-                android:maxLines="3"
+                android:layout_weight="1.8"
+                android:hint="Info"
+                android:maxLines="1"
                 android:justificationMode="inter_word"
                 android:ellipsize="end"
                 android:padding="4dp"
                 android:textColor="@color/colorBlack"/>
 
-    </LinearLayout>
+        </LinearLayout>
 
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

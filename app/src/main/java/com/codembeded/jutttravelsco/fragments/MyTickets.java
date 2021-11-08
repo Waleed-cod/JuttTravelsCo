@@ -3,15 +3,11 @@ package com.codembeded.jutttravelsco.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,13 +16,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
-import com.codembeded.jutttravelsco.activity.BookMyTicket;
-import com.codembeded.jutttravelsco.activity.MyBookings;
 import com.codembeded.jutttravelsco.adapter.AdapterForMyTickets;
 import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
 import com.codembeded.jutttravelsco.models.GetTicketsModels;
-import com.codembeded.jutttravelsco.models.MyBookingsModels;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +28,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MyTickets extends Fragment {
 
@@ -45,7 +42,7 @@ public class MyTickets extends Fragment {
     TextView mEmpty_card_tv_myTickets;
     SharedPreferences preferences;
     String user_id_str;
-
+    ProgressBar progressBar;
 
     public static MyTickets newInstance() {
 
@@ -60,7 +57,7 @@ public class MyTickets extends Fragment {
         View v = inflater.inflate(R.layout.fragment_my_tickets, container, false);
         mMyTicket_rv = v.findViewById(R.id.my_tickets_frag_rv);
         mEmpty_card_tv_myTickets = v.findViewById(R.id.empty_tv_my_tickets_frag);
-
+        progressBar = v.findViewById(R.id.progress_my_tickets_frag);
         preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         user_id_str = preferences.getString("id", "");
 
@@ -72,27 +69,30 @@ public class MyTickets extends Fragment {
     private void getBookingTickets(final String passenger_id) {
         String tag_str_req = "req_get_bookings";
 
+        progressBar.setVisibility(View.VISIBLE);
 
         StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_BOOKING + "?passenger_id=" + passenger_id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e("1st Response:", response);
+
+                progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
                         JSONArray jsonArray = jObj.getJSONArray("bookings");
-//                        JSONObject jObject = jsonArray.getJSONObject(Integer.parseInt("status"));
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
                         if (jsonArray.length() == 0) {
-
                             mEmpty_card_tv_myTickets.setVisibility(View.VISIBLE);
+                            mMyTicket_rv.setVisibility(View.GONE);
 
-                        } else if (jsonObject.getInt("status") == 0) {
-
+                        } else {
+                            mEmpty_card_tv_myTickets.setVisibility(View.GONE);
+                            mMyTicket_rv.setVisibility(View.VISIBLE);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 bookings_list.add(new GetTicketsModels(jsonObject.getInt("booking_id"),
                                         jsonObject.getInt("ladies_seats"),
                                         jsonObject.getInt("status"),
@@ -102,7 +102,9 @@ public class MyTickets extends Fragment {
                                         jsonObject.getInt("ac_status"),
                                         jsonObject.getString("date"),
                                         jsonObject.getString("booking_date"),
-                                        jsonObject.getString("booking_time")));
+                                        jsonObject.getString("arrival_time"),
+                                        jsonObject.getString("route_name"),
+                                        jsonObject.getString("departure_time")));
                             }
                         }
                         mAdapterForMyTickets = new AdapterForMyTickets(bookings_list, getActivity());
@@ -111,7 +113,7 @@ public class MyTickets extends Fragment {
 
                     } else {
                         String error_msg = jObj.getString("error_msg");
-                        Toast.makeText(getActivity(), "" + error_msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), error_msg, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -122,7 +124,7 @@ public class MyTickets extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Volley Error:", error.getMessage());
-                        Toast.makeText(getContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 }) {
             protected Map<String, String> getParams() {

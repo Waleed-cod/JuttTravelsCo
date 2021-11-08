@@ -1,26 +1,16 @@
 package com.codembeded.jutttravelsco.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
 import com.codembeded.jutttravelsco.adapter.AdapterForHomeSlider;
-import com.codembeded.jutttravelsco.helperclass.AppConfig;
-import com.codembeded.jutttravelsco.helperclass.AppController;
 import com.codembeded.jutttravelsco.models.HomeImageSliderModels;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
@@ -28,13 +18,11 @@ import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnima
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class Home extends AppCompatActivity {
 
@@ -44,7 +32,7 @@ public class Home extends AppCompatActivity {
     private static final String TAG = Home.class.getSimpleName();
     MaterialCardView bookMyTickets_cv, specialBooking_cv, myBookings_cv, tour_cv, history_cv, complain_cv, new_parcel_cv;
     Toolbar toolbar;
-
+    SharedPreferences sharedPreferences;
     BottomSheetDialog bottomSheetDialog;
 
     @Override
@@ -75,15 +63,21 @@ public class Home extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home,menu);
+        getMenuInflater().inflate(R.menu.home, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.about:
                 showBottomSheet();
+                break;
+            case R.id.log_out:
+                sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                sharedPreferences.edit().remove("id").apply();
+                startActivity(new Intent(Home.this, Login.class));
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -91,12 +85,11 @@ public class Home extends AppCompatActivity {
 
     private void showBottomSheet() {
 
+
         bottomSheetDialog.setContentView(R.layout.bottom_navigation_box);
 
         bottomSheetDialog.show();
     }
-
-
 
     //    private void get_slider_images() {
 //
@@ -204,9 +197,9 @@ public class Home extends AppCompatActivity {
         });
     }
 
-
     private void setImageSlider() {
 
+        items.add(new HomeImageSliderModels(R.drawable.courier_deliveries));
         items.add(new HomeImageSliderModels(R.drawable.world_tour));
         items.add(new HomeImageSliderModels(R.drawable.world_tour_beauty));
         imageSliderAdapter = new AdapterForHomeSlider(items, Home.this);

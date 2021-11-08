@@ -7,4 +7,7 @@
         android:icon="@drawable/ic_outline_location_on_24"
         app:showAsAction="ifRoom"/>
 
+    <item android:id="@+id/log_out"
+        android:title="Log Out"
+        app:showAsAction="withText"/>
 </menu>

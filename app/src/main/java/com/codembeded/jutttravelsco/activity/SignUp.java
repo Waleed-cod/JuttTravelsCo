@@ -7,12 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -21,7 +19,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.codembeded.jutttravelsco.R;
 import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
@@ -29,6 +26,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class SignUp extends AppCompatActivity {
 
@@ -40,6 +40,9 @@ public class SignUp extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Toolbar toolbar;
     TextView please_select_gender;
+    ProgressBar progressBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,14 +70,14 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!validateName() | !validatePhone() | !validateCNIC() | !validateEmail() |
-                        !validatePass() | !validateConfirmPassword() | !validateRadioGroup()){
+                        !validatePass() | !validateConfirmPassword() | !validateRadioGroup()) {
                     return;
 
-                }else {
-                get_sign_up(name_et.getEditText().getText().toString(), "+92"+phone_et.getEditText().getText().toString(),
-                        email_et.getEditText().getText().toString(), cnic_et.getEditText().getText().toString(),
-                        password_et.getEditText().getText().toString(), radio_btn_value_str);
-            }
+                } else {
+                    get_sign_up(name_et.getEditText().getText().toString(), "+92" + phone_et.getEditText().getText().toString(),
+                            email_et.getEditText().getText().toString(), cnic_et.getEditText().getText().toString(),
+                            password_et.getEditText().getText().toString(), radio_btn_value_str);
+                }
             }
         });
     }
@@ -89,29 +92,30 @@ public class SignUp extends AppCompatActivity {
         btn_sign_up = findViewById(R.id.user_sign_up_btn);
         radioGroup = findViewById(R.id.radio_group);
         please_select_gender = findViewById(R.id.please_select_gender);
+        progressBar = findViewById(R.id.progress_sign_up);
     }
 
-    private boolean validateName(){
+    private boolean validateName() {
         String name = name_et.getEditText().getText().toString();
         if (name.isEmpty()) {
             name_et.setError("Field cannot be empty");
             return false;
-        }else {
+        } else {
             name_et.setError(null);
             return true;
         }
 
     }
 
-    private boolean validatePhone(){
-        String phone= phone_et.getEditText().getText().toString().trim();
+    private boolean validatePhone() {
+        String phone = phone_et.getEditText().getText().toString().trim();
         if (phone.isEmpty()) {
             phone_et.setError("Field cannot be empty");
             return false;
-        }else if (phone.length() < 13){
-            phone_et.setError("Enter 13 digits +92xxxxxxxxx");
+        } else if (phone.length() < 10) {
+            phone_et.setError("Enter 10 digits 3xxxxxxxx");
             return false;
-        }else {
+        } else {
             phone_et.setError(null);
             return true;
         }
@@ -119,11 +123,11 @@ public class SignUp extends AppCompatActivity {
     }
 
     private boolean validateCNIC() {
-        String cnic= cnic_et.getEditText().getText().toString();
+        String cnic = cnic_et.getEditText().getText().toString();
         if (cnic.isEmpty()) {
             cnic_et.setError("Field cannot be empty");
             return false;
-        }else {
+        } else {
             cnic_et.setError(null);
             return true;
         }
@@ -193,37 +197,38 @@ public class SignUp extends AppCompatActivity {
             confirm_password_et.setError("Password not Matched");
             return false;
 
-        } else{
+        } else {
             confirm_password_et.setError(null);
-        return true;
-    }
+            return true;
+        }
     }
 
-    private boolean validateRadioGroup(){
-        if (radioGroup.getCheckedRadioButtonId() == -1){
+    private boolean validateRadioGroup() {
+        if (radioGroup.getCheckedRadioButtonId() == -1) {
             please_select_gender.setVisibility(View.VISIBLE);
             return false;
-        }else if(radioGroup.getCheckedRadioButtonId() != -1){
+        } else if (radioGroup.getCheckedRadioButtonId() != -1) {
             please_select_gender.setVisibility(View.GONE);
             return true;
-        }else{
+        } else {
             please_select_gender.setVisibility(View.GONE);
-        return true;
-    }
+            return true;
+        }
     }
 
     private void get_sign_up(final String name_tv_str, final String phone_tv_str, final String email_tv_str, final String cnic_tv_str,
                              final String password_tv_str, final String radio_value_str) {
         String tag_str_req = "req_get_sign_up";
 
+        progressBar.setVisibility(View.VISIBLE);
 
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.GET_SIGN_UP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "1st Response:" + response);
+                progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
@@ -231,7 +236,7 @@ public class SignUp extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
 
                         editor.putString("id", jObj.getString("id"));
-                        editor.commit();
+                        editor.apply();
                         name_et.getEditText().setText("");
                         phone_et.getEditText().setText("");
                         email_et.getEditText().setText("");

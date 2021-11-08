@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.MyToursHistory">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <TextView
+           <TextView
             android:id="@+id/empty_tv_my_tours_history_frag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,7 +17,14 @@
             android:textSize="20sp"
             android:visibility="gone"
             tools:visibility="visible" />
-
+        <ProgressBar
+            android:id="@+id/progress_my_tours_history_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            tools:visibility="visible"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_tours_history_frag_rv"
             android:layout_width="match_parent"
@@ -30,6 +34,3 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true" />
     </RelativeLayout>
-
-
-</FrameLayout>

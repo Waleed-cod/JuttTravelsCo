@@ -36,9 +36,10 @@ public class AdapterForParcels extends RecyclerView.Adapter<AdapterForParcels.Vi
     public void onBindViewHolder(@NonNull AdapterForParcels.ViewHolder holder, int position) {
         holder.receiver_name.setText(details.get(position).getReceiver_name());
         holder.receiver_contact.setText(details.get(position).getReceiver_contact());
-        holder.parcel_weight.setText(details.get(position).getParcel_weight());
-        holder.parcel_quantity.setText(details.get(position).getParcel_quantity());
+        holder.parcel_weight.setText(details.get(position).getParcel_weight() + " gm");
+        holder.parcel_quantity.setText(String.valueOf(details.get(position).getParcel_quantity()));
         holder.parcel_description.setText(details.get(position).getDescription());
+        holder.parcel_route.setText(details.get(position).getRoute_name());
     }
 
     @Override
@@ -48,7 +49,7 @@ public class AdapterForParcels extends RecyclerView.Adapter<AdapterForParcels.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView receiver_name, receiver_contact, parcel_weight, parcel_quantity, parcel_description;
+        TextView receiver_name, receiver_contact, parcel_weight, parcel_quantity, parcel_description, parcel_route;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +59,7 @@ public class AdapterForParcels extends RecyclerView.Adapter<AdapterForParcels.Vi
             parcel_weight = itemView.findViewById(R.id.weight_my_parcels_frag_box);
             parcel_quantity = itemView.findViewById(R.id.quantity_my_parcels_frag_box);
             parcel_description = itemView.findViewById(R.id.desc_my_parcel_frag_box);
+            parcel_route = itemView.findViewById(R.id.route_my_parcel_frag_box);
         }
     }
 }

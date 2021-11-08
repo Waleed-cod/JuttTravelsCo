@@ -2,20 +2,21 @@ package com.codembeded.jutttravelsco.models;
 
 public class ParcelModels {
 
-    int id;
-    String parcel_weight, parcel_quantity, receiver_name, receiver_contact, parcel_date, status, description, amount;
+    int id, parcel_weight, parcel_quantity, status, amount;
+    String receiver_name, receiver_contact, parcel_date, description, route_name;
 
-    public ParcelModels(int id, String parcel_weight, String parcel_quantity, String receiver_name, String receiver_contact, String parcel_date, String status, String description, String amount) {
-
+    public ParcelModels(int id, int parcel_weight, int parcel_quantity, int status, int amount,
+                        String receiver_name, String receiver_contact, String parcel_date, String description, String route_name) {
         this.id = id;
         this.parcel_weight = parcel_weight;
         this.parcel_quantity = parcel_quantity;
+        this.status = status;
+        this.amount = amount;
         this.receiver_name = receiver_name;
         this.receiver_contact = receiver_contact;
         this.parcel_date = parcel_date;
-        this.status = status;
         this.description = description;
-        this.amount = amount;
+        this.route_name = route_name;
     }
 
     public int getId() {
@@ -26,36 +27,52 @@ public class ParcelModels {
         this.id = id;
     }
 
-    public String getParcel_weight() {
+    public int getParcel_weight() {
         return parcel_weight;
     }
 
-    public void setParcel_weight(String parcel_weight) {
+    public void setParcel_weight(int parcel_weight) {
         this.parcel_weight = parcel_weight;
     }
 
-    public String getParcel_quantity() {
+    public int getParcel_quantity() {
         return parcel_quantity;
     }
 
-    public void setParcel_quantity(String parcel_quantity) {
+    public void setParcel_quantity(int parcel_quantity) {
         this.parcel_quantity = parcel_quantity;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public String getReceiver_name() {
         return receiver_name;
     }
 
-    public void setReceiver_name(String discounted_amount) {
-        this.receiver_name = discounted_amount;
+    public void setReceiver_name(String receiver_name) {
+        this.receiver_name = receiver_name;
     }
 
     public String getReceiver_contact() {
         return receiver_contact;
     }
 
-    public void setReceiver_contact(String parcel_status) {
-        this.receiver_contact = parcel_status;
+    public void setReceiver_contact(String receiver_contact) {
+        this.receiver_contact = receiver_contact;
     }
 
     public String getParcel_date() {
@@ -66,14 +83,6 @@ public class ParcelModels {
         this.parcel_date = parcel_date;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -82,11 +91,11 @@ public class ParcelModels {
         this.description = description;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getRoute_name() {
+        return route_name;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setRoute_name(String route_name) {
+        this.route_name = route_name;
     }
 }

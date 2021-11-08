@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codembeded.jutttravelsco">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".helperclass.AppController"
         android:allowBackup="true"
@@ -11,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity android:name=".activity.ConfirmUserPhone"
+            android:label="Confirm User">
+        </activity>
         <activity
             android:name=".activity.NewParcel"
             android:label="New Parcel" />
@@ -44,6 +50,7 @@
         <activity
             android:name=".activity.Login"
             android:label="Jutt Travels" />
+
         <activity android:name=".activity.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,7 +59,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

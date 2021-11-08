@@ -25,31 +25,39 @@
             android:showDividers="middle"
             android:divider="@color/colorBlack">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="Route:"
+                android:padding="6dp"/>
+
 
             <TextView
                 android:id="@+id/departure_special_booking_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.4"
+                android:layout_weight="1.2"
                 android:hint="Departure"
-                android:padding="4dp"
+                android:padding="6dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_weight="0.1"
                 android:hint="to"
-                android:padding="4dp" />
+                android:textAlignment="center"
+                android:padding="6dp" />
 
             <TextView
                 android:id="@+id/arrival_special_booking_frag_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.4"
+                android:layout_weight="1.2"
                 android:hint="Arrival"
-                android:padding="4dp"
+                android:padding="6dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack" />
 
@@ -63,6 +71,13 @@
             android:showDividers="middle"
             android:divider="@color/colorBlack">
 
+<!--            <TextView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="0.5"-->
+<!--                android:hint="Date:"-->
+<!--                android:padding="4dp" />-->
+
 
             <TextView
                 android:id="@+id/departure_date_special_booking_frag_box"
@@ -72,7 +87,8 @@
                 android:hint="mm/dd/yyyy"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorBlack" />
+                android:textColor="@color/colorBlack"
+                app:drawableStartCompat="@drawable/ic_arrival_date_range_24" />
 
 
             <TextView
@@ -83,7 +99,8 @@
                 android:hint="hh:mm"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorBlack" />
+                android:textColor="@color/colorBlack"
+                app:drawableStartCompat="@drawable/ic_dept_time_24" />
 
         </LinearLayout>
 
@@ -116,7 +133,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="AC status"
+                android:hint="AC status:"
                 android:padding="4dp" />
 
             <TextView

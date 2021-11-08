@@ -1,25 +1,15 @@
 package com.codembeded.jutttravelsco.activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.telephony.mbms.StreamingServiceInfo;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -29,9 +19,6 @@ import com.codembeded.jutttravelsco.adapter.AdapterForTour;
 import com.codembeded.jutttravelsco.helperclass.AppConfig;
 import com.codembeded.jutttravelsco.helperclass.AppController;
 import com.codembeded.jutttravelsco.models.TourModels;
-import com.codembeded.jutttravelsco.models.VehiclesModels;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +27,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class OurTours extends AppCompatActivity {
 
@@ -51,6 +43,8 @@ public class OurTours extends AppCompatActivity {
     Toolbar toolbar;
     SharedPreferences preferences;
     String user_id;
+    ProgressBar progressBar;
+    LottieAnimationView lottieAnimationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +54,11 @@ public class OurTours extends AppCompatActivity {
         tour_rv = findViewById(R.id.tour_rv);
         empty_card_tv_tour = findViewById(R.id.empty_card_tv_tour);
         toolbar = findViewById(R.id.our_tour_toolbar);
+        progressBar = findViewById(R.id.progress_our_tour);
+        lottieAnimationView = findViewById(R.id.empty_tour_lottie);
         setSupportActionBar(toolbar);
-        preferences = getSharedPreferences("MyPrefs",Context.MODE_PRIVATE);
-        user_id = preferences.getString("id","");
+        preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        user_id = preferences.getString("id", "");
 
         getToursDetails();
 
@@ -70,25 +66,26 @@ public class OurTours extends AppCompatActivity {
     }
 
 
-
     private void getToursDetails() {
         String tag_str_req = "req_get_tours";
+        progressBar.setVisibility(View.VISIBLE);
+
         StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.GET_TOURS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "1st Response:" + response);
+                progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
                         JSONArray array = jObj.getJSONArray("tours");
                         if (array.length() == 0) {
+                            lottieAnimationView.setVisibility(View.VISIBLE);
                             empty_card_tv_tour.setVisibility(View.VISIBLE);
                         } else
                             for (int i = 0; i < array.length(); i++) {
-
                                 JSONObject jsonObject = array.getJSONObject(i);
                                 tours_lists.add(new TourModels(jsonObject.getInt("id"),
                                         jsonObject.getString("image"),
@@ -97,7 +94,9 @@ public class OurTours extends AppCompatActivity {
                                         jsonObject.getString("end_date"),
                                         jsonObject.getString("departure_time"),
                                         jsonObject.getInt("rate_per_seat"),
-                                        jsonObject.getString("description")));
+                                        jsonObject.getString("description"),
+                                        jsonObject.getInt("status"),
+                                        jsonObject.getString("date")));
                             }
 
                         adapterForTour = new AdapterForTour(tours_lists, OurTours.this);
@@ -116,8 +115,7 @@ public class OurTours extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Volley Error: " + error.getMessage());
-                        Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 }) {
             protected Map<String, String> getParams() {

@@ -11,6 +11,8 @@ import android.util.FloatProperty;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,59 +33,60 @@ import java.util.Map;
 public class ForgetPassword extends AppCompatActivity {
 
     final static String TAG = ForgetPassword.class.getSimpleName();
-    TextInputLayout user_phone_et, new_password_forgot_et, confirm_new_password_forgot_et;
+    EditText new_password_forgot_et, confirm_new_password_forgot_et;
     Button reset_password_btn;
     Toolbar toolbar;
-    SharedPreferences preferences;
-    String user_id;
+    String user_phone_str;
+    int user_id;
+    ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
-        preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        user_id = preferences.getString("id", "");
         toolbar = findViewById(R.id.forget_password_toolbar);
         setSupportActionBar(toolbar);
-
         init();
+
         reset_password_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validatePass() | validateConfirmPassword()) {
+                if (!validatePass() | !validateConfirmPassword()) {
                     return;
                 } else {
-                    resetPassword(user_id, new_password_forgot_et.getEditText().getText().toString());
-                    Toast.makeText(ForgetPassword.this, "Password Changed", Toast.LENGTH_SHORT).show();
+                    resetPassword(String.valueOf(user_id), new_password_forgot_et.getText().toString());
                 }
             }
         });
     }
 
-    private void resetPassword(final String passenger_id, final String password_tv_str) {
+    private void resetPassword(final String user_id_str, final String password_tv_str) {
         String tag_str_req = "req_get_forgot_password";
-
+        progressBar.setVisibility(View.VISIBLE);
 
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.GET_CHANGE_PASSWORD, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "1st Response:" + response);
+                progressBar.setVisibility(View.GONE);
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    Log.e("second response:", response);
                     boolean error = jObj.getBoolean("error");
                     //check for error node in json
                     if (!error) {
 
-                        new_password_forgot_et.getEditText().setText("");
-                        confirm_new_password_forgot_et.getEditText().setText("");
+                        new_password_forgot_et.setText("");
+                        confirm_new_password_forgot_et.setText("");
+
                         Toast.makeText(ForgetPassword.this, "Your Password has been changed", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(ForgetPassword.this, Home.class);
+                        Intent intent = new Intent(ForgetPassword.this, Login.class);
                         startActivity(intent);
                     } else {
                         String error_msg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(), "Error is " + error_msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), error_msg, Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -93,14 +96,14 @@ public class ForgetPassword extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Volley Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(), "error of volley" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("passenger", passenger_id);
+                params.put("user_id", user_id_str);
                 params.put("password", password_tv_str);
                 return params;
             }
@@ -109,15 +112,18 @@ public class ForgetPassword extends AppCompatActivity {
     }
 
     private void init() {
-        user_phone_et = findViewById(R.id.user_phone_et);
         new_password_forgot_et = findViewById(R.id.new_password_forgot_et);
         confirm_new_password_forgot_et = findViewById(R.id.confirm_new_password_forgot_et);
         reset_password_btn = findViewById(R.id.reset_password_btn);
+        progressBar = findViewById(R.id.progress_forgot_password);
+
+        user_id = getIntent().getIntExtra("User_Id",0);
+//        user_phone_str = getIntent().getStringExtra("User_Phone");
     }
 
 
     private boolean validatePass() {
-        String getPassword = new_password_forgot_et.getEditText().getText().toString();
+        String getPassword = new_password_forgot_et.getText().toString();
 
 
 //        String passwordVal = "^" +
@@ -150,8 +156,8 @@ public class ForgetPassword extends AppCompatActivity {
     }
 
     private boolean validateConfirmPassword() {
-        String getPassword = new_password_forgot_et.getEditText().getText().toString();
-        String getConfirmPassword = confirm_new_password_forgot_et.getEditText().getText().toString();
+        String getPassword = new_password_forgot_et.getText().toString();
+        String getConfirmPassword = confirm_new_password_forgot_et.getText().toString();
         if (getConfirmPassword.isEmpty()) {
             confirm_new_password_forgot_et.setError("Field cannot be empty");
             return false;

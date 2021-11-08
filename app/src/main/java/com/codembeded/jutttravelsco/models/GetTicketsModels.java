@@ -3,10 +3,11 @@ package com.codembeded.jutttravelsco.models;
 public class GetTicketsModels {
     int booking_id, ladies_seats, status, total_seats, total_amount, route_id, ac_status;
 
-    String date, booking_date , booking_time;
+    String date, booking_date , arrival_time,route_name, departure_time;
 
     public GetTicketsModels(int booking_id, int ladies_seats, int status, int total_seats, int total_amount,
-                            int route_id, int ac_status, String date, String booking_date, String booking_time) {
+                            int route_id, int ac_status, String date, String booking_date, String booking_time,
+                            String route_name, String departure_time) {
         this.booking_id = booking_id;
         this.ladies_seats = ladies_seats;
         this.status = status;
@@ -16,7 +17,9 @@ public class GetTicketsModels {
         this.ac_status = ac_status;
         this.date = date;
         this.booking_date = booking_date;
-        this.booking_time= booking_time;
+        this.arrival_time= booking_time;
+        this.route_name= route_name;
+        this.departure_time= departure_time;
     }
 
     public GetTicketsModels(int ladies_seats, int total_seats, int total_amount, int route_id, String booking_date, String booking_time) {
@@ -26,7 +29,15 @@ public class GetTicketsModels {
         this.route_id = route_id;
         this.ac_status = ac_status;
         this.booking_date = booking_date;
-        this.booking_time = booking_time;
+        this.arrival_time = booking_time;
+    }
+
+    public String getRoute_name() {
+        return route_name;
+    }
+
+    public void setRoute_name(String route_name) {
+        this.route_name = route_name;
     }
 
     public int getBooking_id() {
@@ -101,11 +112,19 @@ public class GetTicketsModels {
         this.booking_date = booking_date;
     }
 
-    public String getBooking_time() {
-        return booking_time;
+    public String getArrival_time() {
+        return arrival_time;
     }
 
-    public void setBooking_time(String booking_time) {
-        this.booking_time = booking_time;
+    public void setArrival_time(String arrival_time) {
+        this.arrival_time = arrival_time;
+    }
+
+    public String getDeparture_time() {
+        return departure_time;
+    }
+
+    public void setDeparture_time(String departure_time) {
+        this.departure_time = departure_time;
     }
 }
